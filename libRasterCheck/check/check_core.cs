@@ -185,7 +185,7 @@ namespace geodata
 		public static void checkClipExtent(Raster img, TaskCfg tc, string ofname)
 		{
 			Extent2d diff = new Extent2d();
-			Extent2d CE = img.getClipExtent(tc.ClipExtent);
+			Extent2d CE = img.getClipExtent(tc.ClipExtent, tc.ExtFormula);
 			if (CE.Equals(img.ImgExtent))
 			{
 				diff = CE - img.ImgExtent;
@@ -309,7 +309,7 @@ namespace geodata
 				psi.CreateNoWindow = true;
 				psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 				psi.ErrorDialog = false;
-				psi.FileName = "./lib64/siftMatch.exe";
+				psi.FileName = "./lib64/geolib/siftMatch.exe";
 				psi.WindowStyle = ProcessWindowStyle.Hidden;
 				psi.Arguments = "19900413 " +
 								"\"" + img1.FileName + "\" " +

@@ -157,9 +157,12 @@ namespace geodata
 			/* ------------- */
 
 			// 自己
-			this.Neighbours[4] = this.MapNo_str;
+			string selfMapNo = this.MapNo_str;
+			if (selfMapNo.Length == 10)
+				selfMapNo = "N" + this.MapNo_str;
+			this.Neighbours[4] = selfMapNo;
 
-			CNStandard tmp = new CNStandard(this.MapNo_str);
+			CNStandard tmp = new CNStandard(selfMapNo);
 			CNMapNo tmpMN = tmp.MapNo;
 			// 正北
 			tmpMN.row_dec();

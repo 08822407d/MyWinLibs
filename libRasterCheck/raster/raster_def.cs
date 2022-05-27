@@ -11,6 +11,12 @@ using OpenCvSharp;
 
 namespace geodata
 {
+	public enum ClipExtFormula
+	{
+		NewFormula,
+		OrigFormula,
+	}
+
 	public partial class Raster 
 	{
 		public String		FileName { get; }
@@ -105,14 +111,22 @@ namespace geodata
 					getImgExtent();
 					parseProjInfo();
 
-					CNS	= new CNStandard(Path.GetFileNameWithoutExtension(filename));
-					if (CNS.MapNo.IsValid)
+					string mapname = Path.GetFileNameWithoutExtension(filename);
+					if (mapname.Length >= 10)
 					{
-						CNS.calcCornersXY(PrjSys);
-						CNS.getNeighbour();
+						CNS	= new CNStandard(mapname.Substring(0, 10));
+						if (!CNS.MapNo.IsValid)
+						{
+							CNS = new CNStandard(mapname.Substring(0, 11));
+							if (!CNS.MapNo.IsValid)
+								CNS = null;
+						}
+						if (CNS.MapNo.IsValid)
+						{
+							CNS.calcCornersXY(PrjSys);
+							CNS.getNeighbour();
+						}
 					}
-					else
-						CNS = null;
 				}
 			}
 		}
@@ -194,16 +208,27 @@ namespace geodata
 		{
 			foreach (Raster r in rlist)
 			{
-				string rmn = r.CNS.getMapNoStr();
-				// 只获取东南角的邻接图幅
-				if (rmn.Equals(this.CNS.Neighbours[5]))
-					this.Overlaps.Add(r);
-				if (rmn.Equals(this.CNS.Neighbours[6]))
-					this.Overlaps.Add(r);
-				if (rmn.Equals(this.CNS.Neighbours[7]))
-					this.Overlaps.Add(r);
-				if (rmn.Equals(this.CNS.Neighbours[8]))
-					this.Overlaps.Add(r);
+				if (r.CNS != null)
+				{
+
+					string rmn = r.CNS.getMapNoStr();
+					string rmn_HSflag = rmn;
+					if (rmn.Length == 10)
+						rmn_HSflag = "N" + rmn;
+					// 只获取东南角的邻接图幅
+					if (rmn.Equals(this.CNS.Neighbours[5]) ||
+						rmn_HSflag.Equals(this.CNS.Neighbours[5]))
+						this.Overlaps.Add(r);
+					if (rmn.Equals(this.CNS.Neighbours[6]) ||
+						rmn_HSflag.Equals(this.CNS.Neighbours[6]))
+						this.Overlaps.Add(r);
+					if (rmn.Equals(this.CNS.Neighbours[7]) ||
+						rmn_HSflag.Equals(this.CNS.Neighbours[7]))
+						this.Overlaps.Add(r);
+					if (rmn.Equals(this.CNS.Neighbours[8]) ||
+						rmn_HSflag.Equals(this.CNS.Neighbours[8]))
+						this.Overlaps.Add(r);
+				}
 			}
 		}
 	}

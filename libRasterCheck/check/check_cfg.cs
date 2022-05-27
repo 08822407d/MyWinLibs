@@ -68,8 +68,10 @@ namespace geodata
 		public double Resolution { get; set; }
 		// 比例尺
 		public char Scale { get; set; }
-		// 外扩范围，单位米
-		public double ClipExtent { get; set; }
+		// 外扩范围(单位米)
+		public uint	ClipExtent { get; set; }
+		// 外扩公式
+		public ClipExtFormula ExtFormula { get; set; }
 
 		/// <summary>
 		/// DEM位置精度
@@ -101,7 +103,8 @@ namespace geodata
 			BandCount = 3;
 			Resolution = 1;
 			Scale = 'G';
-			ClipExtent = 0.0;
+			ClipExtent = 0;
+			ExtFormula = ClipExtFormula.NewFormula;
 
 			PositionDiffTolarence = 0.0;
 			HeightDiffTolarence = 0.0;
@@ -112,8 +115,8 @@ namespace geodata
 
 		public TaskCfg(ProjSystem PrjSys, double SemiMajor, double InvFlatt,
 							double ScaleFactor, int CentMerid, double FalseEast, double FalseNorth,
-							DataType Depth, uint BandCount, double Resol, char Scale, int ClipExt,
-							double PosDiffTolarence, double HeighDiffTolarence, int CountIntv,
+							DataType Depth, uint BandCount, double Resol, char Scale, uint ClipExt,
+							ClipExtFormula ExtFormu, double PosDiffTolarence, double HeighDiffTolarence, int CountIntv,
 							double[] Nodata)
 		{
 			this.PrjSys = PrjSys;
@@ -130,6 +133,7 @@ namespace geodata
 			this.Resolution = Resol;
 			this.Scale = Scale;
 			this.ClipExtent = ClipExt;
+			this.ExtFormula = ExtFormu;
 
 			this.PositionDiffTolarence = PosDiffTolarence;
 			this.HeightDiffTolarence = HeightDiffTolarence;
@@ -213,6 +217,37 @@ namespace geodata
 
 			FormatConsistency = false;
 		}
+
+		public override string ToString()
+		{
+			string retval = "\n";
+			if (this.PrjSys)
+				retval += "投影系参数\n";
+			if (this.PrjOther)
+				retval += "其他投影参数\n";
+			if (this.ColorMode)
+				retval += "色彩模式\n";
+			if (this.DataInfo)
+				retval += "其他数据信息\n";
+
+			if (this.ImgNoise)
+				retval += "影像噪声\n";
+			if (this.ImgChkPoint)
+				retval += "人工选取检测点\n";
+			if (this.ImgEdgeMatch)
+				retval += "影像接边\n";
+
+			if (this.GenContour)
+				retval += "反生等高线\n";
+			if (this.DemChkPoint)
+				retval += "高程监测点\n";
+			if (this.DemEdgeMatch)
+				retval += "DEM高程接边\n";
+			if (this.GlobalMappingItems)
+				retval += "全球测图专属项目\n";
+
+			return retval;
+		}
 	}
 
 	/// <summary>
@@ -250,6 +285,12 @@ namespace geodata
 			Tcache = new Dictionary<string, TaskCfg>();
 
 			this.PCpath = pc_path;
+			reloadSelf();
+
+			flushTC();
+			flushPC();
+			flushCI();
+
 			reloadSelf();
 		}
 		public void reloadSelf()

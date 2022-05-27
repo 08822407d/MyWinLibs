@@ -610,7 +610,6 @@
 			this.pnl_editTskCfg.Name = "pnl_editTskCfg";
 			this.pnl_editTskCfg.Size = new System.Drawing.Size(403, 553);
 			this.pnl_editTskCfg.TabIndex = 18;
-			this.pnl_editTskCfg.Visible = false;
 			// 
 			// btn_deleteCurr
 			// 

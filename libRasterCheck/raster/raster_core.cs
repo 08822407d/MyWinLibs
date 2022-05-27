@@ -30,7 +30,7 @@ namespace geodata
 		/// <summary>
 		/// 计算裁切范围
 		/// </summary>
-		public Extent2d getClipExtent(double extwidth)
+		public Extent2d getClipExtent(uint extwidth, ClipExtFormula CEF)
 		{
 			double maxX = Const.minX;
 			double maxY = Const.minY;
@@ -50,10 +50,13 @@ namespace geodata
 				if (pt.Y < minY) minY = pt.Y;
 			}
 
-			double sx, sy, ex, ey;
-			if (this.CNS.MapNo.Scale > 'C')
+			double	sx = Const.minX,
+					sy = Const.minY,
+					ex = Const.minX,
+					ey = Const.minY;
 			// CH/T 9008.3 - 2010 (1:500 1:1000 1:2000)
 			// CH/T 9009.3 - 2010 (1:10000 1:50000)
+			if (CEF == ClipExtFormula.NewFormula)
 			{
 				sx = (int)((minX - this.Resolution.X * extwidth) /
 						this.Resolution.X) * this.Resolution.X;
@@ -64,7 +67,7 @@ namespace geodata
 				ey = (int)((minY + this.Resolution.Y * extwidth) /
 						this.Resolution.Y) * this.Resolution.Y;
 			}
-			else
+			else if (CEF == ClipExtFormula.OrigFormula)
 			// 原计算公式
 			{
 				sx = (int)(minX / this.Resolution.X) * this.Resolution.X -

@@ -8,12 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using geodata;
 using Utils;
 
-namespace CheckerUI
+namespace geodata
 {
-	public partial class frmTaskConf : Form
+	public partial class frmCfgs : Form
 	{
 		public CfgPack Cfgs = null;
 
@@ -21,57 +20,46 @@ namespace CheckerUI
 		string currTCname = null;
 		TaskCfg currTC = null;
 
-		public frmTaskConf()
+		int NewExtFormu_idx = 0;
+		int OrigExtFormu_idx = 0;
+		string NewExtFormu_name = "新公式";
+		string OrigExtFormu_name = "原公式";
+		string NewExtFormu_str =	"角点像元中心计算公式如下：" + 
+									"	X起 = INT[(MAX(X1, X2, X3, X4) + N*d) / d] * d\n" +
+									"	Y起 = INT[(MIN(Y1, Y2, Y3, Y4) - N*d) / d] * d\n" +
+									"	X止 = INT[(MIN(X1, X2, X3, X4) - N*d) / d] * d\n" +
+									"	Y止 = INT[(MAX(Y1, Y2, Y3, Y4) + N*d) / d] * d\n" +
+									"其中 N 为外扩像素数，d 为像素地面分辨率";
+		string OrigExtFormu_str =	"角点像元中心计算公式如下：" + 
+									"	X起 = INT[(MAX(X1, X2, X3, X4) / d + 1] * d + N*d\n" +
+									"	Y起 = INT[(MIN(Y1, Y2, Y3, Y4) / d] * d - N*d\n" +
+									"	X止 = INT[(MIN(X1, X2, X3, X4) / d] * d - N*d\n" +
+									"	Y止 = INT[(MAX(Y1, Y2, Y3, Y4) / d + 1] * d + N*d\n" +
+									"其中 N 为外扩像素数，d 为像素地面分辨率";
+
+
+		public frmCfgs()
 		{
 			InitializeComponent();
-
-			pnl_editTskCfg.Visible = false;
 		}
-
-		public frmTaskConf(CfgPack cfgs)
+		public frmCfgs(CfgPack cfgs)
 		{
 			InitializeComponent();
 			this.Cfgs = cfgs;
+
+			cmbbx_ExtFormula.Items.Add(NewExtFormu_name);
+			cmbbx_ExtFormula.Items.Add(OrigExtFormu_name);
+			NewExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(NewExtFormu_name);
+			OrigExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(OrigExtFormu_name);
 			loadTcfgs2cmbbx();
 
-			pnl_editTskCfg.Visible = false;
-		}
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			if (Cfgs.hasUnsavedChanges())
-			{
-				DialogResult dr = MessageBox.Show(
-								"有" + Cfgs.Tcachecount.ToString() +
-								"项未保存配置,确定退出吗？",
-								"", MessageBoxButtons.OKCancel);
-				if (dr == DialogResult.Cancel)
-					e.Cancel = true;
-				else
-					Cfgs.clearTCCaches();
-			}
-			base.OnClosing(e);
+			ci2frm(this.Cfgs.getChkItems());
+
+			tbx_resultPath.Text = this.Cfgs.chkOutput_path;
 		}
 
-		private void cmbbx_tskcfgs_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			string name = cmbbx_tskcfgs.SelectedItem.ToString();
-			TaskCfg tc = this.Cfgs.getTC(name);
-			if (tc != null)
-			{
-				this.currTCname = name;
-				this.currTC = tc;
-				cfg2frm(this.currTC);
-			}
-			else
-			{
-				MessageBox.Show("错误，该配置不存在");
-				cmbbx_tskcfgs.SelectedItem = this.currTCname;
-			}
 
-			btn_viewTskCfg_Click(sender, e);
-		}
-
-		private void btn_NewCfg_Click(object sender, EventArgs e)
+		private void btn_newCfg_Click(object sender, EventArgs e)
 		{
 			frmTXTInput wTI = new frmTXTInput();
 			wTI.ShowDialog();
@@ -90,47 +78,31 @@ namespace CheckerUI
 				cmbbx_tskcfgs.Items.Add(currTCname + " （新建）");
 
 				MessageBox.Show("新建配置:" + currTCname + ", 采用默认配置模板");
-				btn_editTskCfg_Click(sender, e);
 			}
-		}
-
-		private void btn_viewTskCfg_Click(object sender, EventArgs e)
-		{
-			Utils.UI.units_disable(pnl_editTskCfg.Controls);
-			pnl_editTskCfg.Visible = true;
-			btn_close.Enabled = true;
-		}
-
-		private void btn_editTskCfg_Click(object sender, EventArgs e)
-		{
-			Utils.UI.units_enable(pnl_editTskCfg.Controls);
-			pnl_editTskCfg.Visible = true;
-			btn_close.Enabled = true;
-
-			Cfgs.addTcache(this.currTCname, this.currTC);
 		}
 
 		private void btn_saveCurr_Click(object sender, EventArgs e)
 		{
-			if (Cfgs.hasUnsavedChanges())
-			{
-				DialogResult dr = MessageBox.Show("确定保存当前配置？", "", MessageBoxButtons.OKCancel);
-				if (dr == DialogResult.Cancel)
-					return;
+			DialogResult dr = MessageBox.Show("确定保存当前配置？", "", MessageBoxButtons.OKCancel);
+			if (dr == DialogResult.Cancel)
+				return;
 
-				frm2cfg(ref currTC);
-				exitErr();
+			// 保存检查参数
+			frm2cfg(ref currTC);
+			exitErr();
+			Cfgs.setLastTskCfg(currTCname);
+			Cfgs.addTcache(currTCname, currTC);
+			Cfgs.flushPC();
+			Cfgs.flushTC();
+			loadTcfgs2cmbbx();
 
-				Cfgs.setLastTskCfg(currTCname);
-				Cfgs.addTcache(currTCname, currTC);
-				Cfgs.flushPC();
-				Cfgs.flushTC();
+			// 保存检查项
+			CheckItem ci = Cfgs.getChkItems();
+			frm2ci(ref ci);
+			Cfgs.setChkItems(ci);
+			Cfgs.flushCI();
 
-				loadTcfgs2cmbbx();
-				btn_viewTskCfg_Click(sender, e);
-
-				MessageBox.Show("已保存当前配置");
-			}
+			MessageBox.Show("已保存当前配置");
 		}
 
 		private void btn_deleteCurr_Click(object sender, EventArgs e)
@@ -140,17 +112,71 @@ namespace CheckerUI
 				return;
 
 			this.Cfgs.removeTC(this.currTCname);
-			this.Cfgs.setLastTskCfgByIdx(1);
+			this.Cfgs.setLastTskCfgByIdx(0);
 			this.Cfgs.flushTC();
 
 			loadTcfgs2cmbbx();
 		}
 
-		private void btn_close_Click(object sender, EventArgs e)
+		private void btn_resetCurr_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			DialogResult dr = MessageBox.Show("确定放弃当前更改？", "", MessageBoxButtons.OKCancel);
+			if (dr == DialogResult.Cancel)
+				return;
+
+			loadTcfgs2cmbbx();
 		}
 
+		private void btn_resultPath_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog fbd =new FolderBrowserDialog();
+			fbd.Description = "请选择文件夹";
+			if (fbd.ShowDialog() == DialogResult.OK)
+			{
+				string dir = fbd.SelectedPath;
+				if (dir != null)
+				{
+					tbx_resultPath.Text = dir;
+					this.Cfgs.chkOutput_path = dir;
+				}
+			}
+		}
+
+		private void cmbbx_tskcfgs_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			string si = cmbbx_tskcfgs.SelectedItem.ToString();
+			TaskCfg tc = Cfgs.getTC(si);
+			if (tc != null)
+			{
+				this.currTCname = si;
+				this.currTC = tc;
+				cfg2frm(this.currTC);
+			}
+			else
+			{
+
+			}
+		}
+
+		private void cmbbx_ExtFormula_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (cmbbx_ExtFormula.SelectedItem.ToString().Equals(NewExtFormu_name))
+			{
+				this.currTC.ExtFormula = ClipExtFormula.NewFormula;
+				rtbx_ExtFormula.Text = NewExtFormu_str;
+			}
+			else if (cmbbx_ExtFormula.SelectedItem.ToString().Equals(OrigExtFormu_name))
+			{
+				this.currTC.ExtFormula = ClipExtFormula.OrigFormula;
+				rtbx_ExtFormula.Text = OrigExtFormu_str;
+			}
+		}
+
+		private void exitErr()
+		{
+			if (!errstr.Equals(""))
+				MessageBox.Show(errstr);
+		}
 
 		private void loadTcfgs2cmbbx()
 		{
@@ -161,19 +187,16 @@ namespace CheckerUI
 				return;
 			}
 			else
+			{
+				cmbbx_tskcfgs.Items.Clear();
 				foreach (string key in keys)
 					cmbbx_tskcfgs.Items.Add(key);
+			}
 
 			this.currTCname = this.Cfgs.getLastTskCfg();
 			cmbbx_tskcfgs.SelectedItem = currTCname;
 			this.currTC = this.Cfgs.getTC(currTCname);
 			cfg2frm(this.currTC);
-		}
-
-		private void exitErr()
-		{
-			if (!errstr.Equals(""))
-				MessageBox.Show(errstr);
 		}
 
 		private void cfg2frm(TaskCfg cfg)
@@ -235,11 +258,14 @@ namespace CheckerUI
 			tbx_BandCount.Text = cfg.BandCount.ToString();
 			// 分辨率
 			tbx_Resolution.Text = cfg.Resolution.ToString();
-			// 比例尺
-			tbx_Scale.Text = cfg.Scale.ToString();
 			// 外扩范围
 			rdbtn_ByMeter.Checked = true;
 			tbx_ClipExt.Text = cfg.ClipExtent.ToString();
+			// 外扩公式
+			if (cfg.ExtFormula == ClipExtFormula.NewFormula)
+				cmbbx_ExtFormula.SelectedIndex = NewExtFormu_idx;
+			else if (cfg.ExtFormula == ClipExtFormula.OrigFormula)
+				cmbbx_ExtFormula.SelectedIndex = OrigExtFormu_idx;
 
 			// 等高距
 			tbx_ContIntv.Text = cfg.ContourInterval.ToString();
@@ -251,6 +277,8 @@ namespace CheckerUI
 
 		private void frm2cfg(ref TaskCfg cfg)
 		{
+			// 数据类型
+
 			// 坐标系
 			if (rdbtn_PrjSys_wgs84.Checked)
 				cfg.PrjSys = ProjSystem.wgs84;
@@ -320,12 +348,6 @@ namespace CheckerUI
 				cfg.Resolution = res;
 			else
 				errstr += "分辨率输入值非法:" + tbx_Resolution.Text + ";";
-			// 比例尺
-			string S = tbx_Scale.Text.ToUpper();
-			if (S.Length == 1 && S[0] >= 'A' && S[0] <= 'K')
-				cfg.Scale = S[0];
-			else
-				errstr += "比例尺输入值非法:" + S + ";";
 			// 外扩范围
 			if (res > 0)
 			{
@@ -346,6 +368,7 @@ namespace CheckerUI
 			}
 			else
 				tbx_ClipExt.Text = "0";
+			// 外扩公式
 
 			// 等高距
 			double CI = 0;
@@ -365,6 +388,67 @@ namespace CheckerUI
 				cfg.HeightDiffTolarence = HT;
 			else
 				errstr += "等高距输入值非法:" + tbx_HeightTolar.Text + ";";
+		}
+		private void ci2frm(CheckItem ci)
+		{
+			if (ci.PrjSys)
+				chkbx_PrjSys.Checked = true;
+			if (ci.PrjOther)
+				chkbx_PrjOther.Checked = true;
+			if (ci.ColorMode)
+				chkbx_ColorMode.Checked = true;
+			if (ci.DataInfo)
+				chkbx_DataInfo.Checked = true;
+
+
+			if (ci.ImgNoise)
+				chkbx_ImgNoise.Checked = true;
+			if (ci.ImgChkPoint)
+				chkbx_ImgChkPoint.Checked = true;
+			if (ci.ImgEdgeMatch)
+				chkbx_ImgEdgeMatch.Checked = true;
+
+
+			if (ci.GenContour)
+				chkbx_GenContour.Checked = true;
+			if (ci.DemChkPoint)
+				chkbx_DemChkPoint.Checked = true;
+			if (ci.DemEdgeMatch)
+				chkbx_DemEdgeMatch.Checked = true;
+			if (ci.GlobalMappingItems)
+				chkbx_GMitems.Checked = true;
+		}
+
+		private void frm2ci(ref CheckItem ci)
+		{
+			ci.Clear();
+
+			if (chkbx_PrjSys.Checked)
+				ci.PrjSys = true;
+			if (chkbx_PrjOther.Checked)
+				ci.PrjOther = true;
+			if (chkbx_ColorMode.Checked)
+				ci.ColorMode = true;
+			if (chkbx_DataInfo.Checked)
+				ci.DataInfo = true;
+
+
+			if (chkbx_ImgNoise.Checked)
+				ci.ImgNoise = true;
+			if (chkbx_ImgChkPoint.Checked)
+				ci.ImgChkPoint = true;
+			if (chkbx_ImgEdgeMatch.Checked)
+				ci.ImgEdgeMatch = true;
+
+
+			if (chkbx_GenContour.Checked)
+				ci.GenContour = true;
+			if (chkbx_DemChkPoint.Checked)
+				ci.DemChkPoint = true;
+			if (chkbx_DemEdgeMatch.Checked)
+				ci.DemEdgeMatch = true;
+			if (chkbx_GMitems.Checked)
+				ci.GlobalMappingItems = true;
 		}
 	}
 }
