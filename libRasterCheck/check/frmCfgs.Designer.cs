@@ -33,16 +33,16 @@
 			this.groupBox9 = new System.Windows.Forms.GroupBox();
 			this.tbx_resultPath = new System.Windows.Forms.TextBox();
 			this.btn_resultPath = new System.Windows.Forms.Button();
-			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.gbx_CI_dem = new System.Windows.Forms.GroupBox();
 			this.chkbx_DemEdgeMatch = new System.Windows.Forms.CheckBox();
 			this.chkbx_GMitems = new System.Windows.Forms.CheckBox();
 			this.chkbx_GenContour = new System.Windows.Forms.CheckBox();
 			this.chkbx_DemChkPoint = new System.Windows.Forms.CheckBox();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.gbx_CI_img = new System.Windows.Forms.GroupBox();
 			this.chkbx_ImgEdgeMatch = new System.Windows.Forms.CheckBox();
 			this.chkbx_ImgNoise = new System.Windows.Forms.CheckBox();
 			this.chkbx_ImgChkPoint = new System.Windows.Forms.CheckBox();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.gbx_CI_common = new System.Windows.Forms.GroupBox();
 			this.chkbx_PrjSys = new System.Windows.Forms.CheckBox();
 			this.chkbx_DataOrganize = new System.Windows.Forms.CheckBox();
 			this.chkbx_DataInfo = new System.Windows.Forms.CheckBox();
@@ -105,9 +105,9 @@
 			this.tabCtrl_Cfgs.SuspendLayout();
 			this.tabPg_ChkItms.SuspendLayout();
 			this.groupBox9.SuspendLayout();
-			this.groupBox3.SuspendLayout();
-			this.groupBox2.SuspendLayout();
-			this.groupBox1.SuspendLayout();
+			this.gbx_CI_dem.SuspendLayout();
+			this.gbx_CI_img.SuspendLayout();
+			this.gbx_CI_common.SuspendLayout();
 			this.tabPG_ChkParams.SuspendLayout();
 			this.groupBox8.SuspendLayout();
 			this.groupBox4.SuspendLayout();
@@ -134,9 +134,9 @@
 			// 
 			this.tabPg_ChkItms.AutoScroll = true;
 			this.tabPg_ChkItms.Controls.Add(this.groupBox9);
-			this.tabPg_ChkItms.Controls.Add(this.groupBox3);
-			this.tabPg_ChkItms.Controls.Add(this.groupBox2);
-			this.tabPg_ChkItms.Controls.Add(this.groupBox1);
+			this.tabPg_ChkItms.Controls.Add(this.gbx_CI_dem);
+			this.tabPg_ChkItms.Controls.Add(this.gbx_CI_img);
+			this.tabPg_ChkItms.Controls.Add(this.gbx_CI_common);
 			this.tabPg_ChkItms.Location = new System.Drawing.Point(4, 25);
 			this.tabPg_ChkItms.Name = "tabPg_ChkItms";
 			this.tabPg_ChkItms.Padding = new System.Windows.Forms.Padding(3);
@@ -173,18 +173,18 @@
 			this.btn_resultPath.UseVisualStyleBackColor = true;
 			this.btn_resultPath.Click += new System.EventHandler(this.btn_resultPath_Click);
 			// 
-			// groupBox3
+			// gbx_CI_dem
 			// 
-			this.groupBox3.Controls.Add(this.chkbx_DemEdgeMatch);
-			this.groupBox3.Controls.Add(this.chkbx_GMitems);
-			this.groupBox3.Controls.Add(this.chkbx_GenContour);
-			this.groupBox3.Controls.Add(this.chkbx_DemChkPoint);
-			this.groupBox3.Location = new System.Drawing.Point(370, 116);
-			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(355, 130);
-			this.groupBox3.TabIndex = 17;
-			this.groupBox3.TabStop = false;
-			this.groupBox3.Text = "DEM/DSM专有项";
+			this.gbx_CI_dem.Controls.Add(this.chkbx_DemEdgeMatch);
+			this.gbx_CI_dem.Controls.Add(this.chkbx_GMitems);
+			this.gbx_CI_dem.Controls.Add(this.chkbx_GenContour);
+			this.gbx_CI_dem.Controls.Add(this.chkbx_DemChkPoint);
+			this.gbx_CI_dem.Location = new System.Drawing.Point(370, 116);
+			this.gbx_CI_dem.Name = "gbx_CI_dem";
+			this.gbx_CI_dem.Size = new System.Drawing.Size(355, 130);
+			this.gbx_CI_dem.TabIndex = 17;
+			this.gbx_CI_dem.TabStop = false;
+			this.gbx_CI_dem.Text = "DEM/DSM专有项";
 			// 
 			// chkbx_DemEdgeMatch
 			// 
@@ -228,17 +228,17 @@
 			this.chkbx_DemChkPoint.Text = "DEM高程精度（检测点文件）";
 			this.chkbx_DemChkPoint.UseVisualStyleBackColor = true;
 			// 
-			// groupBox2
+			// gbx_CI_img
 			// 
-			this.groupBox2.Controls.Add(this.chkbx_ImgEdgeMatch);
-			this.groupBox2.Controls.Add(this.chkbx_ImgNoise);
-			this.groupBox2.Controls.Add(this.chkbx_ImgChkPoint);
-			this.groupBox2.Location = new System.Drawing.Point(370, 6);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(355, 104);
-			this.groupBox2.TabIndex = 16;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "影像专有项";
+			this.gbx_CI_img.Controls.Add(this.chkbx_ImgEdgeMatch);
+			this.gbx_CI_img.Controls.Add(this.chkbx_ImgNoise);
+			this.gbx_CI_img.Controls.Add(this.chkbx_ImgChkPoint);
+			this.gbx_CI_img.Location = new System.Drawing.Point(370, 6);
+			this.gbx_CI_img.Name = "gbx_CI_img";
+			this.gbx_CI_img.Size = new System.Drawing.Size(355, 104);
+			this.gbx_CI_img.TabIndex = 16;
+			this.gbx_CI_img.TabStop = false;
+			this.gbx_CI_img.Text = "影像专有项";
 			// 
 			// chkbx_ImgEdgeMatch
 			// 
@@ -271,19 +271,19 @@
 			this.chkbx_ImgChkPoint.Text = "影像平面精度（检测点文件）";
 			this.chkbx_ImgChkPoint.UseVisualStyleBackColor = true;
 			// 
-			// groupBox1
+			// gbx_CI_common
 			// 
-			this.groupBox1.Controls.Add(this.chkbx_PrjSys);
-			this.groupBox1.Controls.Add(this.chkbx_DataOrganize);
-			this.groupBox1.Controls.Add(this.chkbx_DataInfo);
-			this.groupBox1.Controls.Add(this.chkbx_ColorMode);
-			this.groupBox1.Controls.Add(this.chkbx_PrjOther);
-			this.groupBox1.Location = new System.Drawing.Point(8, 6);
-			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(356, 240);
-			this.groupBox1.TabIndex = 15;
-			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "通用检查项";
+			this.gbx_CI_common.Controls.Add(this.chkbx_PrjSys);
+			this.gbx_CI_common.Controls.Add(this.chkbx_DataOrganize);
+			this.gbx_CI_common.Controls.Add(this.chkbx_DataInfo);
+			this.gbx_CI_common.Controls.Add(this.chkbx_ColorMode);
+			this.gbx_CI_common.Controls.Add(this.chkbx_PrjOther);
+			this.gbx_CI_common.Location = new System.Drawing.Point(8, 6);
+			this.gbx_CI_common.Name = "gbx_CI_common";
+			this.gbx_CI_common.Size = new System.Drawing.Size(356, 240);
+			this.gbx_CI_common.TabIndex = 15;
+			this.gbx_CI_common.TabStop = false;
+			this.gbx_CI_common.Text = "通用检查项";
 			// 
 			// chkbx_PrjSys
 			// 
@@ -301,9 +301,9 @@
 			this.chkbx_DataOrganize.Enabled = false;
 			this.chkbx_DataOrganize.Location = new System.Drawing.Point(21, 125);
 			this.chkbx_DataOrganize.Name = "chkbx_DataOrganize";
-			this.chkbx_DataOrganize.Size = new System.Drawing.Size(104, 19);
+			this.chkbx_DataOrganize.Size = new System.Drawing.Size(89, 19);
 			this.chkbx_DataOrganize.TabIndex = 7;
-			this.chkbx_DataOrganize.Text = "格式一致性";
+			this.chkbx_DataOrganize.Text = "文件组织";
 			this.chkbx_DataOrganize.UseVisualStyleBackColor = true;
 			// 
 			// chkbx_DataInfo
@@ -917,7 +917,7 @@
 			// 
 			this.panel3.Controls.Add(this.tabCtrl_Cfgs);
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel3.Location = new System.Drawing.Point(0, 0);
+			this.panel3.Location = new System.Drawing.Point(0, 53);
 			this.panel3.Name = "panel3";
 			this.panel3.Size = new System.Drawing.Size(804, 550);
 			this.panel3.TabIndex = 28;
@@ -930,8 +930,8 @@
 			this.panel1.Controls.Add(this.btn_newCfg);
 			this.panel1.Controls.Add(this.btn_saveCurr);
 			this.panel1.Controls.Add(this.cmbbx_tskcfgs);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel1.Location = new System.Drawing.Point(0, 550);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(804, 53);
 			this.panel1.TabIndex = 26;
@@ -949,12 +949,12 @@
 			this.tabPg_ChkItms.ResumeLayout(false);
 			this.groupBox9.ResumeLayout(false);
 			this.groupBox9.PerformLayout();
-			this.groupBox3.ResumeLayout(false);
-			this.groupBox3.PerformLayout();
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
-			this.groupBox1.ResumeLayout(false);
-			this.groupBox1.PerformLayout();
+			this.gbx_CI_dem.ResumeLayout(false);
+			this.gbx_CI_dem.PerformLayout();
+			this.gbx_CI_img.ResumeLayout(false);
+			this.gbx_CI_img.PerformLayout();
+			this.gbx_CI_common.ResumeLayout(false);
+			this.gbx_CI_common.PerformLayout();
 			this.tabPG_ChkParams.ResumeLayout(false);
 			this.groupBox8.ResumeLayout(false);
 			this.groupBox8.PerformLayout();
@@ -985,16 +985,16 @@
 		private System.Windows.Forms.ComboBox cmbbx_tskcfgs;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.Panel panel3;
-		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.GroupBox gbx_CI_dem;
 		private System.Windows.Forms.CheckBox chkbx_DemEdgeMatch;
 		private System.Windows.Forms.CheckBox chkbx_GMitems;
 		private System.Windows.Forms.CheckBox chkbx_GenContour;
 		private System.Windows.Forms.CheckBox chkbx_DemChkPoint;
-		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.GroupBox gbx_CI_img;
 		private System.Windows.Forms.CheckBox chkbx_ImgEdgeMatch;
 		private System.Windows.Forms.CheckBox chkbx_ImgNoise;
 		private System.Windows.Forms.CheckBox chkbx_ImgChkPoint;
-		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.GroupBox gbx_CI_common;
 		private System.Windows.Forms.CheckBox chkbx_PrjSys;
 		private System.Windows.Forms.CheckBox chkbx_DataOrganize;
 		private System.Windows.Forms.CheckBox chkbx_DataInfo;

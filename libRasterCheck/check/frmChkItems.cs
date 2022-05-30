@@ -28,21 +28,6 @@ namespace CheckerUI
 			ci2frm(this.Cfgs.getChkItems());
 		}
 
-		private void btn_Save_Click(object sender, EventArgs e)
-		{
-			CheckItem ci = Cfgs.getChkItems();
-			frm2ci(ref ci);
-			Cfgs.setChkItems(ci);
-			Cfgs.flushCI();
-
-			this.Close();
-		}
-
-		private void btn_Cancel_Click(object sender, EventArgs e)
-		{
-			this.Close();
-		}
-
 		private void ci2frm(CheckItem ci)
 		{
 			if (ci.PrjSys)
@@ -103,6 +88,36 @@ namespace CheckerUI
 				ci.DemEdgeMatch = true;
 			if (chkbx_GMitems.Checked)
 				ci.GlobalMappingItems = true;
+		}
+
+		private void btn_resultPath_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog fbd =new FolderBrowserDialog();
+			fbd.Description = "请选择文件夹";
+			if (fbd.ShowDialog() == DialogResult.OK)
+			{
+				string dir = fbd.SelectedPath;
+				if (dir != null)
+				{
+					tbx_resultPath.Text = dir;
+					this.Cfgs.chkOutput_path = dir;
+				}
+			}
+		}
+
+		private void timer_updateCI_Tick(object sender, EventArgs e)
+		{
+			tbx_resultPath.Text = DateTime.Now.ToLongTimeString();
+		}
+
+		private void frmChkItems_MouseEnter(object sender, EventArgs e)
+		{
+			timer_updateCI.Start();
+		}
+
+		private void frmChkItems_MouseLeave(object sender, EventArgs e)
+		{
+			timer_updateCI.Stop();
 		}
 	}
 }
