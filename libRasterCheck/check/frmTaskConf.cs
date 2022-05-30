@@ -21,20 +21,38 @@ namespace CheckerUI
 		string currTCname = null;
 		TaskCfg currTC = null;
 
+		int NewExtFormu_idx = 0;
+		int OrigExtFormu_idx = 0;
+		string NewExtFormu_name = "新公式";
+		string OrigExtFormu_name = "原公式";
+		string NewExtFormu_str =	"角点像元中心计算公式如下：\n" + 
+									"	X起 = INT[(MAX(X1, X2, X3, X4) + N*d) / d] * d\n" +
+									"	Y起 = INT[(MIN(Y1, Y2, Y3, Y4) - N*d) / d] * d\n" +
+									"	X止 = INT[(MIN(X1, X2, X3, X4) - N*d) / d] * d\n" +
+									"	Y止 = INT[(MAX(Y1, Y2, Y3, Y4) + N*d) / d] * d\n" +
+									"其中 N 为外扩像素数目，d 为像素地面分辨率";
+		string OrigExtFormu_str =	"角点像元中心计算公式如下：\n" + 
+									"	X起 = INT[(MAX(X1, X2, X3, X4) / d + 1] * d + N*d\n" +
+									"	Y起 = INT[(MIN(Y1, Y2, Y3, Y4) / d] * d - N*d\n" +
+									"	X止 = INT[(MIN(X1, X2, X3, X4) / d] * d - N*d\n" +
+									"	Y止 = INT[(MAX(Y1, Y2, Y3, Y4) / d + 1] * d + N*d\n" +
+									"其中 N 为外扩像素数目，d 为像素地面分辨率";
+
 		public frmTaskConf()
 		{
 			InitializeComponent();
-
-			pnl_editTskCfg.Visible = false;
 		}
 
 		public frmTaskConf(CfgPack cfgs)
 		{
 			InitializeComponent();
-			this.Cfgs = cfgs;
-			loadTcfgs2cmbbx();
 
-			pnl_editTskCfg.Visible = false;
+			this.Cfgs = cfgs;
+			cmbbx_ExtFormula.Items.Add(NewExtFormu_name);
+			cmbbx_ExtFormula.Items.Add(OrigExtFormu_name);
+			NewExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(NewExtFormu_name);
+			OrigExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(OrigExtFormu_name);
+			loadTcfgs2cmbbx();
 		}
 		protected override void OnClosing(CancelEventArgs e)
 		{
@@ -67,8 +85,6 @@ namespace CheckerUI
 				MessageBox.Show("错误，该配置不存在");
 				cmbbx_tskcfgs.SelectedItem = this.currTCname;
 			}
-
-			btn_viewTskCfg_Click(sender, e);
 		}
 
 		private void btn_NewCfg_Click(object sender, EventArgs e)
@@ -90,47 +106,26 @@ namespace CheckerUI
 				cmbbx_tskcfgs.Items.Add(currTCname + " （新建）");
 
 				MessageBox.Show("新建配置:" + currTCname + ", 采用默认配置模板");
-				btn_editTskCfg_Click(sender, e);
 			}
-		}
-
-		private void btn_viewTskCfg_Click(object sender, EventArgs e)
-		{
-			Utils.UI.units_disable(pnl_editTskCfg.Controls);
-			pnl_editTskCfg.Visible = true;
-			btn_close.Enabled = true;
-		}
-
-		private void btn_editTskCfg_Click(object sender, EventArgs e)
-		{
-			Utils.UI.units_enable(pnl_editTskCfg.Controls);
-			pnl_editTskCfg.Visible = true;
-			btn_close.Enabled = true;
-
-			Cfgs.addTcache(this.currTCname, this.currTC);
 		}
 
 		private void btn_saveCurr_Click(object sender, EventArgs e)
 		{
-			if (Cfgs.hasUnsavedChanges())
-			{
-				DialogResult dr = MessageBox.Show("确定保存当前配置？", "", MessageBoxButtons.OKCancel);
-				if (dr == DialogResult.Cancel)
-					return;
+			DialogResult dr = MessageBox.Show("确定保存当前配置？", "", MessageBoxButtons.OKCancel);
+			if (dr == DialogResult.Cancel)
+				return;
 
-				frm2cfg(ref currTC);
-				exitErr();
+			frm2cfg(ref currTC);
+			exitErr();
 
-				Cfgs.setLastTskCfg(currTCname);
-				Cfgs.addTcache(currTCname, currTC);
-				Cfgs.flushPC();
-				Cfgs.flushTC();
+			Cfgs.setLastTskCfg(currTCname);
+			Cfgs.addTcache(currTCname, currTC);
+			Cfgs.flushPC();
+			Cfgs.flushTC();
 
-				loadTcfgs2cmbbx();
-				btn_viewTskCfg_Click(sender, e);
+			loadTcfgs2cmbbx();
 
-				MessageBox.Show("已保存当前配置");
-			}
+			MessageBox.Show("已保存当前配置");
 		}
 
 		private void btn_deleteCurr_Click(object sender, EventArgs e)
@@ -146,11 +141,19 @@ namespace CheckerUI
 			loadTcfgs2cmbbx();
 		}
 
-		private void btn_close_Click(object sender, EventArgs e)
+		private void cmbbx_ExtFormula_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			this.Close();
+			if (cmbbx_ExtFormula.SelectedItem.ToString().Equals(NewExtFormu_name))
+			{
+				this.currTC.ExtFormula = ClipExtFormula.NewFormula;
+				rtbx_ExtFormula.Text = NewExtFormu_str;
+			}
+			else if (cmbbx_ExtFormula.SelectedItem.ToString().Equals(OrigExtFormu_name))
+			{
+				this.currTC.ExtFormula = ClipExtFormula.OrigFormula;
+				rtbx_ExtFormula.Text = OrigExtFormu_str;
+			}
 		}
-
 
 		private void loadTcfgs2cmbbx()
 		{
@@ -161,8 +164,11 @@ namespace CheckerUI
 				return;
 			}
 			else
+			{
+				cmbbx_tskcfgs.Items.Clear();
 				foreach (string key in keys)
 					cmbbx_tskcfgs.Items.Add(key);
+			}
 
 			this.currTCname = this.Cfgs.getLastTskCfg();
 			cmbbx_tskcfgs.SelectedItem = currTCname;
@@ -178,6 +184,24 @@ namespace CheckerUI
 
 		private void cfg2frm(TaskCfg cfg)
 		{
+			// 数据类型
+			switch (cfg.TskType)
+			{
+				case TaskType.CNSimg:
+					rdbtn_CNSimg.Checked = true;
+					break;
+				case TaskType.DEM:
+					rdbtn_DEM.Checked = true;
+					break;
+				case TaskType.ImgSrc:
+					rdbtn_ImgSrc.Checked = true;
+					break;
+
+				default:
+					rdbtn_CNSimg.Checked = true;
+					break;
+			}
+
 			// 坐标系
 			switch (cfg.PrjSys)
 			{
@@ -235,14 +259,15 @@ namespace CheckerUI
 			tbx_BandCount.Text = cfg.BandCount.ToString();
 			// 分辨率
 			tbx_Resolution.Text = cfg.Resolution.ToString();
-			// 比例尺
-			tbx_Scale.Text = cfg.Scale.ToString();
 			// 外扩范围
 			rdbtn_ByMeter.Checked = true;
 			tbx_ClipExt.Text = cfg.ClipExtent.ToString();
+			// 外扩公式
+			if (cfg.ExtFormula == ClipExtFormula.NewFormula)
+				cmbbx_ExtFormula.SelectedIndex = NewExtFormu_idx;
+			else if (cfg.ExtFormula == ClipExtFormula.OrigFormula)
+				cmbbx_ExtFormula.SelectedIndex = OrigExtFormu_idx;
 
-			// 等高距
-			tbx_ContIntv.Text = cfg.ContourInterval.ToString();
 			// 平面限差
 			tbx_PosTolar.Text = cfg.PositionDiffTolarence.ToString();
 			// 高程限差
@@ -251,6 +276,14 @@ namespace CheckerUI
 
 		private void frm2cfg(ref TaskCfg cfg)
 		{
+			// 数据类型
+			if (rdbtn_CNSimg.Checked)
+				cfg.TskType = TaskType.CNSimg;
+			else if (rdbtn_DEM.Checked)
+				cfg.TskType = TaskType.DEM;
+			else if (rdbtn_ImgSrc.Checked)
+				cfg.TskType = TaskType.ImgSrc;
+
 			// 坐标系
 			if (rdbtn_PrjSys_wgs84.Checked)
 				cfg.PrjSys = ProjSystem.wgs84;
@@ -320,12 +353,6 @@ namespace CheckerUI
 				cfg.Resolution = res;
 			else
 				errstr += "分辨率输入值非法:" + tbx_Resolution.Text + ";";
-			// 比例尺
-			string S = tbx_Scale.Text.ToUpper();
-			if (S.Length == 1 && S[0] >= 'A' && S[0] <= 'K')
-				cfg.Scale = S[0];
-			else
-				errstr += "比例尺输入值非法:" + S + ";";
 			// 外扩范围
 			if (res > 0)
 			{
@@ -347,24 +374,18 @@ namespace CheckerUI
 			else
 				tbx_ClipExt.Text = "0";
 
-			// 等高距
-			double CI = 0;
-			if (Double.TryParse(tbx_ContIntv.Text, out CI))
-				cfg.ContourInterval = CI;
-			else
-				errstr += "等高距输入值非法:" + tbx_ContIntv.Text + ";";
 			// 平面限差
 			double PT = 0;
 			if (Double.TryParse(tbx_PosTolar.Text, out PT))
 				cfg.PositionDiffTolarence = PT;
 			else
-				errstr += "等高距输入值非法:" + tbx_PosTolar.Text + ";";
+				errstr += "平面限差输入值非法:" + tbx_PosTolar.Text + ";";
 			// 高程限差
 			double HT = 0;
 			if (Double.TryParse(tbx_HeightTolar.Text, out HT))
 				cfg.HeightDiffTolarence = HT;
 			else
-				errstr += "等高距输入值非法:" + tbx_HeightTolar.Text + ";";
+				errstr += "高程限差输入值非法:" + tbx_HeightTolar.Text + ";";
 		}
 	}
 }

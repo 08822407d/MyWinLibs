@@ -14,6 +14,7 @@ namespace geodata
 	{
 		CNSimg,
 		DEM,
+		ImgSrc,
 	}
 
 
@@ -39,6 +40,8 @@ namespace geodata
 	/// </summary>
 	public class TaskCfg
 	{
+		public TaskType	TskType { get; set; }
+
 		/// <summary>
 		/// 数学基础
 		/// </summary>
@@ -66,9 +69,7 @@ namespace geodata
 		public uint BandCount { get; set; }
 		// 分辨率
 		public double Resolution { get; set; }
-		// 比例尺
-		public char Scale { get; set; }
-		// 外扩范围(单位米)
+		// 外扩范围(单位像素)
 		public uint	ClipExtent { get; set; }
 		// 外扩公式
 		public ClipExtFormula ExtFormula { get; set; }
@@ -76,8 +77,6 @@ namespace geodata
 		/// <summary>
 		/// DEM位置精度
 		/// </summary>
-		// 等高距
-		public double ContourInterval { get; set; }
 		/// <summary>
 		/// 限差
 		/// </summary>
@@ -90,6 +89,8 @@ namespace geodata
 
 		public TaskCfg()
 		{
+			TskType = TaskType.CNSimg;
+
 			PrjSys = ProjSystem.wgs84;
 			SemiMajor = 6378137.0;
 			InvFlatt = 298.257223563;
@@ -102,23 +103,23 @@ namespace geodata
 			Depth = DataType.GDT_Byte;
 			BandCount = 3;
 			Resolution = 1;
-			Scale = 'G';
 			ClipExtent = 0;
 			ExtFormula = ClipExtFormula.NewFormula;
 
 			PositionDiffTolarence = 0.0;
 			HeightDiffTolarence = 0.0;
-			ContourInterval = 1.0;
 
 			NoData = new double[] { 0.0, 0.0, 0.0};
 		}
 
-		public TaskCfg(ProjSystem PrjSys, double SemiMajor, double InvFlatt,
+		public TaskCfg(TaskType TskType, ProjSystem PrjSys, double SemiMajor, double InvFlatt,
 							double ScaleFactor, int CentMerid, double FalseEast, double FalseNorth,
-							DataType Depth, uint BandCount, double Resol, char Scale, uint ClipExt,
-							ClipExtFormula ExtFormu, double PosDiffTolarence, double HeighDiffTolarence, int CountIntv,
+							DataType Depth, uint BandCount, double Resol, uint ClipExt,
+							ClipExtFormula ExtFormu, double PosDiffTolarence, double HeighDiffTolarence,
 							double[] Nodata)
 		{
+			this.TskType = TskType;
+
 			this.PrjSys = PrjSys;
 			this.SemiMajor = SemiMajor;
 			this.InvFlatt = InvFlatt;
@@ -131,14 +132,11 @@ namespace geodata
 			this.Depth = Depth;
 			this.BandCount = BandCount;
 			this.Resolution = Resol;
-			this.Scale = Scale;
 			this.ClipExtent = ClipExt;
 			this.ExtFormula = ExtFormu;
 
 			this.PositionDiffTolarence = PosDiffTolarence;
 			this.HeightDiffTolarence = HeightDiffTolarence;
-			this.ContourInterval = CountIntv;
-
 
 			this.NoData = NoData;
 		}

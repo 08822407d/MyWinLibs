@@ -267,8 +267,6 @@ namespace geodata
 			else if (cfg.ExtFormula == ClipExtFormula.OrigFormula)
 				cmbbx_ExtFormula.SelectedIndex = OrigExtFormu_idx;
 
-			// 等高距
-			tbx_ContIntv.Text = cfg.ContourInterval.ToString();
 			// 平面限差
 			tbx_PosTolar.Text = cfg.PositionDiffTolarence.ToString();
 			// 高程限差
@@ -370,12 +368,6 @@ namespace geodata
 				tbx_ClipExt.Text = "0";
 			// 外扩公式
 
-			// 等高距
-			double CI = 0;
-			if (Double.TryParse(tbx_ContIntv.Text, out CI))
-				cfg.ContourInterval = CI;
-			else
-				errstr += "等高距输入值非法:" + tbx_ContIntv.Text + ";";
 			// 平面限差
 			double PT = 0;
 			if (Double.TryParse(tbx_PosTolar.Text, out PT))

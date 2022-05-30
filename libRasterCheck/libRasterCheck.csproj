@@ -161,6 +161,7 @@
     <Compile Include="CNStandard\CNStandard_core.cs" />
     <Compile Include="CNStandard\CNStandard_defs.cs" />
     <Compile Include="geodata\geodata_def.cs" />
+    <Compile Include="geoutils\GeoUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="raster\raster_core.cs" />
     <Compile Include="raster\raster_def.cs" />

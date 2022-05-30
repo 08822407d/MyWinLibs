@@ -92,8 +92,6 @@ namespace geodata
 				if (ci.ImgEdgeMatch)
 					Check.checkImgEdge(r, tc, opath_with_mapno);
 
-				if (ci.GenContour)
-					Check.GenContour(r, tc, contour_ofname);
 				if (ci.DemEdgeMatch)
 					Check.checkDemEdge(r, tc, opath_with_mapno);
 			}
@@ -203,35 +201,6 @@ namespace geodata
 							img.ImgExtent.ToString() + "};\t");
 				sw.Flush();
 				sw.Close();
-			}
-		}
-
-		public static void GenContour(Raster dem, TaskCfg tc, string ofname)
-		{
-			String input = dem.FileName;
-
-			ProcessStartInfo psi = new ProcessStartInfo();
-			psi.CreateNoWindow = false;
-			psi.UseShellExecute = false;
-			psi.FileName = "DEM2Contour.exe";
-			psi.WindowStyle = ProcessWindowStyle.Hidden;
-			psi.Arguments = "-a elev " + "-i " + tc.ContourInterval.ToString() + " " +
-							 "-snodata " + tc.NoData[0].ToString() + " " +
-							 "\"" + input + "\"" + " " +
-							 "\"" + ofname + "\"";
-
-			try
-			{
-				// Start the process with the info we specified.
-				// Call WaitForExit and then the using statement will close.
-				using (Process exeProcess = Process.Start(psi))
-				{
-					exeProcess.WaitForExit();
-				}
-			}
-			catch
-			{
-				 // Log error.
 			}
 		}
 
