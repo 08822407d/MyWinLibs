@@ -46,33 +46,37 @@ namespace geodata
 		/// 数学基础
 		/// </summary>
 		//	投影系
-		public ProjSystem PrjSys { get; set; }
+		public ProjSystem	PrjSys { get; set; }
 		// 半长轴
-		public double SemiMajor { get; set; }
+		public double	SemiMajor { get; set; }
 		// 扁率
-		public double InvFlatt { get; set; }
+		public double	InvFlatt { get; set; }
 		// 长度变形比
-		public double ScaleFactor { get; set; }
+		public double	ScaleFactor { get; set; }
 		// 中央经线
-		public int CentralMeridian { get; set; }
+		public int		CentralMeridian { get; set; }
 		// 坐标东移
-		public double FalseEast { get; set; }
+		public double	FalseEast { get; set; }
 		// 坐标北移
-		public double FalseNorth { get; set; }
+		public double	FalseNorth { get; set; }
 
 		/// <summary>
 		/// 数据质量
 		/// </summary>
 		// 影像位深度
-		public DataType Depth { get; set; }
+		public DataType	Depth { get; set; }
 		// 影像波段数
-		public uint BandCount { get; set; }
+		public uint		BandCount { get; set; }
 		// 分辨率
-		public double Resolution { get; set; }
+		public double	Resolution { get; set; }
+		// DPI
+		public uint		DPI { get; set; }
+		// 块尺寸
+		public int		BlkSize { get; set; }
 		// 外扩范围(单位像素)
-		public uint	ClipExtent { get; set; }
+		public uint		ClipExtent { get; set; }
 		// 外扩公式
-		public ClipExtFormula ExtFormula { get; set; }
+		public ClipExtFormula	ExtFormula { get; set; }
 
 		/// <summary>
 		/// DEM位置精度
@@ -81,11 +85,11 @@ namespace geodata
 		/// 限差
 		/// </summary>
 
-		public double PositionDiffTolarence { get; set; }
-		public double HeightDiffTolarence { get; set; }
+		public double	PositionDiffTolarence { get; set; }
+		public double	HeightDiffTolarence { get; set; }
 
 
-		public double[] NoData { get; set; }
+		public double[]	NoData { get; set; }
 
 		public TaskCfg()
 		{
@@ -103,6 +107,8 @@ namespace geodata
 			Depth = DataType.GDT_Byte;
 			BandCount = 3;
 			Resolution = 1;
+			DPI = 96;
+			BlkSize = 256;
 			ClipExtent = 0;
 			ExtFormula = ClipExtFormula.NewFormula;
 
@@ -114,7 +120,7 @@ namespace geodata
 
 		public TaskCfg(TaskType TskType, ProjSystem PrjSys, double SemiMajor, double InvFlatt,
 							double ScaleFactor, int CentMerid, double FalseEast, double FalseNorth,
-							DataType Depth, uint BandCount, double Resol, uint ClipExt,
+							DataType Depth, uint BandCount, double Resol, uint DPI, int BlkSize, uint ClipExt,
 							ClipExtFormula ExtFormu, double PosDiffTolarence, double HeighDiffTolarence,
 							double[] Nodata)
 		{
@@ -132,7 +138,9 @@ namespace geodata
 			this.Depth = Depth;
 			this.BandCount = BandCount;
 			this.Resolution = Resol;
+			this.DPI = DPI;
 			this.ClipExtent = ClipExt;
+			this.BlkSize = BlkSize;
 			this.ExtFormula = ExtFormu;
 
 			this.PositionDiffTolarence = PosDiffTolarence;

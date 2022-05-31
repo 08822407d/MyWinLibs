@@ -14,14 +14,13 @@ namespace CheckerUI
 {
 	public partial class frmChkItems : Form
 	{
-		public List<string> file_list  = null;
-
-
 		CfgPack Cfgs = null;
 
 		public frmChkItems()
 		{
 			InitializeComponent();
+
+			initLayout();
 		}
 
 		public frmChkItems(CfgPack cfgs)

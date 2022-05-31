@@ -55,7 +55,7 @@
 			// 
 			this.chkbx_DataOrganize.AutoSize = true;
 			this.chkbx_DataOrganize.Enabled = false;
-			this.chkbx_DataOrganize.Location = new System.Drawing.Point(40, 125);
+			this.chkbx_DataOrganize.Location = new System.Drawing.Point(29, 131);
 			this.chkbx_DataOrganize.Name = "chkbx_DataOrganize";
 			this.chkbx_DataOrganize.Size = new System.Drawing.Size(104, 19);
 			this.chkbx_DataOrganize.TabIndex = 7;
@@ -65,17 +65,17 @@
 			// chkbx_DataInfo
 			// 
 			this.chkbx_DataInfo.AutoSize = true;
-			this.chkbx_DataInfo.Location = new System.Drawing.Point(40, 99);
+			this.chkbx_DataInfo.Location = new System.Drawing.Point(29, 105);
 			this.chkbx_DataInfo.Name = "chkbx_DataInfo";
-			this.chkbx_DataInfo.Size = new System.Drawing.Size(314, 19);
+			this.chkbx_DataInfo.Size = new System.Drawing.Size(374, 19);
 			this.chkbx_DataInfo.TabIndex = 6;
-			this.chkbx_DataInfo.Text = "数据信息（分辨率，起点坐标，裁切范围）";
+			this.chkbx_DataInfo.Text = "数据信息（分辨率，块尺寸，起点坐标，裁切范围）";
 			this.chkbx_DataInfo.UseVisualStyleBackColor = true;
 			// 
 			// chkbx_ImgNoise
 			// 
 			this.chkbx_ImgNoise.AutoSize = true;
-			this.chkbx_ImgNoise.Location = new System.Drawing.Point(40, 24);
+			this.chkbx_ImgNoise.Location = new System.Drawing.Point(29, 29);
 			this.chkbx_ImgNoise.Name = "chkbx_ImgNoise";
 			this.chkbx_ImgNoise.Size = new System.Drawing.Size(194, 19);
 			this.chkbx_ImgNoise.TabIndex = 5;
@@ -85,7 +85,7 @@
 			// chkbx_PrjSys
 			// 
 			this.chkbx_PrjSys.AutoSize = true;
-			this.chkbx_PrjSys.Location = new System.Drawing.Point(40, 24);
+			this.chkbx_PrjSys.Location = new System.Drawing.Point(29, 30);
 			this.chkbx_PrjSys.Name = "chkbx_PrjSys";
 			this.chkbx_PrjSys.Size = new System.Drawing.Size(299, 19);
 			this.chkbx_PrjSys.TabIndex = 4;
@@ -95,7 +95,7 @@
 			// chkbx_PrjOther
 			// 
 			this.chkbx_PrjOther.AutoSize = true;
-			this.chkbx_PrjOther.Location = new System.Drawing.Point(40, 49);
+			this.chkbx_PrjOther.Location = new System.Drawing.Point(29, 55);
 			this.chkbx_PrjOther.Name = "chkbx_PrjOther";
 			this.chkbx_PrjOther.Size = new System.Drawing.Size(284, 19);
 			this.chkbx_PrjOther.TabIndex = 8;
@@ -106,7 +106,7 @@
 			// 
 			this.chkbx_ImgChkPoint.AutoSize = true;
 			this.chkbx_ImgChkPoint.Enabled = false;
-			this.chkbx_ImgChkPoint.Location = new System.Drawing.Point(40, 49);
+			this.chkbx_ImgChkPoint.Location = new System.Drawing.Point(29, 54);
 			this.chkbx_ImgChkPoint.Name = "chkbx_ImgChkPoint";
 			this.chkbx_ImgChkPoint.Size = new System.Drawing.Size(224, 19);
 			this.chkbx_ImgChkPoint.TabIndex = 9;
@@ -116,7 +116,7 @@
 			// chkbx_ColorMode
 			// 
 			this.chkbx_ColorMode.AutoSize = true;
-			this.chkbx_ColorMode.Location = new System.Drawing.Point(40, 74);
+			this.chkbx_ColorMode.Location = new System.Drawing.Point(29, 80);
 			this.chkbx_ColorMode.Name = "chkbx_ColorMode";
 			this.chkbx_ColorMode.Size = new System.Drawing.Size(224, 19);
 			this.chkbx_ColorMode.TabIndex = 11;
@@ -132,10 +132,11 @@
 			this.gbx_CI_common.Controls.Add(this.chkbx_DataInfo);
 			this.gbx_CI_common.Controls.Add(this.chkbx_ColorMode);
 			this.gbx_CI_common.Controls.Add(this.chkbx_PrjOther);
-			this.gbx_CI_common.Location = new System.Drawing.Point(15, 133);
+			this.gbx_CI_common.Location = new System.Drawing.Point(15, 106);
 			this.gbx_CI_common.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_CI_common.Name = "gbx_CI_common";
-			this.gbx_CI_common.Size = new System.Drawing.Size(360, 168);
+			this.gbx_CI_common.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
+			this.gbx_CI_common.Size = new System.Drawing.Size(426, 171);
 			this.gbx_CI_common.TabIndex = 12;
 			this.gbx_CI_common.TabStop = false;
 			this.gbx_CI_common.Text = "通用检查项";
@@ -147,10 +148,11 @@
 			this.gbx_CI_img.Controls.Add(this.chkbx_ImgEdgeMatch);
 			this.gbx_CI_img.Controls.Add(this.chkbx_ImgNoise);
 			this.gbx_CI_img.Controls.Add(this.chkbx_ImgChkPoint);
-			this.gbx_CI_img.Location = new System.Drawing.Point(15, 302);
+			this.gbx_CI_img.Location = new System.Drawing.Point(15, 287);
 			this.gbx_CI_img.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_CI_img.Name = "gbx_CI_img";
-			this.gbx_CI_img.Size = new System.Drawing.Size(270, 117);
+			this.gbx_CI_img.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
+			this.gbx_CI_img.Size = new System.Drawing.Size(276, 119);
 			this.gbx_CI_img.TabIndex = 13;
 			this.gbx_CI_img.TabStop = false;
 			this.gbx_CI_img.Text = "影像专有项";
@@ -158,7 +160,7 @@
 			// chkbx_ImgEdgeMatch
 			// 
 			this.chkbx_ImgEdgeMatch.AutoSize = true;
-			this.chkbx_ImgEdgeMatch.Location = new System.Drawing.Point(40, 74);
+			this.chkbx_ImgEdgeMatch.Location = new System.Drawing.Point(29, 79);
 			this.chkbx_ImgEdgeMatch.Name = "chkbx_ImgEdgeMatch";
 			this.chkbx_ImgEdgeMatch.Size = new System.Drawing.Size(89, 19);
 			this.chkbx_ImgEdgeMatch.TabIndex = 10;
@@ -175,7 +177,8 @@
 			this.gbx_CI_dem.Location = new System.Drawing.Point(15, 416);
 			this.gbx_CI_dem.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_CI_dem.Name = "gbx_CI_dem";
-			this.gbx_CI_dem.Size = new System.Drawing.Size(264, 117);
+			this.gbx_CI_dem.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
+			this.gbx_CI_dem.Size = new System.Drawing.Size(270, 120);
 			this.gbx_CI_dem.TabIndex = 14;
 			this.gbx_CI_dem.TabStop = false;
 			this.gbx_CI_dem.Text = "DEM/DSM专有项";
@@ -183,7 +186,7 @@
 			// chkbx_DemEdgeMatch
 			// 
 			this.chkbx_DemEdgeMatch.AutoSize = true;
-			this.chkbx_DemEdgeMatch.Location = new System.Drawing.Point(40, 49);
+			this.chkbx_DemEdgeMatch.Location = new System.Drawing.Point(29, 55);
 			this.chkbx_DemEdgeMatch.Name = "chkbx_DemEdgeMatch";
 			this.chkbx_DemEdgeMatch.Size = new System.Drawing.Size(83, 19);
 			this.chkbx_DemEdgeMatch.TabIndex = 10;
@@ -194,7 +197,7 @@
 			// 
 			this.chkbx_GMitems.AutoSize = true;
 			this.chkbx_GMitems.Enabled = false;
-			this.chkbx_GMitems.Location = new System.Drawing.Point(40, 74);
+			this.chkbx_GMitems.Location = new System.Drawing.Point(29, 80);
 			this.chkbx_GMitems.Name = "chkbx_GMitems";
 			this.chkbx_GMitems.Size = new System.Drawing.Size(134, 19);
 			this.chkbx_GMitems.TabIndex = 11;
@@ -205,7 +208,7 @@
 			// 
 			this.chkbx_DemChkPoint.AutoSize = true;
 			this.chkbx_DemChkPoint.Enabled = false;
-			this.chkbx_DemChkPoint.Location = new System.Drawing.Point(40, 24);
+			this.chkbx_DemChkPoint.Location = new System.Drawing.Point(29, 30);
 			this.chkbx_DemChkPoint.Name = "chkbx_DemChkPoint";
 			this.chkbx_DemChkPoint.Size = new System.Drawing.Size(218, 19);
 			this.chkbx_DemChkPoint.TabIndex = 9;
@@ -221,21 +224,22 @@
 			this.gbx_check.Location = new System.Drawing.Point(15, 15);
 			this.gbx_check.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_check.Name = "gbx_check";
-			this.gbx_check.Size = new System.Drawing.Size(476, 82);
+			this.gbx_check.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
+			this.gbx_check.Size = new System.Drawing.Size(630, 81);
 			this.gbx_check.TabIndex = 19;
 			this.gbx_check.TabStop = false;
 			this.gbx_check.Text = "结果输出";
 			// 
 			// tbx_resultPath
 			// 
-			this.tbx_resultPath.Location = new System.Drawing.Point(122, 33);
+			this.tbx_resultPath.Location = new System.Drawing.Point(161, 35);
 			this.tbx_resultPath.Name = "tbx_resultPath";
-			this.tbx_resultPath.Size = new System.Drawing.Size(348, 25);
+			this.tbx_resultPath.Size = new System.Drawing.Size(446, 25);
 			this.tbx_resultPath.TabIndex = 1;
 			// 
 			// btn_resultPath
 			// 
-			this.btn_resultPath.Location = new System.Drawing.Point(11, 33);
+			this.btn_resultPath.Location = new System.Drawing.Point(29, 35);
 			this.btn_resultPath.Name = "btn_resultPath";
 			this.btn_resultPath.Size = new System.Drawing.Size(105, 25);
 			this.btn_resultPath.TabIndex = 0;
@@ -249,7 +253,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(662, 579);
+			this.ClientSize = new System.Drawing.Size(751, 579);
 			this.Controls.Add(this.gbx_check);
 			this.Controls.Add(this.gbx_CI_dem);
 			this.Controls.Add(this.gbx_CI_img);

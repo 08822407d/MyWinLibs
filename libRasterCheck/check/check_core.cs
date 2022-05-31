@@ -23,6 +23,8 @@ namespace geodata
 
 	public class CheckTask
 	{
+		public bool output_onefile = true;
+
 		CfgPack Cfgs;
 		CheckItem ci;
 		TaskCfg tc;
@@ -52,7 +54,18 @@ namespace geodata
 		public void checkAll()
 		{
 			string opath = this.Cfgs.chkOutput_path;
+
 			Check.checkCNSMapNo(raster_list, Path.Combine(opath, "InvalidMapNo.txt"));
+			string prj_total = Path.Combine(opath, "投影检查.txt");
+			string colormode_total = Path.Combine(opath, "色彩模式检查.txt");
+			string datainfo_total = Path.Combine(opath, "其他数据信息.txt");
+			string imgedge_total = Path.Combine(opath, "影像接边检查.txt");
+			string imgnoise_total = Path.Combine(opath, "影像噪音检查.txt");
+			string demedge_total = Path.Combine(opath, "DEM接边检查.txt");
+
+			StreamWriter sw_prj = new StreamWriter(prj_total, true);
+			StreamWriter sw_colormode = new StreamWriter(colormode_total, true);
+			StreamWriter sw_datainfo = new StreamWriter(datainfo_total, true);
 
 			foreach (Raster r in raster_list)
 			{
@@ -64,7 +77,8 @@ namespace geodata
 				string opath_with_mapno = Path.Combine(opath, r.CNS.MapNo_str);
 				string general_ofname = Path.Combine(opath_with_mapno, "GeneralResult.txt");
 				string noise_ofname = Path.Combine(opath_with_mapno, "ImageNoise.txt");
-				string contour_ofname = Path.Combine(opath_with_mapno, "Contour.shp");
+				string imgedge_ofpath = Path.Combine(opath_with_mapno, "ImgEdge");
+				string demedge_ofpath = Path.Combine(opath_with_mapno, "DEMEdge");
 
 				if (!Directory.Exists(opath_with_mapno))
 					Directory.CreateDirectory(opath_with_mapno);
@@ -74,27 +88,74 @@ namespace geodata
 				Check.checkProjOther(r, tc, cr);
 				Check.checkColorMode(r, tc, cr);
 				Check.checkDataInfo(r, tc, cr);
-				chk_results.Add(cr);
-				StreamWriter sw = new StreamWriter(general_ofname, false);
-				if (ci.PrjSys)
-					sw.WriteLine(cr.PrjSys);
-				if (ci.PrjOther)
-					sw.WriteLine(cr.PrjOther);
-				if (ci.ColorMode)
-					sw.WriteLine(cr.ColorMode);
-				if (ci.DataInfo)
-					sw.WriteLine(cr.DataInfo);
-				sw.Flush();
-				sw.Close();
-
 				if (ci.ImgNoise)
 					Check.checkNoise(r, tc, noise_ofname);
 				if (ci.ImgEdgeMatch)
-					Check.checkImgEdge(r, tc, opath_with_mapno);
-
+					Check.checkImgEdge(r, tc, imgedge_ofpath);
 				if (ci.DemEdgeMatch)
-					Check.checkDemEdge(r, tc, opath_with_mapno);
+					Check.checkDemEdge(r, tc, demedge_ofpath);
+				chk_results.Add(cr);
+
+				// 为每个数据文件输出独立检查报告
+				if (!output_onefile)
+				{
+					StreamWriter sw_seperate = new StreamWriter(general_ofname, false);
+					if (ci.PrjSys)
+						sw_seperate.WriteLine(cr.PrjSys);
+					if (ci.PrjOther)
+						sw_seperate.WriteLine(cr.PrjOther);
+					if (ci.ColorMode)
+						sw_seperate.WriteLine(cr.ColorMode);
+					if (ci.DataInfo)
+						sw_seperate.WriteLine(cr.DataInfo);
+					sw_seperate.Flush();
+					sw_seperate.Close();
+				}
+				// 为所有数据文件的单项检查创建共用检查报告
+				else
+				{
+					if (ci.PrjSys)
+					{
+						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
+						sw_prj.WriteLine(cr.PrjSys + "\n");
+					}
+					if (ci.PrjOther)
+					{
+						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
+						sw_prj.WriteLine(cr.PrjOther + "\n");
+					}
+					if (ci.ColorMode)
+					{
+						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
+						sw_colormode.WriteLine(cr.ColorMode + "\n");
+					}
+					if (ci.DataInfo)
+					{
+						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
+						sw_datainfo.WriteLine(cr.DataInfo + "\n");
+					}
+					if (ci.ImgNoise)
+					{
+						string[] files = Utils.FIO.traverseSearchFile_Ext(imgedge_ofpath, ".txt").ToArray();
+						Utils.FIO.mergeTextFiles(files, imgedge_total, true);
+					}
+					if (ci.ImgEdgeMatch)
+					{
+					}
+					if (ci.DemEdgeMatch)
+					{
+					}
+
+					sw_prj.Flush();
+					sw_colormode.Flush();
+					sw_datainfo.Flush();
+				}
+
 			}
+
+			sw_prj.Close();
+			sw_colormode.Close();
+			sw_datainfo.Close();
 		}
 	}
 
@@ -146,6 +207,9 @@ namespace geodata
 		{
 			if (tc.Resolution != img.Resolution.X)
 				cr.DataInfo += "地面分辨率错误: " + img.Resolution.X.ToString() + "\n";
+			
+			if (tc.BlkSize != img.BlockSize[0, 0])
+				cr.DataInfo += "块尺寸错误: " + img.BlockSize[0, 0].ToString() + "\n";
 
 			Point2d imgStart = new Point2d(img.ImgExtent.Start.X + tc.ClipExtent,
 											img.ImgExtent.Start.Y - tc.ClipExtent);
@@ -228,7 +292,7 @@ namespace geodata
 			foreach (Raster dem2 in dem1.Overlaps)
 			{
 				string ofname = Path.Combine(ofpath, dem1.CNS.MapNo_str + "-" +
-											dem2.CNS.MapNo_str + "_EdgeMatch.txt");
+											dem2.CNS.MapNo_str + ".txt");
 				Extent ovlp1 = dem1.getOverlapPixel(dem2);
 				Extent ovlp2 = dem2.getOverlapPixel(dem1);
 				int width = ovlp1.Width;
@@ -267,7 +331,7 @@ namespace geodata
 			{
 				Debug.Assert(img1.PrjSys == img2.PrjSys);
 				string ofname = Path.Combine(ofpath, img1.CNS.MapNo_str + "-" +
-											img2.CNS.MapNo_str + "_EdgeMatch.txt");
+											img2.CNS.MapNo_str + ".txt");
 				double NN_SQ_DIST_RATIO_THR = 0.3;
 				double matchType = 0;
 

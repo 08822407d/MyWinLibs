@@ -9,8 +9,9 @@ namespace Utils
 {
 	public static class FIO
 	{
-		public static void traverseSearchFile_Ext(List<string> list, string root, string ext)
+		public static List<string> traverseSearchFile_Ext(string root, string ext)
 		{
+			List<string> ret_val = new List<string>();
 			// Data structure to hold names of subfolders to be
 			// examined for files.
 			Stack<string> dirs = new Stack<string>();
@@ -77,7 +78,7 @@ namespace Utils
 						System.IO.FileInfo fi = new System.IO.FileInfo(f);
 						Console.WriteLine("{0}: {1}, {2}", fi.Name, fi.Length, fi.CreationTime);
 						if (Path.GetExtension(f).Equals(ext))
-							list.Add(f);
+							ret_val.Add(f);
 					}
 					catch (System.IO.FileNotFoundException e)
 					{
@@ -94,6 +95,20 @@ namespace Utils
 				foreach (string str in subDirs)
 					dirs.Push(str);
 			}
+
+			return ret_val;
+		}
+
+		public static void mergeTextFiles(string[] files, string ofname, bool append)
+		{
+			StreamWriter sw = new StreamWriter(ofname, append);
+			foreach (string f in files)
+			{
+				string[] lines = File.ReadAllLines(f);
+				sw.WriteLine(lines);
+				sw.Flush();
+			}
+			sw.Close();
 		}
 	}
 }

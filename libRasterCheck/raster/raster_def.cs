@@ -54,6 +54,10 @@ namespace geodata
 		/// 对应数据位宽的最大值
 		/// </summary>
 		public double[]		LimitVals { get; set; }
+		/// <summary>
+		/// 存储块大小
+		/// </summary>
+		public int[,]		BlockSize { get; set; }
 
 		/// <summary>
 		/// 数学基础
@@ -100,6 +104,7 @@ namespace geodata
 					Gt			= new double[6];
 					ImgSize		= new Point(Ds.RasterXSize, Ds.RasterYSize);
 					Depths		= new DataType[BandCount];
+					BlockSize	= new int[BandCount, 2];
 					Bands		= new Band[BandCount];
 					LimitVals	= new double[BandCount];
 					DataBuf		= new double[BandCount][];
@@ -171,8 +176,10 @@ namespace geodata
 		{
 			for (int i = 0; i < BandCount; i++)
 			{
-				Bands[i]	= Ds.GetRasterBand(i + 1);
-				Depths[i]	= Bands[i].DataType;
+				Bands[i]		= Ds.GetRasterBand(i + 1);
+				Depths[i]		= Bands[i].DataType;
+
+				Bands[i].GetBlockSize(out BlockSize[i, 0], out BlockSize[i, 1]);
 
 				if (Depths[i] == DataType.GDT_Byte)
 					LimitVals[i] = Byte.MaxValue;

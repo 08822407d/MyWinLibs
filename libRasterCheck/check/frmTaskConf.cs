@@ -259,6 +259,9 @@ namespace CheckerUI
 			tbx_BandCount.Text = cfg.BandCount.ToString();
 			// 分辨率
 			tbx_Resolution.Text = cfg.Resolution.ToString();
+			// 块尺寸
+			tbx_BlkSize.Text = cfg.BlkSize.ToString();
+
 			// 外扩范围
 			rdbtn_ByMeter.Checked = true;
 			tbx_ClipExt.Text = cfg.ClipExtent.ToString();
@@ -320,14 +323,14 @@ namespace CheckerUI
 			else
 				this.errstr += "中央经线输入值非法:" + tbx_CM.Text + ";";
 			// 坐标东移
-			int FE = 0;
-			if (Int32.TryParse(tbx_False_E.Text, out FE))
+			double FE = 0;
+			if (Double.TryParse(tbx_False_E.Text, out FE))
 				cfg.FalseEast = FE;
 			else
 				errstr += "坐标东移输入值非法:" + tbx_False_E.Text + ";";
 			// 坐标北移
-			int FN = 0;
-			if (Int32.TryParse(tbx_False_N.Text, out FN))
+			double FN = 0;
+			if (Double.TryParse(tbx_False_N.Text, out FN))
 				cfg.FalseNorth = FN;
 			else
 				errstr += "坐标北移输入值非法:" + tbx_False_N.Text + ";";
@@ -353,6 +356,13 @@ namespace CheckerUI
 				cfg.Resolution = res;
 			else
 				errstr += "分辨率输入值非法:" + tbx_Resolution.Text + ";";
+			// 块尺寸
+			int bs = 0;
+			if (Int32.TryParse(tbx_BlkSize.Text, out bs))
+				cfg.BlkSize = bs;
+			else
+				errstr += "块尺寸输入值非法:" + tbx_BlkSize.Text + ";";
+
 			// 外扩范围
 			if (res > 0)
 			{
@@ -386,6 +396,11 @@ namespace CheckerUI
 				cfg.HeightDiffTolarence = HT;
 			else
 				errstr += "高程限差输入值非法:" + tbx_HeightTolar.Text + ";";
+		}
+
+		private void btn_editConfig_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
