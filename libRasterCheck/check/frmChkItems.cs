@@ -14,7 +14,11 @@ namespace CheckerUI
 {
 	public partial class frmChkItems : Form
 	{
+		public List<string> file_list  = null;
+
+
 		CfgPack Cfgs = null;
+
 		public frmChkItems()
 		{
 			InitializeComponent();
@@ -26,6 +30,29 @@ namespace CheckerUI
 			this.Cfgs = cfgs;
 
 			ci2frm(this.Cfgs.getChkItems());
+
+			initLayout();
+		}
+
+		public void updateCI()
+		{
+			CheckItem tmpci = this.Cfgs.getChkItems();
+			frm2ci(ref tmpci);
+		}
+
+		private void btn_resultPath_Click(object sender, EventArgs e)
+		{
+			FolderBrowserDialog fbd =new FolderBrowserDialog();
+			fbd.Description = "请选择文件夹";
+			if (fbd.ShowDialog() == DialogResult.OK)
+			{
+				string dir = fbd.SelectedPath;
+				if (dir != null)
+				{
+					tbx_resultPath.Text = dir;
+					this.Cfgs.chkOutput_path = dir;
+				}
+			}
 		}
 
 		private void ci2frm(CheckItem ci)
@@ -39,7 +66,6 @@ namespace CheckerUI
 			if (ci.DataInfo)
 				chkbx_DataInfo.Checked = true;
 
-
 			if (ci.ImgNoise)
 				chkbx_ImgNoise.Checked = true;
 			if (ci.ImgChkPoint)
@@ -47,9 +73,6 @@ namespace CheckerUI
 			if (ci.ImgEdgeMatch)
 				chkbx_ImgEdgeMatch.Checked = true;
 
-
-			if (ci.GenContour)
-				chkbx_GenContour.Checked = true;
 			if (ci.DemChkPoint)
 				chkbx_DemChkPoint.Checked = true;
 			if (ci.DemEdgeMatch)
@@ -71,7 +94,6 @@ namespace CheckerUI
 			if (chkbx_DataInfo.Checked)
 				ci.DataInfo = true;
 
-
 			if (chkbx_ImgNoise.Checked)
 				ci.ImgNoise = true;
 			if (chkbx_ImgChkPoint.Checked)
@@ -79,9 +101,6 @@ namespace CheckerUI
 			if (chkbx_ImgEdgeMatch.Checked)
 				ci.ImgEdgeMatch = true;
 
-
-			if (chkbx_GenContour.Checked)
-				ci.GenContour = true;
 			if (chkbx_DemChkPoint.Checked)
 				ci.DemChkPoint = true;
 			if (chkbx_DemEdgeMatch.Checked)
@@ -90,34 +109,17 @@ namespace CheckerUI
 				ci.GlobalMappingItems = true;
 		}
 
-		private void btn_resultPath_Click(object sender, EventArgs e)
+		private void initLayout()
 		{
-			FolderBrowserDialog fbd =new FolderBrowserDialog();
-			fbd.Description = "请选择文件夹";
-			if (fbd.ShowDialog() == DialogResult.OK)
-			{
-				string dir = fbd.SelectedPath;
-				if (dir != null)
-				{
-					tbx_resultPath.Text = dir;
-					this.Cfgs.chkOutput_path = dir;
-				}
-			}
-		}
+			this.Controls.SetChildIndex(this.gbx_check, 0);
+			this.Controls.SetChildIndex(this.gbx_CI_common, 0);
+			this.Controls.SetChildIndex(this.gbx_CI_img, 0);
+			this.Controls.SetChildIndex(this.gbx_CI_dem, 0);
 
-		private void timer_updateCI_Tick(object sender, EventArgs e)
-		{
-			tbx_resultPath.Text = DateTime.Now.ToLongTimeString();
-		}
-
-		private void frmChkItems_MouseEnter(object sender, EventArgs e)
-		{
-			timer_updateCI.Start();
-		}
-
-		private void frmChkItems_MouseLeave(object sender, EventArgs e)
-		{
-			timer_updateCI.Stop();
+			this.gbx_check.Dock = DockStyle.Top;
+			this.gbx_CI_common.Dock = DockStyle.Top;
+			this.gbx_CI_img.Dock = DockStyle.Top;
+			this.gbx_CI_dem.Dock = DockStyle.Top;
 		}
 	}
 }

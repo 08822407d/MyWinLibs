@@ -157,6 +157,12 @@
     <Compile Include="check\frmTaskConf.Designer.cs">
       <DependentUpon>frmTaskConf.cs</DependentUpon>
     </Compile>
+    <Compile Include="check\genContour.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="check\genContour.Designer.cs">
+      <DependentUpon>genContour.cs</DependentUpon>
+    </Compile>
     <Compile Include="CNStandard\CNStandard_cfg.cs" />
     <Compile Include="CNStandard\CNStandard_core.cs" />
     <Compile Include="CNStandard\CNStandard_defs.cs" />
@@ -179,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="check\frmTaskConf.resx">
       <DependentUpon>frmTaskConf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="check\genContour.resx">
+      <DependentUpon>genContour.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
