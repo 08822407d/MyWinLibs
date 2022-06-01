@@ -30,9 +30,10 @@ namespace geodata
 		TaskCfg tc;
 
 		List<Raster> raster_list;
+		List<string> tfw_list;
 		List<CheckResult> chk_results;
 
-		public CheckTask(List<string> file_list, CfgPack cfgs)
+		public CheckTask(CfgPack cfgs)
 		{
 			raster_list = new List<Raster>();
 			chk_results = new List<CheckResult>();
@@ -40,7 +41,10 @@ namespace geodata
 			this.Cfgs = cfgs;
 			this.ci= cfgs.getChkItems();
 			this.tc = cfgs.getTC(cfgs.getLastTskCfg());
+		}
 
+		public void setDataList(List<string> file_list)
+		{
 			foreach (string f in file_list)
 			{
 				Raster r = new Raster(f, tc);
@@ -49,6 +53,11 @@ namespace geodata
 					raster_list.Add(r);
 				}
 			}
+		}
+
+		public void setTFWList(List<string> tfws)
+		{
+			this.tfw_list = tfws;
 		}
 
 		public void checkAll()

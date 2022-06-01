@@ -67,9 +67,9 @@
 			this.chkbx_DataInfo.AutoSize = true;
 			this.chkbx_DataInfo.Location = new System.Drawing.Point(29, 105);
 			this.chkbx_DataInfo.Name = "chkbx_DataInfo";
-			this.chkbx_DataInfo.Size = new System.Drawing.Size(374, 19);
+			this.chkbx_DataInfo.Size = new System.Drawing.Size(299, 19);
 			this.chkbx_DataInfo.TabIndex = 6;
-			this.chkbx_DataInfo.Text = "数据信息（分辨率，块尺寸，起点坐标，裁切范围）";
+			this.chkbx_DataInfo.Text = "数据信息（分辨率，块尺寸，裁切范围）";
 			this.chkbx_DataInfo.UseVisualStyleBackColor = true;
 			// 
 			// chkbx_ImgNoise
@@ -106,12 +106,13 @@
 			// 
 			this.chkbx_ImgChkPoint.AutoSize = true;
 			this.chkbx_ImgChkPoint.Enabled = false;
-			this.chkbx_ImgChkPoint.Location = new System.Drawing.Point(29, 54);
+			this.chkbx_ImgChkPoint.Location = new System.Drawing.Point(29, 79);
 			this.chkbx_ImgChkPoint.Name = "chkbx_ImgChkPoint";
 			this.chkbx_ImgChkPoint.Size = new System.Drawing.Size(224, 19);
 			this.chkbx_ImgChkPoint.TabIndex = 9;
 			this.chkbx_ImgChkPoint.Text = "影像平面精度（检测点文件）";
 			this.chkbx_ImgChkPoint.UseVisualStyleBackColor = true;
+			this.chkbx_ImgChkPoint.Visible = false;
 			// 
 			// chkbx_ColorMode
 			// 
@@ -136,7 +137,7 @@
 			this.gbx_CI_common.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_CI_common.Name = "gbx_CI_common";
 			this.gbx_CI_common.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
-			this.gbx_CI_common.Size = new System.Drawing.Size(426, 171);
+			this.gbx_CI_common.Size = new System.Drawing.Size(351, 171);
 			this.gbx_CI_common.TabIndex = 12;
 			this.gbx_CI_common.TabStop = false;
 			this.gbx_CI_common.Text = "通用检查项";
@@ -160,7 +161,7 @@
 			// chkbx_ImgEdgeMatch
 			// 
 			this.chkbx_ImgEdgeMatch.AutoSize = true;
-			this.chkbx_ImgEdgeMatch.Location = new System.Drawing.Point(29, 79);
+			this.chkbx_ImgEdgeMatch.Location = new System.Drawing.Point(29, 54);
 			this.chkbx_ImgEdgeMatch.Name = "chkbx_ImgEdgeMatch";
 			this.chkbx_ImgEdgeMatch.Size = new System.Drawing.Size(89, 19);
 			this.chkbx_ImgEdgeMatch.TabIndex = 10;
@@ -203,6 +204,7 @@
 			this.chkbx_GMitems.TabIndex = 11;
 			this.chkbx_GMitems.Text = "全球测图专有项";
 			this.chkbx_GMitems.UseVisualStyleBackColor = true;
+			this.chkbx_GMitems.Visible = false;
 			// 
 			// chkbx_DemChkPoint
 			// 
