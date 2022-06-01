@@ -33,7 +33,7 @@
 			this.label15 = new System.Windows.Forms.Label();
 			this.cmbbx_tskcfgs = new System.Windows.Forms.ComboBox();
 			this.btn_deleteCurr = new System.Windows.Forms.Button();
-			this.groupBox8 = new System.Windows.Forms.GroupBox();
+			this.gbx_clipext = new System.Windows.Forms.GroupBox();
 			this.rtbx_ExtFormula = new System.Windows.Forms.RichTextBox();
 			this.cmbbx_ExtFormula = new System.Windows.Forms.ComboBox();
 			this.label8 = new System.Windows.Forms.Label();
@@ -42,10 +42,11 @@
 			this.label17 = new System.Windows.Forms.Label();
 			this.rdbtn_ByMeter = new System.Windows.Forms.RadioButton();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.radioButton1 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_ImgSrc = new System.Windows.Forms.RadioButton();
 			this.rdbtn_DEM = new System.Windows.Forms.RadioButton();
 			this.rdbtn_CNSimg = new System.Windows.Forms.RadioButton();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.gbx_prj = new System.Windows.Forms.GroupBox();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
@@ -63,7 +64,11 @@
 			this.rdbtn_PrjSys_xian80 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_PrjSys_bj54 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_PrjSys_2000 = new System.Windows.Forms.RadioButton();
-			this.groupBox7 = new System.Windows.Forms.GroupBox();
+			this.gbx_datainfo = new System.Windows.Forms.GroupBox();
+			this.lbl_NioseVal = new System.Windows.Forms.Label();
+			this.tbx_NoiseVal = new System.Windows.Forms.TextBox();
+			this.label16 = new System.Windows.Forms.Label();
+			this.tbx_NoDataVal = new System.Windows.Forms.TextBox();
 			this.label11 = new System.Windows.Forms.Label();
 			this.tbx_BlkSize = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
@@ -74,28 +79,30 @@
 			this.rdbtn_Depth_8 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_Depth_32 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_Depth_16 = new System.Windows.Forms.RadioButton();
-			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.label13 = new System.Windows.Forms.Label();
+			this.gbx_tolarence = new System.Windows.Forms.GroupBox();
+			this.lbl_HeighTolar = new System.Windows.Forms.Label();
 			this.tbx_HeightTolar = new System.Windows.Forms.TextBox();
-			this.label14 = new System.Windows.Forms.Label();
+			this.lbl_PosTolar = new System.Windows.Forms.Label();
 			this.tbx_PosTolar = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.btn_Rename = new System.Windows.Forms.Button();
 			this.btn_editConfig = new System.Windows.Forms.Button();
-			this.groupBox8.SuspendLayout();
+			this.btn_CopyCreate = new System.Windows.Forms.Button();
+			this.gbx_clipext.SuspendLayout();
 			this.groupBox4.SuspendLayout();
-			this.groupBox5.SuspendLayout();
-			this.groupBox7.SuspendLayout();
-			this.groupBox6.SuspendLayout();
+			this.gbx_prj.SuspendLayout();
+			this.gbx_datainfo.SuspendLayout();
+			this.gbx_tolarence.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// btn_saveCurr
 			// 
 			this.btn_saveCurr.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_saveCurr.Location = new System.Drawing.Point(428, 62);
+			this.btn_saveCurr.Location = new System.Drawing.Point(470, 62);
 			this.btn_saveCurr.Margin = new System.Windows.Forms.Padding(5);
 			this.btn_saveCurr.Name = "btn_saveCurr";
-			this.btn_saveCurr.Size = new System.Drawing.Size(113, 24);
+			this.btn_saveCurr.Size = new System.Drawing.Size(132, 24);
 			this.btn_saveCurr.TabIndex = 16;
 			this.btn_saveCurr.Text = "保存当前更改";
 			this.btn_saveCurr.UseVisualStyleBackColor = true;
@@ -104,12 +111,12 @@
 			// btn_NewCfg
 			// 
 			this.btn_NewCfg.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_NewCfg.Location = new System.Drawing.Point(428, 26);
+			this.btn_NewCfg.Location = new System.Drawing.Point(328, 26);
 			this.btn_NewCfg.Margin = new System.Windows.Forms.Padding(5);
 			this.btn_NewCfg.Name = "btn_NewCfg";
-			this.btn_NewCfg.Size = new System.Drawing.Size(113, 24);
+			this.btn_NewCfg.Size = new System.Drawing.Size(132, 24);
 			this.btn_NewCfg.TabIndex = 5;
-			this.btn_NewCfg.Text = "或新建配置";
+			this.btn_NewCfg.Text = "新建配置";
 			this.btn_NewCfg.UseVisualStyleBackColor = true;
 			this.btn_NewCfg.Click += new System.EventHandler(this.btn_NewCfg_Click);
 			// 
@@ -117,7 +124,7 @@
 			// 
 			this.label15.AutoSize = true;
 			this.label15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.label15.Location = new System.Drawing.Point(43, 31);
+			this.label15.Location = new System.Drawing.Point(27, 31);
 			this.label15.Margin = new System.Windows.Forms.Padding(5);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(120, 15);
@@ -131,10 +138,10 @@
 			this.cmbbx_tskcfgs.FormattingEnabled = true;
 			this.cmbbx_tskcfgs.ImeMode = System.Windows.Forms.ImeMode.Off;
 			this.cmbbx_tskcfgs.ItemHeight = 18;
-			this.cmbbx_tskcfgs.Location = new System.Drawing.Point(173, 26);
+			this.cmbbx_tskcfgs.Location = new System.Drawing.Point(157, 26);
 			this.cmbbx_tskcfgs.Margin = new System.Windows.Forms.Padding(5);
 			this.cmbbx_tskcfgs.Name = "cmbbx_tskcfgs";
-			this.cmbbx_tskcfgs.Size = new System.Drawing.Size(169, 26);
+			this.cmbbx_tskcfgs.Size = new System.Drawing.Size(155, 26);
 			this.cmbbx_tskcfgs.Sorted = true;
 			this.cmbbx_tskcfgs.TabIndex = 1;
 			this.cmbbx_tskcfgs.SelectedIndexChanged += new System.EventHandler(this.cmbbx_tskcfgs_SelectedIndexChanged);
@@ -142,39 +149,39 @@
 			// btn_deleteCurr
 			// 
 			this.btn_deleteCurr.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_deleteCurr.Location = new System.Drawing.Point(173, 62);
+			this.btn_deleteCurr.Location = new System.Drawing.Point(328, 62);
 			this.btn_deleteCurr.Margin = new System.Windows.Forms.Padding(5);
 			this.btn_deleteCurr.Name = "btn_deleteCurr";
-			this.btn_deleteCurr.Size = new System.Drawing.Size(113, 24);
+			this.btn_deleteCurr.Size = new System.Drawing.Size(132, 24);
 			this.btn_deleteCurr.TabIndex = 18;
 			this.btn_deleteCurr.Text = "删除当前配置";
 			this.btn_deleteCurr.UseVisualStyleBackColor = true;
 			this.btn_deleteCurr.Click += new System.EventHandler(this.btn_deleteCurr_Click);
 			// 
-			// groupBox8
+			// gbx_clipext
 			// 
-			this.groupBox8.Controls.Add(this.rtbx_ExtFormula);
-			this.groupBox8.Controls.Add(this.cmbbx_ExtFormula);
-			this.groupBox8.Controls.Add(this.label8);
-			this.groupBox8.Controls.Add(this.rdbtn_ByPixel);
-			this.groupBox8.Controls.Add(this.tbx_ClipExt);
-			this.groupBox8.Controls.Add(this.label17);
-			this.groupBox8.Controls.Add(this.rdbtn_ByMeter);
-			this.groupBox8.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.groupBox8.Location = new System.Drawing.Point(13, 440);
-			this.groupBox8.Margin = new System.Windows.Forms.Padding(5);
-			this.groupBox8.Name = "groupBox8";
-			this.groupBox8.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.groupBox8.Size = new System.Drawing.Size(568, 174);
-			this.groupBox8.TabIndex = 38;
-			this.groupBox8.TabStop = false;
-			this.groupBox8.Text = "裁切范围";
+			this.gbx_clipext.Controls.Add(this.rtbx_ExtFormula);
+			this.gbx_clipext.Controls.Add(this.cmbbx_ExtFormula);
+			this.gbx_clipext.Controls.Add(this.label8);
+			this.gbx_clipext.Controls.Add(this.rdbtn_ByPixel);
+			this.gbx_clipext.Controls.Add(this.tbx_ClipExt);
+			this.gbx_clipext.Controls.Add(this.label17);
+			this.gbx_clipext.Controls.Add(this.rdbtn_ByMeter);
+			this.gbx_clipext.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.gbx_clipext.Location = new System.Drawing.Point(13, 479);
+			this.gbx_clipext.Margin = new System.Windows.Forms.Padding(5);
+			this.gbx_clipext.Name = "gbx_clipext";
+			this.gbx_clipext.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.gbx_clipext.Size = new System.Drawing.Size(622, 174);
+			this.gbx_clipext.TabIndex = 38;
+			this.gbx_clipext.TabStop = false;
+			this.gbx_clipext.Text = "裁切范围";
 			// 
 			// rtbx_ExtFormula
 			// 
 			this.rtbx_ExtFormula.Location = new System.Drawing.Point(19, 60);
 			this.rtbx_ExtFormula.Name = "rtbx_ExtFormula";
-			this.rtbx_ExtFormula.Size = new System.Drawing.Size(528, 107);
+			this.rtbx_ExtFormula.Size = new System.Drawing.Size(583, 107);
 			this.rtbx_ExtFormula.TabIndex = 26;
 			this.rtbx_ExtFormula.Text = "";
 			// 
@@ -188,7 +195,7 @@
 			this.cmbbx_ExtFormula.Location = new System.Drawing.Point(100, 23);
 			this.cmbbx_ExtFormula.Margin = new System.Windows.Forms.Padding(5);
 			this.cmbbx_ExtFormula.Name = "cmbbx_ExtFormula";
-			this.cmbbx_ExtFormula.Size = new System.Drawing.Size(100, 26);
+			this.cmbbx_ExtFormula.Size = new System.Drawing.Size(144, 26);
 			this.cmbbx_ExtFormula.Sorted = true;
 			this.cmbbx_ExtFormula.TabIndex = 25;
 			this.cmbbx_ExtFormula.SelectedIndexChanged += new System.EventHandler(this.cmbbx_ExtFormula_SelectedIndexChanged);
@@ -205,7 +212,7 @@
 			// rdbtn_ByPixel
 			// 
 			this.rdbtn_ByPixel.AutoSize = true;
-			this.rdbtn_ByPixel.Location = new System.Drawing.Point(489, 28);
+			this.rdbtn_ByPixel.Location = new System.Drawing.Point(534, 28);
 			this.rdbtn_ByPixel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_ByPixel.Name = "rdbtn_ByPixel";
 			this.rdbtn_ByPixel.Size = new System.Drawing.Size(58, 19);
@@ -216,7 +223,7 @@
 			// 
 			// tbx_ClipExt
 			// 
-			this.tbx_ClipExt.Location = new System.Drawing.Point(320, 23);
+			this.tbx_ClipExt.Location = new System.Drawing.Point(365, 23);
 			this.tbx_ClipExt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_ClipExt.Name = "tbx_ClipExt";
 			this.tbx_ClipExt.Size = new System.Drawing.Size(110, 25);
@@ -225,7 +232,7 @@
 			// label17
 			// 
 			this.label17.AutoSize = true;
-			this.label17.Location = new System.Drawing.Point(237, 30);
+			this.label17.Location = new System.Drawing.Point(282, 30);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(75, 15);
 			this.label17.TabIndex = 14;
@@ -234,7 +241,7 @@
 			// rdbtn_ByMeter
 			// 
 			this.rdbtn_ByMeter.AutoSize = true;
-			this.rdbtn_ByMeter.Location = new System.Drawing.Point(440, 28);
+			this.rdbtn_ByMeter.Location = new System.Drawing.Point(485, 28);
 			this.rdbtn_ByMeter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_ByMeter.Name = "rdbtn_ByMeter";
 			this.rdbtn_ByMeter.Size = new System.Drawing.Size(43, 19);
@@ -245,21 +252,36 @@
 			// 
 			// groupBox4
 			// 
+			this.groupBox4.Controls.Add(this.radioButton1);
 			this.groupBox4.Controls.Add(this.rdbtn_ImgSrc);
 			this.groupBox4.Controls.Add(this.rdbtn_DEM);
 			this.groupBox4.Controls.Add(this.rdbtn_CNSimg);
 			this.groupBox4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.groupBox4.Location = new System.Drawing.Point(13, 117);
 			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(568, 62);
+			this.groupBox4.Size = new System.Drawing.Size(622, 62);
 			this.groupBox4.TabIndex = 37;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "项目类型";
 			// 
+			// radioButton1
+			// 
+			this.radioButton1.AutoSize = true;
+			this.radioButton1.Location = new System.Drawing.Point(397, 25);
+			this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.Size = new System.Drawing.Size(88, 19);
+			this.radioButton1.TabIndex = 19;
+			this.radioButton1.TabStop = true;
+			this.radioButton1.Text = "影像原片";
+			this.radioButton1.UseVisualStyleBackColor = true;
+			this.radioButton1.Visible = false;
+			this.radioButton1.CheckedChanged += new System.EventHandler(this.rdbtn_ImgSrc_CheckedChanged);
+			// 
 			// rdbtn_ImgSrc
 			// 
 			this.rdbtn_ImgSrc.AutoSize = true;
-			this.rdbtn_ImgSrc.Location = new System.Drawing.Point(342, 28);
+			this.rdbtn_ImgSrc.Location = new System.Drawing.Point(395, 25);
 			this.rdbtn_ImgSrc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_ImgSrc.Name = "rdbtn_ImgSrc";
 			this.rdbtn_ImgSrc.Size = new System.Drawing.Size(88, 19);
@@ -268,11 +290,12 @@
 			this.rdbtn_ImgSrc.Text = "影像原片";
 			this.rdbtn_ImgSrc.UseVisualStyleBackColor = true;
 			this.rdbtn_ImgSrc.Visible = false;
+			this.rdbtn_ImgSrc.CheckedChanged += new System.EventHandler(this.rdbtn_ImgSrc_CheckedChanged);
 			// 
 			// rdbtn_DEM
 			// 
 			this.rdbtn_DEM.AutoSize = true;
-			this.rdbtn_DEM.Location = new System.Drawing.Point(188, 28);
+			this.rdbtn_DEM.Location = new System.Drawing.Point(232, 25);
 			this.rdbtn_DEM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_DEM.Name = "rdbtn_DEM";
 			this.rdbtn_DEM.Size = new System.Drawing.Size(84, 19);
@@ -280,11 +303,12 @@
 			this.rdbtn_DEM.TabStop = true;
 			this.rdbtn_DEM.Text = "DEM/DSM";
 			this.rdbtn_DEM.UseVisualStyleBackColor = true;
+			this.rdbtn_DEM.CheckedChanged += new System.EventHandler(this.rdbtn_DEM_CheckedChanged);
 			// 
 			// rdbtn_CNSimg
 			// 
 			this.rdbtn_CNSimg.AutoSize = true;
-			this.rdbtn_CNSimg.Location = new System.Drawing.Point(19, 28);
+			this.rdbtn_CNSimg.Location = new System.Drawing.Point(46, 27);
 			this.rdbtn_CNSimg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_CNSimg.Name = "rdbtn_CNSimg";
 			this.rdbtn_CNSimg.Size = new System.Drawing.Size(88, 19);
@@ -292,36 +316,37 @@
 			this.rdbtn_CNSimg.TabStop = true;
 			this.rdbtn_CNSimg.Text = "分幅影像";
 			this.rdbtn_CNSimg.UseVisualStyleBackColor = true;
+			this.rdbtn_CNSimg.CheckedChanged += new System.EventHandler(this.rdbtn_CNSimg_CheckedChanged);
 			// 
-			// groupBox5
+			// gbx_prj
 			// 
-			this.groupBox5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.groupBox5.Controls.Add(this.label12);
-			this.groupBox5.Controls.Add(this.label5);
-			this.groupBox5.Controls.Add(this.label6);
-			this.groupBox5.Controls.Add(this.tbx_False_N);
-			this.groupBox5.Controls.Add(this.label4);
-			this.groupBox5.Controls.Add(this.label3);
-			this.groupBox5.Controls.Add(this.tbx_False_E);
-			this.groupBox5.Controls.Add(this.tbx_CM);
-			this.groupBox5.Controls.Add(this.tbx_ScaleFact);
-			this.groupBox5.Controls.Add(this.label2);
-			this.groupBox5.Controls.Add(this.label1);
-			this.groupBox5.Controls.Add(this.tbx_InvFlatt);
-			this.groupBox5.Controls.Add(this.tbx_SemiMajor);
-			this.groupBox5.Controls.Add(this.rdbtn_PrjSys_wgs84);
-			this.groupBox5.Controls.Add(this.rdbtn_PrjSys_xian80);
-			this.groupBox5.Controls.Add(this.rdbtn_PrjSys_bj54);
-			this.groupBox5.Controls.Add(this.rdbtn_PrjSys_2000);
-			this.groupBox5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.groupBox5.Location = new System.Drawing.Point(13, 187);
-			this.groupBox5.Margin = new System.Windows.Forms.Padding(5);
-			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Padding = new System.Windows.Forms.Padding(6);
-			this.groupBox5.Size = new System.Drawing.Size(568, 133);
-			this.groupBox5.TabIndex = 34;
-			this.groupBox5.TabStop = false;
-			this.groupBox5.Text = "投影信息";
+			this.gbx_prj.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.gbx_prj.Controls.Add(this.label12);
+			this.gbx_prj.Controls.Add(this.label5);
+			this.gbx_prj.Controls.Add(this.label6);
+			this.gbx_prj.Controls.Add(this.tbx_False_N);
+			this.gbx_prj.Controls.Add(this.label4);
+			this.gbx_prj.Controls.Add(this.label3);
+			this.gbx_prj.Controls.Add(this.tbx_False_E);
+			this.gbx_prj.Controls.Add(this.tbx_CM);
+			this.gbx_prj.Controls.Add(this.tbx_ScaleFact);
+			this.gbx_prj.Controls.Add(this.label2);
+			this.gbx_prj.Controls.Add(this.label1);
+			this.gbx_prj.Controls.Add(this.tbx_InvFlatt);
+			this.gbx_prj.Controls.Add(this.tbx_SemiMajor);
+			this.gbx_prj.Controls.Add(this.rdbtn_PrjSys_wgs84);
+			this.gbx_prj.Controls.Add(this.rdbtn_PrjSys_xian80);
+			this.gbx_prj.Controls.Add(this.rdbtn_PrjSys_bj54);
+			this.gbx_prj.Controls.Add(this.rdbtn_PrjSys_2000);
+			this.gbx_prj.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.gbx_prj.Location = new System.Drawing.Point(13, 187);
+			this.gbx_prj.Margin = new System.Windows.Forms.Padding(5);
+			this.gbx_prj.Name = "gbx_prj";
+			this.gbx_prj.Padding = new System.Windows.Forms.Padding(6);
+			this.gbx_prj.Size = new System.Drawing.Size(622, 133);
+			this.gbx_prj.TabIndex = 34;
+			this.gbx_prj.TabStop = false;
+			this.gbx_prj.Text = "投影信息";
 			// 
 			// label12
 			// 
@@ -335,7 +360,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(392, 96);
+			this.label5.Location = new System.Drawing.Point(434, 96);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(45, 15);
 			this.label5.TabIndex = 15;
@@ -344,7 +369,7 @@
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(223, 100);
+			this.label6.Location = new System.Drawing.Point(236, 100);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(45, 15);
 			this.label6.TabIndex = 14;
@@ -352,10 +377,10 @@
 			// 
 			// tbx_False_N
 			// 
-			this.tbx_False_N.Location = new System.Drawing.Point(443, 93);
+			this.tbx_False_N.Location = new System.Drawing.Point(485, 93);
 			this.tbx_False_N.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_False_N.Name = "tbx_False_N";
-			this.tbx_False_N.Size = new System.Drawing.Size(98, 25);
+			this.tbx_False_N.Size = new System.Drawing.Size(117, 25);
 			this.tbx_False_N.TabIndex = 13;
 			// 
 			// label4
@@ -370,18 +395,19 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(377, 63);
+			this.label3.Location = new System.Drawing.Point(419, 63);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(60, 15);
 			this.label3.TabIndex = 10;
 			this.label3.Text = "变形比:";
+			this.label3.Visible = false;
 			// 
 			// tbx_False_E
 			// 
-			this.tbx_False_E.Location = new System.Drawing.Point(274, 93);
+			this.tbx_False_E.Location = new System.Drawing.Point(287, 93);
 			this.tbx_False_E.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_False_E.Name = "tbx_False_E";
-			this.tbx_False_E.Size = new System.Drawing.Size(97, 25);
+			this.tbx_False_E.Size = new System.Drawing.Size(117, 25);
 			this.tbx_False_E.TabIndex = 12;
 			// 
 			// tbx_CM
@@ -389,21 +415,22 @@
 			this.tbx_CM.Location = new System.Drawing.Point(100, 93);
 			this.tbx_CM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_CM.Name = "tbx_CM";
-			this.tbx_CM.Size = new System.Drawing.Size(100, 25);
+			this.tbx_CM.Size = new System.Drawing.Size(117, 25);
 			this.tbx_CM.TabIndex = 9;
 			// 
 			// tbx_ScaleFact
 			// 
-			this.tbx_ScaleFact.Location = new System.Drawing.Point(443, 60);
+			this.tbx_ScaleFact.Location = new System.Drawing.Point(485, 60);
 			this.tbx_ScaleFact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_ScaleFact.Name = "tbx_ScaleFact";
-			this.tbx_ScaleFact.Size = new System.Drawing.Size(98, 25);
+			this.tbx_ScaleFact.Size = new System.Drawing.Size(117, 25);
 			this.tbx_ScaleFact.TabIndex = 8;
+			this.tbx_ScaleFact.Visible = false;
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(223, 66);
+			this.label2.Location = new System.Drawing.Point(236, 66);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(45, 15);
 			this.label2.TabIndex = 7;
@@ -420,10 +447,10 @@
 			// 
 			// tbx_InvFlatt
 			// 
-			this.tbx_InvFlatt.Location = new System.Drawing.Point(274, 60);
+			this.tbx_InvFlatt.Location = new System.Drawing.Point(287, 60);
 			this.tbx_InvFlatt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_InvFlatt.Name = "tbx_InvFlatt";
-			this.tbx_InvFlatt.Size = new System.Drawing.Size(97, 25);
+			this.tbx_InvFlatt.Size = new System.Drawing.Size(117, 25);
 			this.tbx_InvFlatt.TabIndex = 5;
 			// 
 			// tbx_SemiMajor
@@ -431,7 +458,7 @@
 			this.tbx_SemiMajor.Location = new System.Drawing.Point(100, 60);
 			this.tbx_SemiMajor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_SemiMajor.Name = "tbx_SemiMajor";
-			this.tbx_SemiMajor.Size = new System.Drawing.Size(100, 25);
+			this.tbx_SemiMajor.Size = new System.Drawing.Size(117, 25);
 			this.tbx_SemiMajor.TabIndex = 4;
 			// 
 			// rdbtn_PrjSys_wgs84
@@ -449,7 +476,7 @@
 			// rdbtn_PrjSys_xian80
 			// 
 			this.rdbtn_PrjSys_xian80.AutoSize = true;
-			this.rdbtn_PrjSys_xian80.Location = new System.Drawing.Point(327, 26);
+			this.rdbtn_PrjSys_xian80.Location = new System.Drawing.Point(334, 26);
 			this.rdbtn_PrjSys_xian80.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_PrjSys_xian80.Name = "rdbtn_PrjSys_xian80";
 			this.rdbtn_PrjSys_xian80.Size = new System.Drawing.Size(76, 19);
@@ -461,7 +488,7 @@
 			// rdbtn_PrjSys_bj54
 			// 
 			this.rdbtn_PrjSys_bj54.AutoSize = true;
-			this.rdbtn_PrjSys_bj54.Location = new System.Drawing.Point(216, 26);
+			this.rdbtn_PrjSys_bj54.Location = new System.Drawing.Point(212, 26);
 			this.rdbtn_PrjSys_bj54.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_PrjSys_bj54.Name = "rdbtn_PrjSys_bj54";
 			this.rdbtn_PrjSys_bj54.Size = new System.Drawing.Size(100, 19);
@@ -473,7 +500,7 @@
 			// rdbtn_PrjSys_2000
 			// 
 			this.rdbtn_PrjSys_2000.AutoSize = true;
-			this.rdbtn_PrjSys_2000.Location = new System.Drawing.Point(418, 26);
+			this.rdbtn_PrjSys_2000.Location = new System.Drawing.Point(436, 26);
 			this.rdbtn_PrjSys_2000.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.rdbtn_PrjSys_2000.Name = "rdbtn_PrjSys_2000";
 			this.rdbtn_PrjSys_2000.Size = new System.Drawing.Size(92, 19);
@@ -482,32 +509,70 @@
 			this.rdbtn_PrjSys_2000.Text = "CGCS2000";
 			this.rdbtn_PrjSys_2000.UseVisualStyleBackColor = true;
 			// 
-			// groupBox7
+			// gbx_datainfo
 			// 
-			this.groupBox7.Controls.Add(this.label11);
-			this.groupBox7.Controls.Add(this.tbx_BlkSize);
-			this.groupBox7.Controls.Add(this.label10);
-			this.groupBox7.Controls.Add(this.tbx_Resolution);
-			this.groupBox7.Controls.Add(this.label7);
-			this.groupBox7.Controls.Add(this.label9);
-			this.groupBox7.Controls.Add(this.tbx_BandCount);
-			this.groupBox7.Controls.Add(this.rdbtn_Depth_8);
-			this.groupBox7.Controls.Add(this.rdbtn_Depth_32);
-			this.groupBox7.Controls.Add(this.rdbtn_Depth_16);
-			this.groupBox7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.groupBox7.Location = new System.Drawing.Point(13, 330);
-			this.groupBox7.Margin = new System.Windows.Forms.Padding(5);
-			this.groupBox7.Name = "groupBox7";
-			this.groupBox7.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.groupBox7.Size = new System.Drawing.Size(568, 104);
-			this.groupBox7.TabIndex = 35;
-			this.groupBox7.TabStop = false;
-			this.groupBox7.Text = "数据信息";
+			this.gbx_datainfo.Controls.Add(this.lbl_NioseVal);
+			this.gbx_datainfo.Controls.Add(this.tbx_NoiseVal);
+			this.gbx_datainfo.Controls.Add(this.label16);
+			this.gbx_datainfo.Controls.Add(this.tbx_NoDataVal);
+			this.gbx_datainfo.Controls.Add(this.label11);
+			this.gbx_datainfo.Controls.Add(this.tbx_BlkSize);
+			this.gbx_datainfo.Controls.Add(this.label10);
+			this.gbx_datainfo.Controls.Add(this.tbx_Resolution);
+			this.gbx_datainfo.Controls.Add(this.label7);
+			this.gbx_datainfo.Controls.Add(this.label9);
+			this.gbx_datainfo.Controls.Add(this.tbx_BandCount);
+			this.gbx_datainfo.Controls.Add(this.rdbtn_Depth_8);
+			this.gbx_datainfo.Controls.Add(this.rdbtn_Depth_32);
+			this.gbx_datainfo.Controls.Add(this.rdbtn_Depth_16);
+			this.gbx_datainfo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.gbx_datainfo.Location = new System.Drawing.Point(13, 330);
+			this.gbx_datainfo.Margin = new System.Windows.Forms.Padding(5);
+			this.gbx_datainfo.Name = "gbx_datainfo";
+			this.gbx_datainfo.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.gbx_datainfo.Size = new System.Drawing.Size(622, 139);
+			this.gbx_datainfo.TabIndex = 35;
+			this.gbx_datainfo.TabStop = false;
+			this.gbx_datainfo.Text = "数据信息";
+			// 
+			// lbl_NioseVal
+			// 
+			this.lbl_NioseVal.AutoSize = true;
+			this.lbl_NioseVal.Location = new System.Drawing.Point(346, 100);
+			this.lbl_NioseVal.Name = "lbl_NioseVal";
+			this.lbl_NioseVal.Size = new System.Drawing.Size(106, 15);
+			this.lbl_NioseVal.TabIndex = 25;
+			this.lbl_NioseVal.Text = "噪音(白点)值:";
+			// 
+			// tbx_NoiseVal
+			// 
+			this.tbx_NoiseVal.Location = new System.Drawing.Point(458, 95);
+			this.tbx_NoiseVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_NoiseVal.Name = "tbx_NoiseVal";
+			this.tbx_NoiseVal.Size = new System.Drawing.Size(144, 25);
+			this.tbx_NoiseVal.TabIndex = 24;
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(22, 100);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(78, 15);
+			this.label16.TabIndex = 23;
+			this.label16.Text = "NoData值:";
+			// 
+			// tbx_NoDataVal
+			// 
+			this.tbx_NoDataVal.Location = new System.Drawing.Point(100, 95);
+			this.tbx_NoDataVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_NoDataVal.Name = "tbx_NoDataVal";
+			this.tbx_NoDataVal.Size = new System.Drawing.Size(144, 25);
+			this.tbx_NoDataVal.TabIndex = 22;
 			// 
 			// label11
 			// 
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(378, 67);
+			this.label11.Location = new System.Drawing.Point(420, 67);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(60, 15);
 			this.label11.TabIndex = 21;
@@ -515,16 +580,16 @@
 			// 
 			// tbx_BlkSize
 			// 
-			this.tbx_BlkSize.Location = new System.Drawing.Point(443, 62);
+			this.tbx_BlkSize.Location = new System.Drawing.Point(485, 62);
 			this.tbx_BlkSize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_BlkSize.Name = "tbx_BlkSize";
-			this.tbx_BlkSize.Size = new System.Drawing.Size(98, 25);
+			this.tbx_BlkSize.Size = new System.Drawing.Size(117, 25);
 			this.tbx_BlkSize.TabIndex = 20;
 			// 
 			// label10
 			// 
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(209, 67);
+			this.label10.Location = new System.Drawing.Point(223, 67);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(60, 15);
 			this.label10.TabIndex = 19;
@@ -532,10 +597,10 @@
 			// 
 			// tbx_Resolution
 			// 
-			this.tbx_Resolution.Location = new System.Drawing.Point(274, 62);
+			this.tbx_Resolution.Location = new System.Drawing.Point(288, 62);
 			this.tbx_Resolution.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_Resolution.Name = "tbx_Resolution";
-			this.tbx_Resolution.Size = new System.Drawing.Size(95, 25);
+			this.tbx_Resolution.Size = new System.Drawing.Size(117, 25);
 			this.tbx_Resolution.TabIndex = 18;
 			// 
 			// label7
@@ -561,7 +626,7 @@
 			this.tbx_BandCount.Location = new System.Drawing.Point(100, 62);
 			this.tbx_BandCount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.tbx_BandCount.Name = "tbx_BandCount";
-			this.tbx_BandCount.Size = new System.Drawing.Size(100, 25);
+			this.tbx_BandCount.Size = new System.Drawing.Size(117, 25);
 			this.tbx_BandCount.TabIndex = 9;
 			// 
 			// rdbtn_Depth_8
@@ -600,30 +665,30 @@
 			this.rdbtn_Depth_16.Text = "16位";
 			this.rdbtn_Depth_16.UseVisualStyleBackColor = true;
 			// 
-			// groupBox6
+			// gbx_tolarence
 			// 
-			this.groupBox6.Controls.Add(this.label13);
-			this.groupBox6.Controls.Add(this.tbx_HeightTolar);
-			this.groupBox6.Controls.Add(this.label14);
-			this.groupBox6.Controls.Add(this.tbx_PosTolar);
-			this.groupBox6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.groupBox6.Location = new System.Drawing.Point(13, 624);
-			this.groupBox6.Margin = new System.Windows.Forms.Padding(5);
-			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.groupBox6.Size = new System.Drawing.Size(568, 70);
-			this.groupBox6.TabIndex = 36;
-			this.groupBox6.TabStop = false;
-			this.groupBox6.Text = "限差";
+			this.gbx_tolarence.Controls.Add(this.lbl_HeighTolar);
+			this.gbx_tolarence.Controls.Add(this.tbx_HeightTolar);
+			this.gbx_tolarence.Controls.Add(this.lbl_PosTolar);
+			this.gbx_tolarence.Controls.Add(this.tbx_PosTolar);
+			this.gbx_tolarence.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.gbx_tolarence.Location = new System.Drawing.Point(13, 663);
+			this.gbx_tolarence.Margin = new System.Windows.Forms.Padding(5);
+			this.gbx_tolarence.Name = "gbx_tolarence";
+			this.gbx_tolarence.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.gbx_tolarence.Size = new System.Drawing.Size(622, 70);
+			this.gbx_tolarence.TabIndex = 36;
+			this.gbx_tolarence.TabStop = false;
+			this.gbx_tolarence.Text = "限差";
 			// 
-			// label13
+			// lbl_HeighTolar
 			// 
-			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(362, 31);
-			this.label13.Name = "label13";
-			this.label13.Size = new System.Drawing.Size(75, 15);
-			this.label13.TabIndex = 23;
-			this.label13.Text = "高程限差:";
+			this.lbl_HeighTolar.AutoSize = true;
+			this.lbl_HeighTolar.Location = new System.Drawing.Point(362, 31);
+			this.lbl_HeighTolar.Name = "lbl_HeighTolar";
+			this.lbl_HeighTolar.Size = new System.Drawing.Size(75, 15);
+			this.lbl_HeighTolar.TabIndex = 23;
+			this.lbl_HeighTolar.Text = "高程限差:";
 			// 
 			// tbx_HeightTolar
 			// 
@@ -633,14 +698,14 @@
 			this.tbx_HeightTolar.Size = new System.Drawing.Size(98, 25);
 			this.tbx_HeightTolar.TabIndex = 22;
 			// 
-			// label14
+			// lbl_PosTolar
 			// 
-			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(17, 31);
-			this.label14.Name = "label14";
-			this.label14.Size = new System.Drawing.Size(75, 15);
-			this.label14.TabIndex = 21;
-			this.label14.Text = "平面限差:";
+			this.lbl_PosTolar.AutoSize = true;
+			this.lbl_PosTolar.Location = new System.Drawing.Point(17, 31);
+			this.lbl_PosTolar.Name = "lbl_PosTolar";
+			this.lbl_PosTolar.Size = new System.Drawing.Size(75, 15);
+			this.lbl_PosTolar.TabIndex = 21;
+			this.lbl_PosTolar.Text = "平面限差:";
 			// 
 			// tbx_PosTolar
 			// 
@@ -652,6 +717,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.btn_CopyCreate);
+			this.groupBox1.Controls.Add(this.btn_Rename);
 			this.groupBox1.Controls.Add(this.btn_editConfig);
 			this.groupBox1.Controls.Add(this.btn_NewCfg);
 			this.groupBox1.Controls.Add(this.cmbbx_tskcfgs);
@@ -661,23 +728,48 @@
 			this.groupBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.groupBox1.Location = new System.Drawing.Point(13, 13);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(568, 98);
+			this.groupBox1.Size = new System.Drawing.Size(622, 98);
 			this.groupBox1.TabIndex = 39;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "配置模板";
 			// 
+			// btn_Rename
+			// 
+			this.btn_Rename.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.btn_Rename.Location = new System.Drawing.Point(177, 62);
+			this.btn_Rename.Margin = new System.Windows.Forms.Padding(5);
+			this.btn_Rename.Name = "btn_Rename";
+			this.btn_Rename.Size = new System.Drawing.Size(135, 24);
+			this.btn_Rename.TabIndex = 20;
+			this.btn_Rename.Text = "重命名当前配置";
+			this.btn_Rename.UseVisualStyleBackColor = true;
+			this.btn_Rename.Visible = false;
+			this.btn_Rename.Click += new System.EventHandler(this.btn_Rename_Click);
+			// 
 			// btn_editConfig
 			// 
 			this.btn_editConfig.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_editConfig.Location = new System.Drawing.Point(46, 62);
+			this.btn_editConfig.Location = new System.Drawing.Point(30, 62);
 			this.btn_editConfig.Margin = new System.Windows.Forms.Padding(5);
 			this.btn_editConfig.Name = "btn_editConfig";
-			this.btn_editConfig.Size = new System.Drawing.Size(113, 24);
+			this.btn_editConfig.Size = new System.Drawing.Size(135, 24);
 			this.btn_editConfig.TabIndex = 19;
 			this.btn_editConfig.Text = "编辑当前配置";
 			this.btn_editConfig.UseVisualStyleBackColor = true;
 			this.btn_editConfig.Visible = false;
 			this.btn_editConfig.Click += new System.EventHandler(this.btn_editConfig_Click);
+			// 
+			// btn_CopyCreate
+			// 
+			this.btn_CopyCreate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.btn_CopyCreate.Location = new System.Drawing.Point(470, 26);
+			this.btn_CopyCreate.Margin = new System.Windows.Forms.Padding(5);
+			this.btn_CopyCreate.Name = "btn_CopyCreate";
+			this.btn_CopyCreate.Size = new System.Drawing.Size(132, 24);
+			this.btn_CopyCreate.TabIndex = 21;
+			this.btn_CopyCreate.Text = "从已有配置新建";
+			this.btn_CopyCreate.UseVisualStyleBackColor = true;
+			this.btn_CopyCreate.Visible = false;
 			// 
 			// frmTaskConf
 			// 
@@ -685,13 +777,13 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(607, 705);
+			this.ClientSize = new System.Drawing.Size(664, 766);
 			this.Controls.Add(this.groupBox1);
-			this.Controls.Add(this.groupBox8);
+			this.Controls.Add(this.gbx_clipext);
 			this.Controls.Add(this.groupBox4);
-			this.Controls.Add(this.groupBox5);
-			this.Controls.Add(this.groupBox7);
-			this.Controls.Add(this.groupBox6);
+			this.Controls.Add(this.gbx_prj);
+			this.Controls.Add(this.gbx_datainfo);
+			this.Controls.Add(this.gbx_tolarence);
 			this.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -703,16 +795,16 @@
 			this.ShowInTaskbar = false;
 			this.Text = "配置项目参数";
 			this.TopMost = true;
-			this.groupBox8.ResumeLayout(false);
-			this.groupBox8.PerformLayout();
+			this.gbx_clipext.ResumeLayout(false);
+			this.gbx_clipext.PerformLayout();
 			this.groupBox4.ResumeLayout(false);
 			this.groupBox4.PerformLayout();
-			this.groupBox5.ResumeLayout(false);
-			this.groupBox5.PerformLayout();
-			this.groupBox7.ResumeLayout(false);
-			this.groupBox7.PerformLayout();
-			this.groupBox6.ResumeLayout(false);
-			this.groupBox6.PerformLayout();
+			this.gbx_prj.ResumeLayout(false);
+			this.gbx_prj.PerformLayout();
+			this.gbx_datainfo.ResumeLayout(false);
+			this.gbx_datainfo.PerformLayout();
+			this.gbx_tolarence.ResumeLayout(false);
+			this.gbx_tolarence.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
@@ -725,7 +817,7 @@
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.ComboBox cmbbx_tskcfgs;
 		private System.Windows.Forms.Button btn_deleteCurr;
-		private System.Windows.Forms.GroupBox groupBox8;
+		private System.Windows.Forms.GroupBox gbx_clipext;
 		private System.Windows.Forms.RichTextBox rtbx_ExtFormula;
 		private System.Windows.Forms.ComboBox cmbbx_ExtFormula;
 		private System.Windows.Forms.Label label8;
@@ -736,7 +828,7 @@
 		private System.Windows.Forms.GroupBox groupBox4;
 		private System.Windows.Forms.RadioButton rdbtn_DEM;
 		private System.Windows.Forms.RadioButton rdbtn_CNSimg;
-		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.GroupBox gbx_prj;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.Label label6;
@@ -754,7 +846,7 @@
 		private System.Windows.Forms.RadioButton rdbtn_PrjSys_xian80;
 		private System.Windows.Forms.RadioButton rdbtn_PrjSys_bj54;
 		private System.Windows.Forms.RadioButton rdbtn_PrjSys_2000;
-		private System.Windows.Forms.GroupBox groupBox7;
+		private System.Windows.Forms.GroupBox gbx_datainfo;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.TextBox tbx_Resolution;
 		private System.Windows.Forms.Label label7;
@@ -763,15 +855,22 @@
 		private System.Windows.Forms.RadioButton rdbtn_Depth_8;
 		private System.Windows.Forms.RadioButton rdbtn_Depth_32;
 		private System.Windows.Forms.RadioButton rdbtn_Depth_16;
-		private System.Windows.Forms.GroupBox groupBox6;
-		private System.Windows.Forms.Label label13;
+		private System.Windows.Forms.GroupBox gbx_tolarence;
+		private System.Windows.Forms.Label lbl_HeighTolar;
 		private System.Windows.Forms.TextBox tbx_HeightTolar;
-		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.Label lbl_PosTolar;
 		private System.Windows.Forms.TextBox tbx_PosTolar;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.RadioButton rdbtn_ImgSrc;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.TextBox tbx_BlkSize;
 		private System.Windows.Forms.Button btn_editConfig;
+		private System.Windows.Forms.Label lbl_NioseVal;
+		private System.Windows.Forms.TextBox tbx_NoiseVal;
+		private System.Windows.Forms.Label label16;
+		private System.Windows.Forms.TextBox tbx_NoDataVal;
+		private System.Windows.Forms.Button btn_Rename;
+		private System.Windows.Forms.RadioButton radioButton1;
+		private System.Windows.Forms.Button btn_CopyCreate;
 	}
 }

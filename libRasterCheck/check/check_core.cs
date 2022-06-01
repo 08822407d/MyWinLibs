@@ -53,7 +53,7 @@ namespace geodata
 
 		public void checkAll()
 		{
-			string opath = this.Cfgs.chkOutput_path;
+			string opath = this.Cfgs.getAutoChkofpath();
 
 			Check.checkCNSMapNo(raster_list, Path.Combine(opath, "InvalidMapNo.txt"));
 			string prj_total = Path.Combine(opath, "投影检查.txt");

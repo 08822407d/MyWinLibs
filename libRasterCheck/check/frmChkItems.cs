@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,6 +38,17 @@ namespace CheckerUI
 		{
 			CheckItem tmpci = this.Cfgs.getChkItems();
 			frm2ci(ref tmpci);
+
+			TaskCfg ctc = this.Cfgs.getTC(this.Cfgs.getLastTskCfg());
+			if (ctc.TskType == TaskType.CNSimg)
+			{
+				gbx_CI_img.Enabled = true;
+				gbx_CI_dem.Enabled = false;
+			} else if (ctc.TskType == TaskType.DEM)
+			{
+				gbx_CI_dem.Enabled = true;
+				gbx_CI_img.Enabled = false;
+			}
 		}
 
 		private void btn_resultPath_Click(object sender, EventArgs e)
@@ -49,13 +61,15 @@ namespace CheckerUI
 				if (dir != null)
 				{
 					tbx_resultPath.Text = dir;
-					this.Cfgs.chkOutput_path = dir;
+					this.Cfgs.setAutoChkOfpath(dir);
 				}
 			}
 		}
 
 		private void ci2frm(CheckItem ci)
 		{
+			this.tbx_resultPath.Text = this.Cfgs.getAutoChkofpath();
+
 			if (ci.PrjSys)
 				chkbx_PrjSys.Checked = true;
 			if (ci.PrjOther)
@@ -83,6 +97,9 @@ namespace CheckerUI
 		private void frm2ci(ref CheckItem ci)
 		{
 			ci.Clear();
+
+			if (Directory.Exists(tbx_resultPath.Text))
+				this.Cfgs.setAutoChkOfpath(tbx_resultPath.Text);
 
 			if (chkbx_PrjSys.Checked)
 				ci.PrjSys = true;

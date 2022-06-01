@@ -38,6 +38,9 @@ namespace CheckerUI
 									"	Y止 = INT[(MAX(Y1, Y2, Y3, Y4) / d + 1] * d + N*d\n" +
 									"其中 N 为外扩像素数目，d 为像素地面分辨率";
 
+		List<Control> CNSimg_only = null;
+		List<Control> DEM_only = null;
+
 		public frmTaskConf()
 		{
 			InitializeComponent();
@@ -46,6 +49,16 @@ namespace CheckerUI
 		public frmTaskConf(CfgPack cfgs)
 		{
 			InitializeComponent();
+
+			CNSimg_only = new List<Control>();
+			DEM_only = new List<Control>();
+			CNSimg_only.Add(lbl_NioseVal);
+			CNSimg_only.Add(tbx_NoiseVal);
+			CNSimg_only.Add(lbl_PosTolar);
+			CNSimg_only.Add(tbx_PosTolar);
+			DEM_only.Add(lbl_HeighTolar);
+			DEM_only.Add(tbx_HeightTolar);
+			
 
 			this.Cfgs = cfgs;
 			cmbbx_ExtFormula.Items.Add(NewExtFormu_name);
@@ -139,6 +152,45 @@ namespace CheckerUI
 			this.Cfgs.flushTC();
 
 			loadTcfgs2cmbbx();
+		}
+
+		private void btn_editConfig_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void rdbtn_CNSimg_CheckedChanged(object sender, EventArgs e)
+		{
+			foreach (Control c in CNSimg_only)
+			{
+				c.Enabled = true;
+			}
+			foreach (Control c in DEM_only)
+			{
+				c.Enabled = false;
+			}
+		}
+
+		private void rdbtn_DEM_CheckedChanged(object sender, EventArgs e)
+		{
+			foreach (Control c in DEM_only)
+			{
+				c.Enabled = true;
+			}
+			foreach (Control c in CNSimg_only)
+			{
+				c.Enabled = false;
+			}
+		}
+
+		private void rdbtn_ImgSrc_CheckedChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btn_Rename_Click(object sender, EventArgs e)
+		{
+
 		}
 
 		private void cmbbx_ExtFormula_SelectedIndexChanged(object sender, EventArgs e)
@@ -299,38 +351,32 @@ namespace CheckerUI
 			else
 				this.errstr += "未选择投影系；";
 			// 半长轴
-			double SM = 0;
-			if (Double.TryParse(tbx_SemiMajor.Text, out SM))
+			if (Double.TryParse(tbx_SemiMajor.Text, out double SM))
 				cfg.SemiMajor = SM;
 			else
 				this.errstr += "半长轴输入值非法:" + tbx_SemiMajor.Text + ";";
 			// 扁率
-			double IF = 0;
-			if (Double.TryParse(tbx_InvFlatt.Text, out IF))
+			if (Double.TryParse(tbx_InvFlatt.Text, out double IF))
 				cfg.InvFlatt = IF;
 			else
 				this.errstr += "扁率输入值非法:" + tbx_InvFlatt.Text + ";";
 			// 变形比
-			double SF = 0;
-			if (Double.TryParse(tbx_ScaleFact.Text, out SF))
+			if (Double.TryParse(tbx_ScaleFact.Text, out double SF))
 				cfg.ScaleFactor = SF;
 			else
 				this.errstr += "变形比输入值非法:" + tbx_ScaleFact.Text + ";";
 			// 中央经线
-			int CM = 0;
-			if (Int32.TryParse(tbx_CM.Text, out CM))
+			if (Int32.TryParse(tbx_CM.Text, out int CM))
 				cfg.CentralMeridian = CM;
 			else
 				this.errstr += "中央经线输入值非法:" + tbx_CM.Text + ";";
 			// 坐标东移
-			double FE = 0;
-			if (Double.TryParse(tbx_False_E.Text, out FE))
+			if (Double.TryParse(tbx_False_E.Text, out double FE))
 				cfg.FalseEast = FE;
 			else
 				errstr += "坐标东移输入值非法:" + tbx_False_E.Text + ";";
 			// 坐标北移
-			double FN = 0;
-			if (Double.TryParse(tbx_False_N.Text, out FN))
+			if (Double.TryParse(tbx_False_N.Text, out double FN))
 				cfg.FalseNorth = FN;
 			else
 				errstr += "坐标北移输入值非法:" + tbx_False_N.Text + ";";
@@ -345,20 +391,17 @@ namespace CheckerUI
 			else
 				errstr += "位深度选择非法;";
 			// 波段数
-			uint bc = 0;
-			if (UInt32.TryParse(tbx_BandCount.Text, out bc))
+			if (UInt32.TryParse(tbx_BandCount.Text, out uint bc))
 				cfg.BandCount = bc;
 			else
 				errstr += "波段数输入值非法:" + tbx_BandCount.Text + ";";
 			// 分辨率
-			double res = 0;
-			if (Double.TryParse(tbx_Resolution.Text, out res))
+			if (Double.TryParse(tbx_Resolution.Text, out double res))
 				cfg.Resolution = res;
 			else
 				errstr += "分辨率输入值非法:" + tbx_Resolution.Text + ";";
 			// 块尺寸
-			int bs = 0;
-			if (Int32.TryParse(tbx_BlkSize.Text, out bs))
+			if (Int32.TryParse(tbx_BlkSize.Text, out int bs))
 				cfg.BlkSize = bs;
 			else
 				errstr += "块尺寸输入值非法:" + tbx_BlkSize.Text + ";";
@@ -385,22 +428,15 @@ namespace CheckerUI
 				tbx_ClipExt.Text = "0";
 
 			// 平面限差
-			double PT = 0;
-			if (Double.TryParse(tbx_PosTolar.Text, out PT))
+			if (Double.TryParse(tbx_PosTolar.Text, out double PT))
 				cfg.PositionDiffTolarence = PT;
 			else
 				errstr += "平面限差输入值非法:" + tbx_PosTolar.Text + ";";
 			// 高程限差
-			double HT = 0;
-			if (Double.TryParse(tbx_HeightTolar.Text, out HT))
+			if (Double.TryParse(tbx_HeightTolar.Text, out double HT))
 				cfg.HeightDiffTolarence = HT;
 			else
 				errstr += "高程限差输入值非法:" + tbx_HeightTolar.Text + ";";
-		}
-
-		private void btn_editConfig_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

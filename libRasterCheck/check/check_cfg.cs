@@ -24,12 +24,16 @@ namespace geodata
 	public class ProgramCfg
 	{
 		public string Last_Tcfg { get; set; }
+		public string AutoChk_ofpath { get; set; }
+
 		public string Citms_path { get; set; }
 		public string Tcfgs_path { get; set; }
 
 		public ProgramCfg()
 		{
 			Last_Tcfg = "";
+			AutoChk_ofpath = "";
+
 			Citms_path = "";
 			Tcfgs_path = "";
 		}
@@ -268,7 +272,6 @@ namespace geodata
 		const string default_TCname = "default";
 
 
-		public string chkOutput_path { get; set; }
 		public int TCcount { get { return Tcfgs.Count; }}
 		public int Tcachecount { get { return Tcache.Count; } }
 
@@ -400,6 +403,10 @@ namespace geodata
 		{
 			return Pcfg.Last_Tcfg;
 		}
+		public string getAutoChkofpath()
+		{
+			return Pcfg.AutoChk_ofpath;
+		}
 		public bool setLastTskCfg(string ltc)
 		{
 			if (ltc != null && !ltc.Equals(""))
@@ -417,6 +424,16 @@ namespace geodata
 
 			setLastTskCfg(getTCNames()[idx]);
 			return true;
+		}
+		public bool setAutoChkOfpath(string acop)
+		{
+			if (acop != null && !acop.Equals(""))
+			{
+				Pcfg.AutoChk_ofpath = acop;
+				return true;
+			}
+			else
+				return false;
 		}
 		public void flushPC()
 		{

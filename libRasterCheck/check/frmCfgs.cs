@@ -55,7 +55,7 @@ namespace geodata
 
 			ci2frm(this.Cfgs.getChkItems());
 
-			tbx_resultPath.Text = this.Cfgs.chkOutput_path;
+			tbx_resultPath.Text = this.Cfgs.getAutoChkofpath();
 		}
 
 
@@ -137,7 +137,7 @@ namespace geodata
 				if (dir != null)
 				{
 					tbx_resultPath.Text = dir;
-					this.Cfgs.chkOutput_path = dir;
+					this.Cfgs.setAutoChkOfpath(dir);
 				}
 			}
 		}
