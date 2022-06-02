@@ -81,19 +81,21 @@ namespace geodata
 		public uint		ClipExtent { get; set; }
 		// 外扩公式
 		public ClipExtFormula	ExtFormula { get; set; }
+		// 无数据区值
+		public double[]	NoData { get; set; }
 
-		/// <summary>
-		/// DEM位置精度
-		/// </summary>
 		/// <summary>
 		/// 限差
 		/// </summary>
-
 		public double	PositionDiffTolarence { get; set; }
 		public double	HeightDiffTolarence { get; set; }
 
+		/// <summary>
+		/// 附加文件设置
+		/// </summary>
+		// TFW文件小数位数
+		public int		TFWPrec { get; set; }
 
-		public double[]	NoData { get; set; }
 
 		public TaskCfg()
 		{
@@ -115,18 +117,20 @@ namespace geodata
 			BlkSize = 256;
 			ClipExtent = 0;
 			ExtFormula = ClipExtFormula.NewFormula;
+			NoData = new double[] { 0.0, 0.0, 0.0};
 
 			PositionDiffTolarence = 0.0;
 			HeightDiffTolarence = 0.0;
 
-			NoData = new double[] { 0.0, 0.0, 0.0};
+			TFWPrec = 2;
 		}
 
 		public TaskCfg(TaskType TskType, ProjSystem PrjSys, double SemiMajor, double InvFlatt,
 							double ScaleFactor, int CentMerid, double FalseEast, double FalseNorth,
 							DataType Depth, uint BandCount, double Resol, uint DPI, int BlkSize, uint ClipExt,
-							ClipExtFormula ExtFormu, double PosDiffTolarence, double HeighDiffTolarence,
-							double[] Nodata)
+							ClipExtFormula ExtFormu, double[] Nodata,
+							double PosDiffTolarence, double HeighDiffTolarence,
+							int tfwPrec)
 		{
 			this.TskType = TskType;
 
@@ -146,11 +150,12 @@ namespace geodata
 			this.ClipExtent = ClipExt;
 			this.BlkSize = BlkSize;
 			this.ExtFormula = ExtFormu;
+			this.NoData = NoData;
 
 			this.PositionDiffTolarence = PosDiffTolarence;
 			this.HeightDiffTolarence = HeightDiffTolarence;
 
-			this.NoData = NoData;
+			this.TFWPrec = tfwPrec;
 		}
 	}
 
@@ -177,8 +182,6 @@ namespace geodata
 		/// </summary>
 		// 影像噪音
 		public bool ImgNoise { get; set; }
-		// 检测点平面精度
-		public bool ImgChkPoint { get; set; }
 		// 影像接边
 		public bool ImgEdgeMatch { get; set; }
 
@@ -186,8 +189,6 @@ namespace geodata
 		/// <summary>
 		/// DEM专有项
 		/// </summary>
-		// 套合差，提供反生等高线功能
-		public bool GenContour { get; set; }
 		// 检测点高程精度
 		public bool DemChkPoint { get; set; }
 		// DEM/DSM接边
@@ -196,10 +197,11 @@ namespace geodata
 		public bool GlobalMappingItems { get; set; }
 
 
-		/// <summary>
-		/// 文件组织
-		/// </summary>
-		public bool FormatConsistency { get; set; }
+		// TFW小数位
+		public bool OtherFile { get; set; }
+
+		// 文件组织
+		public bool DataOrganize { get; set; }
 
 		public CheckItem()
 		{
@@ -215,17 +217,16 @@ namespace geodata
 
 
 			ImgNoise = false;
-			ImgChkPoint = false;
 			ImgEdgeMatch = false;
 
 
-			GenContour = false;
 			DemChkPoint = false;
 			DemEdgeMatch = false;
 			GlobalMappingItems = false;
 
-
-			FormatConsistency = false;
+			OtherFile = false;
+			
+			DataOrganize = false;
 		}
 
 		public override string ToString()
@@ -242,19 +243,21 @@ namespace geodata
 
 			if (this.ImgNoise)
 				retval += "影像噪声\n";
-			if (this.ImgChkPoint)
-				retval += "人工选取检测点\n";
 			if (this.ImgEdgeMatch)
 				retval += "影像接边\n";
 
-			if (this.GenContour)
-				retval += "反生等高线\n";
 			if (this.DemChkPoint)
 				retval += "高程监测点\n";
 			if (this.DemEdgeMatch)
 				retval += "DEM高程接边\n";
 			if (this.GlobalMappingItems)
 				retval += "全球测图专属项目\n";
+
+			if (this.OtherFile)
+				retval += "TFW小数位\n";
+
+			if (this.DataOrganize)
+				retval += "数据组织\n";
 
 			return retval;
 		}

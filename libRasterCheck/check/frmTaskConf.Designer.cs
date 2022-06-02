@@ -683,7 +683,6 @@
 			this.nud_tfwPrec.Name = "nud_tfwPrec";
 			this.nud_tfwPrec.Size = new System.Drawing.Size(116, 25);
 			this.nud_tfwPrec.TabIndex = 24;
-			this.nud_tfwPrec.Visible = false;
 			// 
 			// lbl_HeighTolar
 			// 
@@ -702,7 +701,6 @@
 			this.label13.Size = new System.Drawing.Size(84, 15);
 			this.label13.TabIndex = 22;
 			this.label13.Text = "tfw小数数:";
-			this.label13.Visible = false;
 			// 
 			// tbx_HeightTolar
 			// 

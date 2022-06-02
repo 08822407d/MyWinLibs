@@ -33,7 +33,6 @@
 			this.chkbx_ImgNoise = new System.Windows.Forms.CheckBox();
 			this.chkbx_PrjSys = new System.Windows.Forms.CheckBox();
 			this.chkbx_PrjOther = new System.Windows.Forms.CheckBox();
-			this.chkbx_ImgChkPoint = new System.Windows.Forms.CheckBox();
 			this.chkbx_ColorMode = new System.Windows.Forms.CheckBox();
 			this.gbx_CI_common = new System.Windows.Forms.GroupBox();
 			this.gbx_CI_img = new System.Windows.Forms.GroupBox();
@@ -45,6 +44,7 @@
 			this.gbx_check = new System.Windows.Forms.GroupBox();
 			this.tbx_resultPath = new System.Windows.Forms.TextBox();
 			this.btn_resultPath = new System.Windows.Forms.Button();
+			this.chkbx_OtherFile = new System.Windows.Forms.CheckBox();
 			this.gbx_CI_common.SuspendLayout();
 			this.gbx_CI_img.SuspendLayout();
 			this.gbx_CI_dem.SuspendLayout();
@@ -55,11 +55,11 @@
 			// 
 			this.chkbx_DataOrganize.AutoSize = true;
 			this.chkbx_DataOrganize.Enabled = false;
-			this.chkbx_DataOrganize.Location = new System.Drawing.Point(29, 131);
+			this.chkbx_DataOrganize.Location = new System.Drawing.Point(29, 155);
 			this.chkbx_DataOrganize.Name = "chkbx_DataOrganize";
-			this.chkbx_DataOrganize.Size = new System.Drawing.Size(104, 19);
+			this.chkbx_DataOrganize.Size = new System.Drawing.Size(89, 19);
 			this.chkbx_DataOrganize.TabIndex = 7;
-			this.chkbx_DataOrganize.Text = "格式一致性";
+			this.chkbx_DataOrganize.Text = "数据组织";
 			this.chkbx_DataOrganize.UseVisualStyleBackColor = true;
 			// 
 			// chkbx_DataInfo
@@ -102,18 +102,6 @@
 			this.chkbx_PrjOther.Text = "其他投影信息（中央经线，坐标偏移）";
 			this.chkbx_PrjOther.UseVisualStyleBackColor = true;
 			// 
-			// chkbx_ImgChkPoint
-			// 
-			this.chkbx_ImgChkPoint.AutoSize = true;
-			this.chkbx_ImgChkPoint.Enabled = false;
-			this.chkbx_ImgChkPoint.Location = new System.Drawing.Point(29, 79);
-			this.chkbx_ImgChkPoint.Name = "chkbx_ImgChkPoint";
-			this.chkbx_ImgChkPoint.Size = new System.Drawing.Size(224, 19);
-			this.chkbx_ImgChkPoint.TabIndex = 9;
-			this.chkbx_ImgChkPoint.Text = "影像平面精度（检测点文件）";
-			this.chkbx_ImgChkPoint.UseVisualStyleBackColor = true;
-			this.chkbx_ImgChkPoint.Visible = false;
-			// 
 			// chkbx_ColorMode
 			// 
 			this.chkbx_ColorMode.AutoSize = true;
@@ -128,6 +116,7 @@
 			// 
 			this.gbx_CI_common.AutoSize = true;
 			this.gbx_CI_common.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.gbx_CI_common.Controls.Add(this.chkbx_OtherFile);
 			this.gbx_CI_common.Controls.Add(this.chkbx_PrjSys);
 			this.gbx_CI_common.Controls.Add(this.chkbx_DataOrganize);
 			this.gbx_CI_common.Controls.Add(this.chkbx_DataInfo);
@@ -137,7 +126,7 @@
 			this.gbx_CI_common.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_CI_common.Name = "gbx_CI_common";
 			this.gbx_CI_common.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
-			this.gbx_CI_common.Size = new System.Drawing.Size(351, 171);
+			this.gbx_CI_common.Size = new System.Drawing.Size(351, 195);
 			this.gbx_CI_common.TabIndex = 12;
 			this.gbx_CI_common.TabStop = false;
 			this.gbx_CI_common.Text = "通用检查项";
@@ -148,12 +137,11 @@
 			this.gbx_CI_img.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.gbx_CI_img.Controls.Add(this.chkbx_ImgEdgeMatch);
 			this.gbx_CI_img.Controls.Add(this.chkbx_ImgNoise);
-			this.gbx_CI_img.Controls.Add(this.chkbx_ImgChkPoint);
-			this.gbx_CI_img.Location = new System.Drawing.Point(15, 287);
+			this.gbx_CI_img.Location = new System.Drawing.Point(15, 311);
 			this.gbx_CI_img.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_CI_img.Name = "gbx_CI_img";
 			this.gbx_CI_img.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
-			this.gbx_CI_img.Size = new System.Drawing.Size(276, 119);
+			this.gbx_CI_img.Size = new System.Drawing.Size(246, 94);
 			this.gbx_CI_img.TabIndex = 13;
 			this.gbx_CI_img.TabStop = false;
 			this.gbx_CI_img.Text = "影像专有项";
@@ -175,7 +163,7 @@
 			this.gbx_CI_dem.Controls.Add(this.chkbx_DemEdgeMatch);
 			this.gbx_CI_dem.Controls.Add(this.chkbx_GMitems);
 			this.gbx_CI_dem.Controls.Add(this.chkbx_DemChkPoint);
-			this.gbx_CI_dem.Location = new System.Drawing.Point(15, 416);
+			this.gbx_CI_dem.Location = new System.Drawing.Point(15, 415);
 			this.gbx_CI_dem.Margin = new System.Windows.Forms.Padding(5);
 			this.gbx_CI_dem.Name = "gbx_CI_dem";
 			this.gbx_CI_dem.Padding = new System.Windows.Forms.Padding(20, 3, 20, 0);
@@ -249,6 +237,16 @@
 			this.btn_resultPath.UseVisualStyleBackColor = true;
 			this.btn_resultPath.Click += new System.EventHandler(this.btn_resultPath_Click);
 			// 
+			// chkbx_OtherFile
+			// 
+			this.chkbx_OtherFile.AutoSize = true;
+			this.chkbx_OtherFile.Location = new System.Drawing.Point(29, 130);
+			this.chkbx_OtherFile.Name = "chkbx_OtherFile";
+			this.chkbx_OtherFile.Size = new System.Drawing.Size(218, 19);
+			this.chkbx_OtherFile.TabIndex = 12;
+			this.chkbx_OtherFile.Text = "附加文件检查（TFW小数位）";
+			this.chkbx_OtherFile.UseVisualStyleBackColor = true;
+			// 
 			// frmChkItems
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -282,7 +280,6 @@
 		private System.Windows.Forms.CheckBox chkbx_ImgNoise;
 		private System.Windows.Forms.CheckBox chkbx_PrjSys;
 		private System.Windows.Forms.CheckBox chkbx_PrjOther;
-		private System.Windows.Forms.CheckBox chkbx_ImgChkPoint;
 		private System.Windows.Forms.CheckBox chkbx_ColorMode;
 		private System.Windows.Forms.GroupBox gbx_CI_common;
 		private System.Windows.Forms.GroupBox gbx_CI_img;
@@ -294,5 +291,6 @@
 		private System.Windows.Forms.GroupBox gbx_check;
 		private System.Windows.Forms.TextBox tbx_resultPath;
 		private System.Windows.Forms.Button btn_resultPath;
+		private System.Windows.Forms.CheckBox chkbx_OtherFile;
 	}
 }

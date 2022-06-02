@@ -17,8 +17,6 @@ namespace geodata
 		public string PrjOther { get; set; }
 		public string ColorMode { get; set; }
 		public string DataInfo { get; set; }
-
-		public string FileOrganize { get; set; }
 	}
 
 	public class CheckTask
@@ -145,14 +143,18 @@ namespace geodata
 					}
 					if (ci.ImgNoise)
 					{
-						string[] files = Utils.FIO.traverseSearchFile_Ext(imgedge_ofpath, ".txt").ToArray();
-						Utils.FIO.mergeTextFiles(files, imgedge_total, true);
+						string[] lines = File.ReadAllLines(noise_ofname);
+						File.WriteAllLines(imgnoise_total, lines);
 					}
 					if (ci.ImgEdgeMatch)
 					{
+						string[] files = Utils.FIO.traverseSearchFile_Ext(imgedge_ofpath, ".txt").ToArray();
+						Utils.FIO.mergeTextFiles(files, imgedge_total, true);
 					}
 					if (ci.DemEdgeMatch)
 					{
+						string[] files = Utils.FIO.traverseSearchFile_Ext(demedge_ofpath, ".txt").ToArray();
+						Utils.FIO.mergeTextFiles(files, imgedge_total, true);
 					}
 
 					sw_prj.Flush();
@@ -165,6 +167,18 @@ namespace geodata
 			sw_prj.Close();
 			sw_colormode.Close();
 			sw_datainfo.Close();
+
+			string TFWPrec_total = Path.Combine(opath, "DEM接边检查.txt");
+			string cr_str = "";
+			foreach (string f in tfw_list)
+			{
+				if (ci.OtherFile)
+					Check.checkTFWPrec(f, tc, cr_str);
+			}
+			StreamWriter sw_tfwp = new StreamWriter(TFWPrec_total);
+			sw_tfwp.WriteLine(cr_str);
+			sw_tfwp.Flush();
+			sw_tfwp.Close();
 		}
 	}
 
@@ -351,6 +365,7 @@ namespace geodata
 				psi.CreateNoWindow = true;
 				psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 				psi.ErrorDialog = false;
+				psi.WorkingDirectory = System.Windows.Forms.Application.StartupPath;
 				psi.FileName = "./lib64/geolib/siftMatch.exe";
 				psi.WindowStyle = ProcessWindowStyle.Hidden;
 				psi.Arguments = "19900413 " +
@@ -393,6 +408,20 @@ namespace geodata
 				}
 				File.WriteAllLines(ofname, results);
 			}
+		}
+
+		public static void checkTFWPrec(string fname, TaskCfg tc, string cr)
+		{
+			bool error = false;
+			string[] lines = File.ReadAllLines(fname);
+			foreach (string line in lines)
+			{
+				if ((line.Length - line.IndexOf('.') - 1) != tc.TFWPrec)
+					error = true;
+			}
+
+			if (error)
+				cr += Path.GetFileNameWithoutExtension(fname) + "\n";
 		}
 	}
 }

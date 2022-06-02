@@ -392,17 +392,11 @@ namespace geodata
 			if (ci.DataInfo)
 				chkbx_DataInfo.Checked = true;
 
-
 			if (ci.ImgNoise)
 				chkbx_ImgNoise.Checked = true;
-			if (ci.ImgChkPoint)
-				chkbx_ImgChkPoint.Checked = true;
 			if (ci.ImgEdgeMatch)
 				chkbx_ImgEdgeMatch.Checked = true;
 
-
-			if (ci.GenContour)
-				chkbx_GenContour.Checked = true;
 			if (ci.DemChkPoint)
 				chkbx_DemChkPoint.Checked = true;
 			if (ci.DemEdgeMatch)
@@ -424,17 +418,11 @@ namespace geodata
 			if (chkbx_DataInfo.Checked)
 				ci.DataInfo = true;
 
-
 			if (chkbx_ImgNoise.Checked)
 				ci.ImgNoise = true;
-			if (chkbx_ImgChkPoint.Checked)
-				ci.ImgChkPoint = true;
 			if (chkbx_ImgEdgeMatch.Checked)
 				ci.ImgEdgeMatch = true;
 
-
-			if (chkbx_GenContour.Checked)
-				ci.GenContour = true;
 			if (chkbx_DemChkPoint.Checked)
 				ci.DemChkPoint = true;
 			if (chkbx_DemEdgeMatch.Checked)

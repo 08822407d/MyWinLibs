@@ -81,8 +81,6 @@ namespace CheckerUI
 
 			if (ci.ImgNoise)
 				chkbx_ImgNoise.Checked = true;
-			if (ci.ImgChkPoint)
-				chkbx_ImgChkPoint.Checked = true;
 			if (ci.ImgEdgeMatch)
 				chkbx_ImgEdgeMatch.Checked = true;
 
@@ -92,6 +90,12 @@ namespace CheckerUI
 				chkbx_DemEdgeMatch.Checked = true;
 			if (ci.GlobalMappingItems)
 				chkbx_GMitems.Checked = true;
+
+			if (ci.OtherFile)
+				chkbx_OtherFile.Checked = true;
+
+			if (ci.DataOrganize)
+				chkbx_DataOrganize.Checked = true;
 		}
 
 		private void frm2ci(ref CheckItem ci)
@@ -112,8 +116,6 @@ namespace CheckerUI
 
 			if (chkbx_ImgNoise.Checked)
 				ci.ImgNoise = true;
-			if (chkbx_ImgChkPoint.Checked)
-				ci.ImgChkPoint = true;
 			if (chkbx_ImgEdgeMatch.Checked)
 				ci.ImgEdgeMatch = true;
 
@@ -123,6 +125,12 @@ namespace CheckerUI
 				ci.DemEdgeMatch = true;
 			if (chkbx_GMitems.Checked)
 				ci.GlobalMappingItems = true;
+
+			if (chkbx_OtherFile.Checked)
+				ci.OtherFile = true;
+
+			if (chkbx_DataOrganize.Checked)
+				ci.DataOrganize = true;
 		}
 
 		private void initLayout()

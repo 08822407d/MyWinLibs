@@ -327,6 +327,9 @@ namespace CheckerUI
 			tbx_PosTolar.Text = cfg.PositionDiffTolarence.ToString();
 			// 高程限差
 			tbx_HeightTolar.Text = cfg.HeightDiffTolarence.ToString();
+
+			// TFW小数位数
+			nud_tfwPrec.Value = cfg.TFWPrec;
 		}
 
 		private void frm2cfg(ref TaskCfg cfg)
@@ -437,6 +440,10 @@ namespace CheckerUI
 				cfg.HeightDiffTolarence = HT;
 			else
 				errstr += "高程限差输入值非法:" + tbx_HeightTolar.Text + ";";
+
+
+			// TFW小数位数
+			cfg.TFWPrec = Convert.ToInt32(nud_tfwPrec.Value);
 		}
 	}
 }
