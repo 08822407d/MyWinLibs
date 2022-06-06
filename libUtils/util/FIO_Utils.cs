@@ -105,7 +105,10 @@ namespace Utils
 			foreach (string f in files)
 			{
 				string[] lines = File.ReadAllLines(f);
-				sw.WriteLine(lines);
+
+				foreach (string line in lines)
+					sw.WriteLine(line);
+
 				sw.Flush();
 			}
 			sw.Close();

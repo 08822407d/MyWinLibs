@@ -86,6 +86,10 @@ namespace geodata
 				string noise_ofname = Path.Combine(opath_with_mapno, "ImageNoise.txt");
 				string imgedge_ofpath = Path.Combine(opath_with_mapno, "ImgEdge");
 				string demedge_ofpath = Path.Combine(opath_with_mapno, "DEMEdge");
+				if (!Directory.Exists(imgedge_ofpath))
+					Directory.CreateDirectory(imgedge_ofpath);
+				if (!Directory.Exists(demedge_ofpath))
+					Directory.CreateDirectory(demedge_ofpath);
 
 				if (!Directory.Exists(opath_with_mapno))
 					Directory.CreateDirectory(opath_with_mapno);
@@ -251,8 +255,8 @@ namespace geodata
 				diff.Start.Y != 0 ||
 				diff.End.X != 0 ||
 				diff.End.Y != 0)
-				cr.DataInfo += "裁切范围有误:\t理论值: {" + CE.Start.ToString() + " , " +
-							CE.End.ToString() + "};" +
+				cr.DataInfo += "裁切范围有误:\n\t理论值: {" + CE.Start.ToString() + " , " +
+							CE.End.ToString() + "};\n\t" +
 							"实际值: {" + img.ImgExtent.Start.ToString() + " , " +
 							img.ImgExtent.End.ToString() + "};";
 		}
@@ -358,8 +362,8 @@ namespace geodata
 				psi.CreateNoWindow = true;
 				psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 				psi.ErrorDialog = false;
-				psi.WorkingDirectory = System.Windows.Forms.Application.StartupPath;
-				psi.FileName = "./lib64/geolib/siftMatch.exe";
+				psi.WorkingDirectory = System.Windows.Forms.Application.StartupPath + @"\lib64\geolib";
+				psi.FileName = @".\siftMatch.exe";
 				psi.WindowStyle = ProcessWindowStyle.Hidden;
 				psi.Arguments = "19900413 " +
 								"\"" + img1.FileName + "\" " +
@@ -384,22 +388,25 @@ namespace geodata
 					 // Log error.
 				}
 
-				string[] allpts = File.ReadAllLines(ofname);
-				List<string> results = new List<string>();
-				foreach (string line in allpts)
+				if (File.Exists(ofname))
 				{
-					string[] pt_fields = line.Split(',');
-					if (pt_fields.Length != 5)
-						continue;
+					string[] allpts = File.ReadAllLines(ofname);
+					List<string> results = new List<string>();
+					foreach (string line in allpts)
+					{
+						string[] pt_fields = line.Split(',');
+						if (pt_fields.Length != 5)
+							continue;
 
-					double diff = 0;
-					if (!double.TryParse(pt_fields[4], out diff))
-						continue;
+						double diff = 0;
+						if (!double.TryParse(pt_fields[4], out diff))
+							continue;
 
-					if (diff >= tc.PositionDiffTolarence)
-						results.Add(line);
+						if (diff >= tc.PositionDiffTolarence)
+							results.Add(line);
+					}
+					File.WriteAllLines(ofname, results);
 				}
-				File.WriteAllLines(ofname, results);
 			}
 		}
 
