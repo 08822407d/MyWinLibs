@@ -95,6 +95,7 @@ namespace geodata
 				Check.checkProjOther(r, tc, cr);
 				Check.checkColorMode(r, tc, cr);
 				Check.checkDataInfo(r, tc, cr);
+				Check.checkClipExtent(r, tc, cr);
 				if (ci.ImgNoise)
 					Check.checkNoise(r, tc, noise_ofname);
 				if (ci.ImgEdgeMatch)
@@ -121,24 +122,24 @@ namespace geodata
 				// 为所有数据文件的单项检查创建共用检查报告
 				else
 				{
-					if (ci.PrjSys)
+					if (ci.PrjSys && cr.PrjSys != null && !cr.PrjSys.Equals(""))
 					{
 						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
 						sw_prj.WriteLine(cr.PrjSys + "\n");
 					}
-					if (ci.PrjOther)
+					if (ci.PrjOther && cr.PrjOther != null && !cr.PrjOther.Equals(""))
 					{
 						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
 						sw_prj.WriteLine(cr.PrjOther + "\n");
 					}
-					if (ci.ColorMode)
+					if (ci.ColorMode && cr.ColorMode != null && !cr.ColorMode.Equals(""))
 					{
-						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
+						sw_colormode.WriteLine("图号：" + r.CNS.getMapNoStr());
 						sw_colormode.WriteLine(cr.ColorMode + "\n");
 					}
-					if (ci.DataInfo)
+					if (ci.DataInfo && cr.DataInfo != null && !cr.DataInfo.Equals(""))
 					{
-						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
+						sw_datainfo.WriteLine("图号：" + r.CNS.getMapNoStr());
 						sw_datainfo.WriteLine(cr.DataInfo + "\n");
 					}
 					if (ci.ImgNoise)
@@ -168,12 +169,12 @@ namespace geodata
 			sw_colormode.Close();
 			sw_datainfo.Close();
 
-			string TFWPrec_total = Path.Combine(opath, "DEM接边检查.txt");
+			string TFWPrec_total = Path.Combine(opath, "TFW格式检查.txt");
 			string cr_str = "";
 			foreach (string f in tfw_list)
 			{
 				if (ci.OtherFile)
-					Check.checkTFWPrec(f, tc, cr_str);
+					Check.checkTFWPrec(f, tc, ref cr_str);
 			}
 			StreamWriter sw_tfwp = new StreamWriter(TFWPrec_total);
 			sw_tfwp.WriteLine(cr_str);
@@ -204,8 +205,8 @@ namespace geodata
 				cr.PrjSys += "半长轴错误: " + img.SemiMajor.ToString() + "\n";
 			if (tc.InvFlatt != img.InvFlatt)
 				cr.PrjSys += "扁率错误: " + img.InvFlatt.ToString() + "\n";
-			if (tc.ScaleFactor != img.ScaleFactor)
-				cr.PrjSys += "变形比错误: " + img.ScaleFactor.ToString() + "\n";
+			//if (tc.ScaleFactor != img.ScaleFactor)
+			//	cr.PrjSys += "变形比错误: " + img.ScaleFactor.ToString() + "\n";
 		}
 
 		public static void checkProjOther(Raster img, TaskCfg tc, CheckResult cr)
@@ -234,10 +235,26 @@ namespace geodata
 			if (tc.BlkSize != img.BlockSize[0, 0])
 				cr.DataInfo += "块尺寸错误: " + img.BlockSize[0, 0].ToString() + "\n";
 
-			Point2d imgStart = new Point2d(img.ImgExtent.Start.X + tc.ClipExtent,
-											img.ImgExtent.Start.Y - tc.ClipExtent);
-			if (imgStart.X != 0 || imgStart.Y != 0)
-				cr.DataInfo += "起始点错误: " + imgStart.ToString() + "\n";
+			//Point2d imgStart = new Point2d(img.ImgExtent.Start.X + tc.ClipExtent,
+			//								img.ImgExtent.Start.Y - tc.ClipExtent);
+			//if (imgStart.X != 0 || imgStart.Y != 0)
+			//	cr.DataInfo += "起始点错误: " + imgStart.ToString() + "\n";
+		}
+
+		public static void checkClipExtent(Raster img, TaskCfg tc, CheckResult cr)
+		{
+			Extent2d diff = new Extent2d();
+			Extent2d CE = img.getClipExtent(tc.ClipExtent, tc.ExtFormula);
+			diff = CE - img.ImgExtent;
+
+			if (diff.Start.X != 0 ||
+				diff.Start.Y != 0 ||
+				diff.End.X != 0 ||
+				diff.End.Y != 0)
+				cr.DataInfo += "裁切范围有误:\t理论值: {" + CE.Start.ToString() + " , " +
+							CE.End.ToString() + "};" +
+							"实际值: {" + img.ImgExtent.Start.ToString() + " , " +
+							img.ImgExtent.End.ToString() + "};";
 		}
 
 		public static void checkNoise(Raster img, TaskCfg tc, string ofname)
@@ -265,30 +282,6 @@ namespace geodata
 			}
 			sw.Flush();
 			sw.Close();
-		}
-
-		public static void checkClipExtent(Raster img, TaskCfg tc, string ofname)
-		{
-			Extent2d diff = new Extent2d();
-			Extent2d CE = img.getClipExtent(tc.ClipExtent, tc.ExtFormula);
-			if (CE.Equals(img.ImgExtent))
-			{
-				diff = CE - img.ImgExtent;
-			}
-
-			if (diff.Start.X != 0 ||
-				diff.Start.Y != 0 ||
-				diff.End.X != 0 ||
-				diff.End.Y != 0)
-			{
-				StreamWriter sw = new StreamWriter(ofname);
-				sw.WriteLine("裁切范围有误:\n\t理论值: {" + CE.Start.ToString() + " , " +
-							CE.End.ToString() + "};\t" +
-							"实际值: {" + img.ImgExtent.Start.ToString() + " , " +
-							img.ImgExtent.ToString() + "};\t");
-				sw.Flush();
-				sw.Close();
-			}
 		}
 
 		public static void checkAltitudeMSE(Raster dem, List<Point2d> pts, double limit, string ofname)
@@ -361,7 +354,7 @@ namespace geodata
 				ProcessStartInfo psi = new ProcessStartInfo();
 				psi.RedirectStandardError = false;
 				psi.RedirectStandardOutput = false;
-				psi.UseShellExecute = false;
+				psi.UseShellExecute = true;
 				psi.CreateNoWindow = true;
 				psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 				psi.ErrorDialog = false;
@@ -410,14 +403,14 @@ namespace geodata
 			}
 		}
 
-		public static void checkTFWPrec(string fname, TaskCfg tc, string cr)
+		public static void checkTFWPrec(string fname, TaskCfg tc, ref string cr)
 		{
 			bool error = false;
 			string[] lines = File.ReadAllLines(fname);
 			foreach (string line in lines)
 			{
 				if ((line.Length - line.IndexOf('.') - 1) != tc.TFWPrec)
-					error = true;
+					error |= true;
 			}
 
 			if (error)
