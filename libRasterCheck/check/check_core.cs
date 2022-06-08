@@ -181,7 +181,7 @@ namespace geodata
 					Check.checkTFWPrec(f, tc, ref cr_str);
 			}
 			StreamWriter sw_tfwp = new StreamWriter(TFWPrec_total);
-			sw_tfwp.WriteLine(cr_str);
+			sw_tfwp.Write(cr_str);
 			sw_tfwp.Flush();
 			sw_tfwp.Close();
 		}
@@ -209,8 +209,6 @@ namespace geodata
 				cr.PrjSys += "半长轴错误: " + img.SemiMajor.ToString() + "\n";
 			if (tc.InvFlatt != img.InvFlatt)
 				cr.PrjSys += "扁率错误: " + img.InvFlatt.ToString() + "\n";
-			//if (tc.ScaleFactor != img.ScaleFactor)
-			//	cr.PrjSys += "变形比错误: " + img.ScaleFactor.ToString() + "\n";
 		}
 
 		public static void checkProjOther(Raster img, TaskCfg tc, CheckResult cr)
@@ -238,11 +236,6 @@ namespace geodata
 			
 			if (tc.BlkSize != img.BlockSize[0, 0])
 				cr.DataInfo += "块尺寸错误: " + img.BlockSize[0, 0].ToString() + "\n";
-
-			//Point2d imgStart = new Point2d(img.ImgExtent.Start.X + tc.ClipExtent,
-			//								img.ImgExtent.Start.Y - tc.ClipExtent);
-			//if (imgStart.X != 0 || imgStart.Y != 0)
-			//	cr.DataInfo += "起始点错误: " + imgStart.ToString() + "\n";
 		}
 
 		public static void checkClipExtent(Raster img, TaskCfg tc, CheckResult cr)

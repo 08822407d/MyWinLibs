@@ -30,7 +30,7 @@ namespace geodata
 		/// <summary>
 		/// 计算裁切范围
 		/// </summary>
-		public Extent2d getClipExtent(uint extwidth, ClipExtFormula CEF)
+		public Extent2d getClipExtent(uint extwidth_pixel, ClipExtFormula CEF)
 		{
 			double maxX = Const.minX;
 			double maxY = Const.minY;
@@ -58,26 +58,26 @@ namespace geodata
 			// CH/T 9009.3 - 2010 (1:10000 1:50000)
 			if (CEF == ClipExtFormula.NewFormula)
 			{
-				sx = (int)((minX - this.Resolution.X * extwidth) /
+				sx = (int)((minX - this.Resolution.X * extwidth_pixel) /
 						this.Resolution.X) * this.Resolution.X;
-				sy = (int)((maxY - this.Resolution.Y * extwidth) /
+				sy = (int)((maxY - this.Resolution.Y * extwidth_pixel) /
 						this.Resolution.Y) * this.Resolution.Y;
-				ex = (int)((maxX + this.Resolution.X * extwidth) /
+				ex = (int)((maxX + this.Resolution.X * extwidth_pixel) /
 						this.Resolution.X) * this.Resolution.X;
-				ey = (int)((minY + this.Resolution.Y * extwidth) /
+				ey = (int)((minY + this.Resolution.Y * extwidth_pixel) /
 						this.Resolution.Y) * this.Resolution.Y;
 			}
 			else if (CEF == ClipExtFormula.OrigFormula)
 			// 原计算公式
 			{
 				sx = (int)(minX / this.Resolution.X) * this.Resolution.X -
-						extwidth * this.Resolution.X;
+						extwidth_pixel * this.Resolution.X;
 				sy = ((int)(maxY / this.Resolution.Y) - 1) * this.Resolution.Y -
-						extwidth * this.Resolution.Y;
+						extwidth_pixel * this.Resolution.Y;
 				ex = (int)((maxX / this.Resolution.X) + 1) * this.Resolution.X +
-						extwidth * this.Resolution.X;
+						extwidth_pixel * this.Resolution.X;
 				ey = (int)(minY / this.Resolution.Y) * this.Resolution.Y +
-						extwidth * this.Resolution.Y;
+						extwidth_pixel * this.Resolution.Y;
 			}
 
 			return new Extent2d(new Point2d(sx, sy), new Point2d(ex, ey));

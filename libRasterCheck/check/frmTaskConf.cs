@@ -116,7 +116,7 @@ namespace CheckerUI
 				this.currTC = new TaskCfg();
 				this.currTCname = newName;
 				Cfgs.addTcache(this.currTCname, this.currTC);
-				cmbbx_tskcfgs.Items.Add(currTCname + " （新建）");
+				cmbbx_tskcfgs.Items.Add(currTCname);
 
 				MessageBox.Show("新建配置:" + currTCname + ", 采用默认配置模板");
 			}
@@ -315,7 +315,7 @@ namespace CheckerUI
 			tbx_BlkSize.Text = cfg.BlkSize.ToString();
 
 			// 外扩范围
-			rdbtn_ByMeter.Checked = true;
+			rdbtn_ByPixel.Checked = true;
 			tbx_ClipExt.Text = cfg.ClipExtent.ToString();
 			// 外扩公式
 			if (cfg.ExtFormula == ClipExtFormula.NewFormula)
@@ -414,7 +414,7 @@ namespace CheckerUI
 			{
 				double CEmeter = 0;
 				uint CEpix = 0;
-				if (rdbtn_ByPixel.Checked && !rdbtn_ByMeter.Checked)
+				if (!rdbtn_ByPixel.Checked && rdbtn_ByMeter.Checked)
 				{
 					if (!Double.TryParse(tbx_ClipExt.Text, out CEmeter))
 						errstr += "外扩范围输入值非法:" + tbx_ClipExt.Text + ";";
