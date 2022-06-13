@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -44,6 +45,8 @@ namespace CheckerUI
 		public frmTaskConf()
 		{
 			InitializeComponent();
+
+			timer_editTC.Start();
 		}
 
 		public frmTaskConf(CfgPack cfgs)
@@ -52,7 +55,7 @@ namespace CheckerUI
 
 			CNSimg_only = new List<Control>();
 			DEM_only = new List<Control>();
-			CNSimg_only.Add(lbl_NioseVal);
+			CNSimg_only.Add(lbl_NoiseVal);
 			CNSimg_only.Add(tbx_NoiseVal);
 			CNSimg_only.Add(lbl_PosTolar);
 			CNSimg_only.Add(tbx_PosTolar);
@@ -66,23 +69,13 @@ namespace CheckerUI
 			NewExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(NewExtFormu_name);
 			OrigExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(OrigExtFormu_name);
 			loadTcfgs2cmbbx();
-		}
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			if (Cfgs.hasUnsavedChanges())
-			{
-				DialogResult dr = MessageBox.Show(
-								"有" + Cfgs.Tcachecount.ToString() +
-								"项未保存配置,确定退出吗？",
-								"", MessageBoxButtons.OKCancel);
-				if (dr == DialogResult.Cancel)
-					e.Cancel = true;
-				else
-					Cfgs.clearTCCaches();
-			}
-			base.OnClosing(e);
+
+			timer_editTC.Start();
 		}
 
+		//==============================================================================================//
+		//										项目模板列表相关											//
+		//==============================================================================================//
 		private void cmbbx_tskcfgs_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string name = cmbbx_tskcfgs.SelectedItem.ToString();
@@ -91,6 +84,8 @@ namespace CheckerUI
 			{
 				this.currTCname = name;
 				this.currTC = tc;
+				this.Cfgs.setLastTCname(name);
+
 				cfg2frm(this.currTC);
 			}
 			else
@@ -102,7 +97,7 @@ namespace CheckerUI
 
 		private void btn_NewCfg_Click(object sender, EventArgs e)
 		{
-			frmTXTInput wTI = new frmTXTInput();
+			frmTXTInput wTI = new frmTXTInput(false);
 			wTI.ShowDialog();
 
 			string newName = wTI.ret_val;
@@ -115,30 +110,35 @@ namespace CheckerUI
 			{
 				this.currTC = new TaskCfg();
 				this.currTCname = newName;
-				Cfgs.addTcache(this.currTCname, this.currTC);
+				Cfgs.addTC(this.currTCname, this.currTC);
 				cmbbx_tskcfgs.Items.Add(currTCname);
 
 				MessageBox.Show("新建配置:" + currTCname + ", 采用默认配置模板");
 			}
 		}
 
-		private void btn_saveCurr_Click(object sender, EventArgs e)
+		private void btn_CopyCreate_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show("确定保存当前配置？", "", MessageBoxButtons.OKCancel);
-			if (dr == DialogResult.Cancel)
-				return;
 
-			frm2cfg(ref currTC);
-			exitErr();
+		}
 
-			Cfgs.setLastTskCfg(currTCname);
-			Cfgs.addTcache(currTCname, currTC);
-			Cfgs.flushPC();
-			Cfgs.flushTC();
+		private void btn_Rename_Click(object sender, EventArgs e)
+		{
+			frmTXTInput wTI = new frmTXTInput(false);
+			wTI.ShowDialog();
 
-			loadTcfgs2cmbbx();
+			string newName = wTI.ret_val;
+			if (newName != null)
+			{
+				this.Cfgs.removeTC(this.currTCname);
+				this.currTCname = newName;
+				this.Cfgs.addTC(this.currTCname, this.currTC);
+				this.Cfgs.setLastTCname(this.currTCname);
 
-			MessageBox.Show("已保存当前配置");
+				MessageBox.Show("新建配置:" + currTCname + ", 采用默认配置模板");
+
+				loadTcfgs2cmbbx();
+			}
 		}
 
 		private void btn_deleteCurr_Click(object sender, EventArgs e)
@@ -148,15 +148,60 @@ namespace CheckerUI
 				return;
 
 			this.Cfgs.removeTC(this.currTCname);
-			this.Cfgs.setLastTskCfgByIdx(1);
 			this.Cfgs.flushTC();
 
 			loadTcfgs2cmbbx();
 		}
 
-		private void btn_editConfig_Click(object sender, EventArgs e)
+		protected override void OnClosing(CancelEventArgs e)
 		{
+			this.Cfgs.flushPC();
+			this.Cfgs.flushTC();
+			this.Cfgs.reloadSelf();
 
+			base.OnClosing(e);
+		}
+
+		private void loadTcfgs2cmbbx()
+		{
+			string[] keys = this.Cfgs.TCkeys;
+			if (keys.Length < 1)
+			{
+				MessageBox.Show("未找到现有项目模板，请新建");
+				return;
+			}
+			else
+			{
+				cmbbx_tskcfgs.Items.Clear();
+				foreach (string key in keys)
+					cmbbx_tskcfgs.Items.Add(key);
+			}
+
+			this.currTCname = this.Cfgs.getLastTCname();
+			this.currTC = this.Cfgs.getTC(currTCname);
+			cmbbx_tskcfgs.SelectedItem = currTCname;
+			cfg2frm(this.currTC);
+		}
+
+
+		//==============================================================================================//
+		//										项目模板内容相关											//
+		//==============================================================================================//
+		private void timer_editTC_Tick(object sender, EventArgs e)
+		{
+			frm2cfg(ref this.currTC);
+			if (errstr != null && errstr.Length > 1)
+			{
+				timer_editTC.Stop();
+				MessageBox.Show(errstr);
+				timer_waitErr.Start();
+			}
+		}
+
+		private void timer_waitErr_Tick(object sender, EventArgs e)
+		{
+			timer_editTC.Start();
+			timer_waitErr.Stop();
 		}
 
 		private void rdbtn_CNSimg_CheckedChanged(object sender, EventArgs e)
@@ -188,11 +233,6 @@ namespace CheckerUI
 
 		}
 
-		private void btn_Rename_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		private void cmbbx_ExtFormula_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (cmbbx_ExtFormula.SelectedItem.ToString().Equals(NewExtFormu_name))
@@ -205,33 +245,6 @@ namespace CheckerUI
 				this.currTC.ExtFormula = ClipExtFormula.OrigFormula;
 				rtbx_ExtFormula.Text = OrigExtFormu_str;
 			}
-		}
-
-		private void loadTcfgs2cmbbx()
-		{
-			string[] keys = this.Cfgs.getTCNames();
-			if (keys.Length < 1)
-			{
-				MessageBox.Show("未找到现有项目模板，请新建");
-				return;
-			}
-			else
-			{
-				cmbbx_tskcfgs.Items.Clear();
-				foreach (string key in keys)
-					cmbbx_tskcfgs.Items.Add(key);
-			}
-
-			this.currTCname = this.Cfgs.getLastTskCfg();
-			cmbbx_tskcfgs.SelectedItem = currTCname;
-			this.currTC = this.Cfgs.getTC(currTCname);
-			cfg2frm(this.currTC);
-		}
-
-		private void exitErr()
-		{
-			if (!errstr.Equals(""))
-				MessageBox.Show(errstr);
 		}
 
 		private void cfg2frm(TaskCfg cfg)
@@ -334,6 +347,8 @@ namespace CheckerUI
 
 		private void frm2cfg(ref TaskCfg cfg)
 		{
+			errstr = "";
+
 			// 数据类型
 			if (rdbtn_CNSimg.Checked)
 				cfg.TskType = TaskType.CNSimg;

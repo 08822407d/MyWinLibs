@@ -39,7 +39,7 @@ namespace CheckerUI
 			CheckItem tmpci = this.Cfgs.getChkItems();
 			frm2ci(ref tmpci);
 
-			TaskCfg ctc = this.Cfgs.getTC(this.Cfgs.getLastTskCfg());
+			TaskCfg ctc = this.Cfgs.getTC(this.Cfgs.getLastTCname());
 			if (ctc.TskType == TaskType.CNSimg)
 			{
 				gbx_CI_img.Enabled = true;
@@ -61,14 +61,14 @@ namespace CheckerUI
 				if (dir != null)
 				{
 					tbx_resultPath.Text = dir;
-					this.Cfgs.setAutoChkOfpath(dir);
+					this.Cfgs.setAutoChkOPath(dir);
 				}
 			}
 		}
 
 		private void ci2frm(CheckItem ci)
 		{
-			this.tbx_resultPath.Text = this.Cfgs.getAutoChkofpath();
+			this.tbx_resultPath.Text = this.Cfgs.getAutoChkOPath();
 
 			if (ci.PrjSys)
 				chkbx_PrjSys.Checked = true;
@@ -103,7 +103,7 @@ namespace CheckerUI
 			ci.Clear();
 
 			if (Directory.Exists(tbx_resultPath.Text))
-				this.Cfgs.setAutoChkOfpath(tbx_resultPath.Text);
+				this.Cfgs.setAutoChkOPath(tbx_resultPath.Text);
 
 			if (chkbx_PrjSys.Checked)
 				ci.PrjSys = true;

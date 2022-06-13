@@ -38,7 +38,7 @@ namespace geodata
 
 			this.Cfgs = cfgs;
 			this.ci= cfgs.getChkItems();
-			this.tc = cfgs.getTC(cfgs.getLastTskCfg());
+			this.tc = cfgs.getTC(cfgs.getLastTCname());
 		}
 
 		public void setDataList(List<string> file_list)
@@ -60,7 +60,7 @@ namespace geodata
 
 		public void checkAll()
 		{
-			string opath = this.Cfgs.getAutoChkofpath();
+			string opath = this.Cfgs.getAutoChkOPath();
 
 			Check.checkCNSMapNo(raster_list, Path.Combine(opath, "InvalidMapNo.txt"));
 			string prj_total = Path.Combine(opath, "投影检查.txt");

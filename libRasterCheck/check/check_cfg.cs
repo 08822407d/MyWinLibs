@@ -24,7 +24,7 @@ namespace geodata
 	public class ProgramCfg
 	{
 		public string Last_Tcfg { get; set; }
-		public string AutoChk_ofpath { get; set; }
+		public string AutoChk_OPath { get; set; }
 
 		public string Citms_path { get; set; }
 		public string Tcfgs_path { get; set; }
@@ -32,7 +32,7 @@ namespace geodata
 		public ProgramCfg()
 		{
 			Last_Tcfg = "";
-			AutoChk_ofpath = "";
+			AutoChk_OPath = "";
 
 			Citms_path = "";
 			Tcfgs_path = "";
@@ -44,6 +44,8 @@ namespace geodata
 	/// </summary>
 	public class TaskCfg
 	{
+		public bool isChanged { get; set; }
+
 		public TaskType	TskType { get; set; }
 
 		/// <summary>
@@ -99,6 +101,8 @@ namespace geodata
 
 		public TaskCfg()
 		{
+			isChanged = false;
+
 			TskType = TaskType.CNSimg;
 
 			PrjSys = ProjSystem.wgs84;
@@ -125,6 +129,36 @@ namespace geodata
 			TFWPrec = 2;
 		}
 
+		public TaskCfg(TaskCfg tc)
+		{
+			this.isChanged = tc.isChanged;
+
+			this.TskType = tc.TskType;
+
+			this.PrjSys = tc.PrjSys;
+			this.SemiMajor = tc.SemiMajor;
+			this.InvFlatt = tc.InvFlatt;
+			this.ScaleFactor = tc.ScaleFactor;
+			this.CentralMeridian = tc.CentralMeridian;
+			this.FalseEast = tc.FalseEast;
+			this.FalseNorth = tc.FalseNorth;
+
+
+			this.Depth = tc.Depth;
+			this.BandCount = tc.BandCount;
+			this.Resolution = tc.Resolution;
+			this.DPI = tc.DPI;
+			this.ClipExtent = tc.ClipExtent;
+			this.BlkSize = tc.BlkSize;
+			this.ExtFormula = tc.ExtFormula;
+			this.NoData = tc.NoData;
+
+			this.PositionDiffTolarence = tc.PositionDiffTolarence;
+			this.HeightDiffTolarence = tc.HeightDiffTolarence;
+
+			this.TFWPrec = tc.TFWPrec;
+		}
+
 		public TaskCfg(TaskType TskType, ProjSystem PrjSys, double SemiMajor, double InvFlatt,
 							double ScaleFactor, int CentMerid, double FalseEast, double FalseNorth,
 							DataType Depth, uint BandCount, double Resol, uint DPI, int BlkSize, uint ClipExt,
@@ -132,6 +166,8 @@ namespace geodata
 							double PosDiffTolarence, double HeighDiffTolarence,
 							int tfwPrec)
 		{
+			this.isChanged = false;
+
 			this.TskType = TskType;
 
 			this.PrjSys = PrjSys;
@@ -277,6 +313,7 @@ namespace geodata
 
 		public int TCcount { get { return Tcfgs.Count; }}
 		public int Tcachecount { get { return Tcache.Count; } }
+		public string[] TCkeys { get { return Tcache.Keys.ToArray(); } }
 
 
 		private string PCpath;
@@ -294,7 +331,6 @@ namespace geodata
 			Pcfg = new ProgramCfg();
 			Citm = new CheckItem();
 			Tcfgs = new Dictionary<string, TaskCfg>();
-			Tcache = new Dictionary<string, TaskCfg>();
 
 			this.PCpath = pc_path;
 			reloadSelf();
@@ -310,6 +346,8 @@ namespace geodata
 			openPCfile();
 			openCIfile();
 			openTCfile();
+
+			Tcache = new Dictionary<string, TaskCfg>(Tcfgs);
 		}
 		private void openTCfile()
 		{
@@ -339,7 +377,7 @@ namespace geodata
 				Tcfgs = JsonSerializer.Deserialize<Dictionary<string, TaskCfg>>(jsonstr);
 			// 当json为空时创建默认项目配置模板
 			if (Tcfgs.Count == 0)
-				addTcache(default_TCname, new TaskCfg());
+				addTC(default_TCname, new TaskCfg());
 		}
 		private void openCIfile()
 		{
@@ -391,7 +429,7 @@ namespace geodata
 				Pcfg = JsonSerializer.Deserialize<ProgramCfg>(jsonstr);
 
 			if (Pcfg.Last_Tcfg == null || Pcfg.Last_Tcfg.Equals(""))
-				setLastTskCfg(default_TCname);
+				setLastTCname(default_TCname);
 
 			if (Pcfg.Citms_path == null || Pcfg.Citms_path.Equals(""))
 				Pcfg.Citms_path = default_Citm_path;
@@ -402,15 +440,15 @@ namespace geodata
 
 
 		// 程序配置参数相关
-		public string getLastTskCfg()
+		public string getLastTCname()
 		{
 			return Pcfg.Last_Tcfg;
 		}
-		public string getAutoChkofpath()
+		public string getAutoChkOPath()
 		{
-			return Pcfg.AutoChk_ofpath;
+			return Pcfg.AutoChk_OPath;
 		}
-		public bool setLastTskCfg(string ltc)
+		public bool setLastTCname(string ltc)
 		{
 			if (ltc != null && !ltc.Equals(""))
 			{
@@ -420,19 +458,11 @@ namespace geodata
 			else
 				return false;
 		}
-		public bool setLastTskCfgByIdx(int idx)
-		{
-			if (idx >= Tcfgs.Count)
-				return false;
-
-			setLastTskCfg(getTCNames()[idx]);
-			return true;
-		}
-		public bool setAutoChkOfpath(string acop)
+		public bool setAutoChkOPath(string acop)
 		{
 			if (acop != null && !acop.Equals(""))
 			{
-				Pcfg.AutoChk_ofpath = acop;
+				Pcfg.AutoChk_OPath = acop;
 				return true;
 			}
 			else
@@ -457,7 +487,6 @@ namespace geodata
 		{
 			this.Citm = ci;
 		}
-
 		public void flushCI()
 		{
 			string jsonstr = JsonSerializer.Serialize(Citm);
@@ -469,52 +498,45 @@ namespace geodata
 		}
 
 		// 检查参数模板相关函数
-		public void addTcache(string name, TaskCfg cfg)
+		public bool addTC(string name, TaskCfg cfg)
 		{
-			this.Tcache.Remove(name);
-			this.Tcache.Add(name, cfg);
+			bool ret_val = true;
+
+			if (!this.Tcache.ContainsKey(name))
+				this.Tcache.Add(name, cfg);
+			else
+				ret_val = false;
+
+			return ret_val;
 		}
 		public bool removeTC(string name)
 		{
-			return Tcfgs.Remove(name) || Tcache.Remove(name);
+			return Tcache.Remove(name);
 		}
-		public TaskCfg getTC(string key)
+		public TaskCfg getTC(string name)
 		{
-			if (this.Tcfgs.ContainsKey(key))
-				return this.Tcfgs[key];
+			if (this.Tcache.ContainsKey(name))
+				return this.Tcache[name];
 			else
 				return null;
 		}
-		public string[] getTCNames()
+		public bool restoreTC(string name)
 		{
-			return this.Tcfgs.Keys.ToArray();
-		}
-		public bool hasUnsavedChanges()
-		{
-			if (this.Tcache.Count > 0)
-				return true;
-			else
+			if (!Tcache.ContainsKey(name) &&
+				Tcfgs.ContainsKey(name))
 				return false;
+			else if (Tcache.ContainsKey(name))
+			{
+				Tcache.Remove(name);
+				if (Tcfgs.ContainsKey(name))
+					Tcache.Add(name, new TaskCfg(Tcfgs[name]));
+			}
+			return true;
 		}
-		public void clearTCCaches()
-		{
-			this.Tcache.Clear();
-		}
-
 		public int flushTC()
 		{
-		/* 将缓存更新到存储 */
-			int count = 0;
-			foreach (string tn in Tcache.Keys)
-			{
-				// 如果存储中已存在，则先删除
-				if (Tcfgs.ContainsKey(tn))
-					Tcfgs.Remove(tn);
-				// 然后将缓存加入存储中
-				TaskCfg cache = Tcache[tn];
-				Tcfgs.Add(tn, cache);
-				count++;
-			}
+			/* 将缓存更新到存储 */
+			Tcfgs = new Dictionary<string, TaskCfg>(Tcache);
 			// 然后清除缓存
 			Tcache.Clear();
 		/* 将存储写入磁盘 */
@@ -525,7 +547,7 @@ namespace geodata
 			sw.Flush();
 			sw.Close();
 
-			return count;
+			return Tcfgs.Count;
 		}
 	}
 }

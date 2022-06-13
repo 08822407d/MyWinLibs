@@ -139,12 +139,6 @@
   <ItemGroup>
     <Compile Include="check\check_cfg.cs" />
     <Compile Include="check\check_core.cs" />
-    <Compile Include="check\frmCfgs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="check\frmCfgs.Designer.cs">
-      <DependentUpon>frmCfgs.cs</DependentUpon>
-    </Compile>
     <Compile Include="check\frmChkItems.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,9 +171,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="check\frmCfgs.resx">
-      <DependentUpon>frmCfgs.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="check\frmChkItems.resx">
       <DependentUpon>frmChkItems.cs</DependentUpon>
     </EmbeddedResource>

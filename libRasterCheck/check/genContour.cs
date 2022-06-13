@@ -16,5 +16,25 @@ namespace libRasterCheck.check
 		{
 			InitializeComponent();
 		}
+
+		private void btn_DemDir_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btn_OutputDir_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btn_Start_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btn_Cancel_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

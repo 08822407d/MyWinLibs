@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.btn_saveCurr = new System.Windows.Forms.Button();
+			this.components = new System.ComponentModel.Container();
 			this.btn_NewCfg = new System.Windows.Forms.Button();
 			this.label15 = new System.Windows.Forms.Label();
 			this.cmbbx_tskcfgs = new System.Windows.Forms.ComboBox();
@@ -64,10 +64,6 @@
 			this.rdbtn_PrjSys_bj54 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_PrjSys_2000 = new System.Windows.Forms.RadioButton();
 			this.gbx_datainfo = new System.Windows.Forms.GroupBox();
-			this.lbl_NioseVal = new System.Windows.Forms.Label();
-			this.tbx_NoiseVal = new System.Windows.Forms.TextBox();
-			this.label16 = new System.Windows.Forms.Label();
-			this.tbx_NoDataVal = new System.Windows.Forms.TextBox();
 			this.label11 = new System.Windows.Forms.Label();
 			this.tbx_BlkSize = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
@@ -78,6 +74,10 @@
 			this.rdbtn_Depth_8 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_Depth_32 = new System.Windows.Forms.RadioButton();
 			this.rdbtn_Depth_16 = new System.Windows.Forms.RadioButton();
+			this.lbl_NoiseVal = new System.Windows.Forms.Label();
+			this.tbx_NoiseVal = new System.Windows.Forms.TextBox();
+			this.label16 = new System.Windows.Forms.Label();
+			this.tbx_NoDataVal = new System.Windows.Forms.TextBox();
 			this.gbx_tolarence = new System.Windows.Forms.GroupBox();
 			this.nud_tfwPrec = new System.Windows.Forms.NumericUpDown();
 			this.lbl_HeighTolar = new System.Windows.Forms.Label();
@@ -88,7 +88,9 @@
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.btn_CopyCreate = new System.Windows.Forms.Button();
 			this.btn_Rename = new System.Windows.Forms.Button();
-			this.btn_editConfig = new System.Windows.Forms.Button();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.timer_editTC = new System.Windows.Forms.Timer(this.components);
+			this.timer_waitErr = new System.Windows.Forms.Timer(this.components);
 			this.gbx_clipext.SuspendLayout();
 			this.groupBox4.SuspendLayout();
 			this.gbx_prj.SuspendLayout();
@@ -96,27 +98,16 @@
 			this.gbx_tolarence.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nud_tfwPrec)).BeginInit();
 			this.groupBox1.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// btn_saveCurr
-			// 
-			this.btn_saveCurr.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_saveCurr.Location = new System.Drawing.Point(470, 62);
-			this.btn_saveCurr.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.btn_saveCurr.Name = "btn_saveCurr";
-			this.btn_saveCurr.Size = new System.Drawing.Size(132, 24);
-			this.btn_saveCurr.TabIndex = 16;
-			this.btn_saveCurr.Text = "保存当前更改";
-			this.btn_saveCurr.UseVisualStyleBackColor = true;
-			this.btn_saveCurr.Click += new System.EventHandler(this.btn_saveCurr_Click);
 			// 
 			// btn_NewCfg
 			// 
 			this.btn_NewCfg.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_NewCfg.Location = new System.Drawing.Point(328, 26);
+			this.btn_NewCfg.Location = new System.Drawing.Point(21, 60);
 			this.btn_NewCfg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btn_NewCfg.Name = "btn_NewCfg";
-			this.btn_NewCfg.Size = new System.Drawing.Size(132, 24);
+			this.btn_NewCfg.Size = new System.Drawing.Size(131, 24);
 			this.btn_NewCfg.TabIndex = 5;
 			this.btn_NewCfg.Text = "新建配置";
 			this.btn_NewCfg.UseVisualStyleBackColor = true;
@@ -140,10 +131,10 @@
 			this.cmbbx_tskcfgs.FormattingEnabled = true;
 			this.cmbbx_tskcfgs.ImeMode = System.Windows.Forms.ImeMode.Off;
 			this.cmbbx_tskcfgs.ItemHeight = 18;
-			this.cmbbx_tskcfgs.Location = new System.Drawing.Point(148, 26);
+			this.cmbbx_tskcfgs.Location = new System.Drawing.Point(167, 24);
 			this.cmbbx_tskcfgs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.cmbbx_tskcfgs.Name = "cmbbx_tskcfgs";
-			this.cmbbx_tskcfgs.Size = new System.Drawing.Size(155, 26);
+			this.cmbbx_tskcfgs.Size = new System.Drawing.Size(206, 26);
 			this.cmbbx_tskcfgs.Sorted = true;
 			this.cmbbx_tskcfgs.TabIndex = 1;
 			this.cmbbx_tskcfgs.SelectedIndexChanged += new System.EventHandler(this.cmbbx_tskcfgs_SelectedIndexChanged);
@@ -151,7 +142,7 @@
 			// btn_deleteCurr
 			// 
 			this.btn_deleteCurr.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_deleteCurr.Location = new System.Drawing.Point(328, 62);
+			this.btn_deleteCurr.Location = new System.Drawing.Point(470, 60);
 			this.btn_deleteCurr.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btn_deleteCurr.Name = "btn_deleteCurr";
 			this.btn_deleteCurr.Size = new System.Drawing.Size(132, 24);
@@ -170,7 +161,7 @@
 			this.gbx_clipext.Controls.Add(this.label17);
 			this.gbx_clipext.Controls.Add(this.rdbtn_ByMeter);
 			this.gbx_clipext.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_clipext.Location = new System.Drawing.Point(14, 479);
+			this.gbx_clipext.Location = new System.Drawing.Point(14, 518);
 			this.gbx_clipext.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gbx_clipext.Name = "gbx_clipext";
 			this.gbx_clipext.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -425,6 +416,7 @@
 			this.label2.Size = new System.Drawing.Size(45, 15);
 			this.label2.TabIndex = 7;
 			this.label2.Text = "扁率:";
+			this.label2.Visible = false;
 			// 
 			// label1
 			// 
@@ -434,6 +426,7 @@
 			this.label1.Size = new System.Drawing.Size(60, 15);
 			this.label1.TabIndex = 6;
 			this.label1.Text = "半长轴:";
+			this.label1.Visible = false;
 			// 
 			// tbx_InvFlatt
 			// 
@@ -442,6 +435,7 @@
 			this.tbx_InvFlatt.Name = "tbx_InvFlatt";
 			this.tbx_InvFlatt.Size = new System.Drawing.Size(116, 25);
 			this.tbx_InvFlatt.TabIndex = 5;
+			this.tbx_InvFlatt.Visible = false;
 			// 
 			// tbx_SemiMajor
 			// 
@@ -450,6 +444,7 @@
 			this.tbx_SemiMajor.Name = "tbx_SemiMajor";
 			this.tbx_SemiMajor.Size = new System.Drawing.Size(116, 25);
 			this.tbx_SemiMajor.TabIndex = 4;
+			this.tbx_SemiMajor.Visible = false;
 			// 
 			// rdbtn_PrjSys_wgs84
 			// 
@@ -501,10 +496,6 @@
 			// 
 			// gbx_datainfo
 			// 
-			this.gbx_datainfo.Controls.Add(this.lbl_NioseVal);
-			this.gbx_datainfo.Controls.Add(this.tbx_NoiseVal);
-			this.gbx_datainfo.Controls.Add(this.label16);
-			this.gbx_datainfo.Controls.Add(this.tbx_NoDataVal);
 			this.gbx_datainfo.Controls.Add(this.label11);
 			this.gbx_datainfo.Controls.Add(this.tbx_BlkSize);
 			this.gbx_datainfo.Controls.Add(this.label10);
@@ -520,48 +511,10 @@
 			this.gbx_datainfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gbx_datainfo.Name = "gbx_datainfo";
 			this.gbx_datainfo.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.gbx_datainfo.Size = new System.Drawing.Size(622, 139);
+			this.gbx_datainfo.Size = new System.Drawing.Size(622, 104);
 			this.gbx_datainfo.TabIndex = 35;
 			this.gbx_datainfo.TabStop = false;
 			this.gbx_datainfo.Text = "数据信息";
-			// 
-			// lbl_NioseVal
-			// 
-			this.lbl_NioseVal.AutoSize = true;
-			this.lbl_NioseVal.Location = new System.Drawing.Point(346, 100);
-			this.lbl_NioseVal.Name = "lbl_NioseVal";
-			this.lbl_NioseVal.Size = new System.Drawing.Size(106, 15);
-			this.lbl_NioseVal.TabIndex = 25;
-			this.lbl_NioseVal.Text = "噪音(白点)值:";
-			this.lbl_NioseVal.Visible = false;
-			// 
-			// tbx_NoiseVal
-			// 
-			this.tbx_NoiseVal.Location = new System.Drawing.Point(458, 95);
-			this.tbx_NoiseVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.tbx_NoiseVal.Name = "tbx_NoiseVal";
-			this.tbx_NoiseVal.Size = new System.Drawing.Size(144, 25);
-			this.tbx_NoiseVal.TabIndex = 24;
-			this.tbx_NoiseVal.Visible = false;
-			// 
-			// label16
-			// 
-			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(22, 100);
-			this.label16.Name = "label16";
-			this.label16.Size = new System.Drawing.Size(78, 15);
-			this.label16.TabIndex = 23;
-			this.label16.Text = "NoData值:";
-			this.label16.Visible = false;
-			// 
-			// tbx_NoDataVal
-			// 
-			this.tbx_NoDataVal.Location = new System.Drawing.Point(100, 95);
-			this.tbx_NoDataVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.tbx_NoDataVal.Name = "tbx_NoDataVal";
-			this.tbx_NoDataVal.Size = new System.Drawing.Size(144, 25);
-			this.tbx_NoDataVal.TabIndex = 22;
-			this.tbx_NoDataVal.Visible = false;
 			// 
 			// label11
 			// 
@@ -659,6 +612,44 @@
 			this.rdbtn_Depth_16.Text = "16位";
 			this.rdbtn_Depth_16.UseVisualStyleBackColor = true;
 			// 
+			// lbl_NoiseVal
+			// 
+			this.lbl_NoiseVal.AutoSize = true;
+			this.lbl_NoiseVal.Location = new System.Drawing.Point(345, 30);
+			this.lbl_NoiseVal.Name = "lbl_NoiseVal";
+			this.lbl_NoiseVal.Size = new System.Drawing.Size(106, 15);
+			this.lbl_NoiseVal.TabIndex = 25;
+			this.lbl_NoiseVal.Text = "噪音(白点)值:";
+			this.lbl_NoiseVal.Visible = false;
+			// 
+			// tbx_NoiseVal
+			// 
+			this.tbx_NoiseVal.Location = new System.Drawing.Point(457, 25);
+			this.tbx_NoiseVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_NoiseVal.Name = "tbx_NoiseVal";
+			this.tbx_NoiseVal.Size = new System.Drawing.Size(144, 25);
+			this.tbx_NoiseVal.TabIndex = 24;
+			this.tbx_NoiseVal.Visible = false;
+			// 
+			// label16
+			// 
+			this.label16.AutoSize = true;
+			this.label16.Location = new System.Drawing.Point(21, 30);
+			this.label16.Name = "label16";
+			this.label16.Size = new System.Drawing.Size(78, 15);
+			this.label16.TabIndex = 23;
+			this.label16.Text = "NoData值:";
+			this.label16.Visible = false;
+			// 
+			// tbx_NoDataVal
+			// 
+			this.tbx_NoDataVal.Location = new System.Drawing.Point(99, 25);
+			this.tbx_NoDataVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_NoDataVal.Name = "tbx_NoDataVal";
+			this.tbx_NoDataVal.Size = new System.Drawing.Size(144, 25);
+			this.tbx_NoDataVal.TabIndex = 22;
+			this.tbx_NoDataVal.Visible = false;
+			// 
 			// gbx_tolarence
 			// 
 			this.gbx_tolarence.Controls.Add(this.nud_tfwPrec);
@@ -668,7 +659,7 @@
 			this.gbx_tolarence.Controls.Add(this.lbl_PosTolar);
 			this.gbx_tolarence.Controls.Add(this.tbx_PosTolar);
 			this.gbx_tolarence.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_tolarence.Location = new System.Drawing.Point(14, 662);
+			this.gbx_tolarence.Location = new System.Drawing.Point(14, 702);
 			this.gbx_tolarence.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.gbx_tolarence.Name = "gbx_tolarence";
 			this.gbx_tolarence.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -731,10 +722,8 @@
 			// 
 			this.groupBox1.Controls.Add(this.btn_CopyCreate);
 			this.groupBox1.Controls.Add(this.btn_Rename);
-			this.groupBox1.Controls.Add(this.btn_editConfig);
 			this.groupBox1.Controls.Add(this.btn_NewCfg);
 			this.groupBox1.Controls.Add(this.cmbbx_tskcfgs);
-			this.groupBox1.Controls.Add(this.btn_saveCurr);
 			this.groupBox1.Controls.Add(this.label15);
 			this.groupBox1.Controls.Add(this.btn_deleteCurr);
 			this.groupBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -750,40 +739,50 @@
 			// btn_CopyCreate
 			// 
 			this.btn_CopyCreate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_CopyCreate.Location = new System.Drawing.Point(470, 26);
+			this.btn_CopyCreate.Location = new System.Drawing.Point(167, 59);
 			this.btn_CopyCreate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btn_CopyCreate.Name = "btn_CopyCreate";
 			this.btn_CopyCreate.Size = new System.Drawing.Size(132, 24);
 			this.btn_CopyCreate.TabIndex = 21;
 			this.btn_CopyCreate.Text = "从已有配置新建";
 			this.btn_CopyCreate.UseVisualStyleBackColor = true;
-			this.btn_CopyCreate.Visible = false;
+			this.btn_CopyCreate.Click += new System.EventHandler(this.btn_CopyCreate_Click);
 			// 
 			// btn_Rename
 			// 
 			this.btn_Rename.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_Rename.Location = new System.Drawing.Point(168, 62);
+			this.btn_Rename.Location = new System.Drawing.Point(331, 60);
 			this.btn_Rename.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btn_Rename.Name = "btn_Rename";
-			this.btn_Rename.Size = new System.Drawing.Size(135, 24);
+			this.btn_Rename.Size = new System.Drawing.Size(131, 24);
 			this.btn_Rename.TabIndex = 20;
 			this.btn_Rename.Text = "重命名当前配置";
 			this.btn_Rename.UseVisualStyleBackColor = true;
-			this.btn_Rename.Visible = false;
 			this.btn_Rename.Click += new System.EventHandler(this.btn_Rename_Click);
 			// 
-			// btn_editConfig
+			// groupBox2
 			// 
-			this.btn_editConfig.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_editConfig.Location = new System.Drawing.Point(21, 62);
-			this.btn_editConfig.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-			this.btn_editConfig.Name = "btn_editConfig";
-			this.btn_editConfig.Size = new System.Drawing.Size(135, 24);
-			this.btn_editConfig.TabIndex = 19;
-			this.btn_editConfig.Text = "编辑当前配置";
-			this.btn_editConfig.UseVisualStyleBackColor = true;
-			this.btn_editConfig.Visible = false;
-			this.btn_editConfig.Click += new System.EventHandler(this.btn_editConfig_Click);
+			this.groupBox2.Controls.Add(this.lbl_NoiseVal);
+			this.groupBox2.Controls.Add(this.tbx_NoiseVal);
+			this.groupBox2.Controls.Add(this.tbx_NoDataVal);
+			this.groupBox2.Controls.Add(this.label16);
+			this.groupBox2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.groupBox2.Location = new System.Drawing.Point(14, 442);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(622, 68);
+			this.groupBox2.TabIndex = 40;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "特殊值";
+			// 
+			// timer_editTC
+			// 
+			this.timer_editTC.Interval = 250;
+			this.timer_editTC.Tick += new System.EventHandler(this.timer_editTC_Tick);
+			// 
+			// timer_waitErr
+			// 
+			this.timer_waitErr.Interval = 10000;
+			this.timer_waitErr.Tick += new System.EventHandler(this.timer_waitErr_Tick);
 			// 
 			// frmTaskConf
 			// 
@@ -791,7 +790,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(664, 754);
+			this.ClientSize = new System.Drawing.Size(664, 790);
+			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.gbx_clipext);
 			this.Controls.Add(this.groupBox4);
@@ -822,12 +822,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.nud_tfwPrec)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			this.groupBox2.ResumeLayout(false);
+			this.groupBox2.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-		private System.Windows.Forms.Button btn_saveCurr;
 		private System.Windows.Forms.Button btn_NewCfg;
 		private System.Windows.Forms.Label label15;
 		private System.Windows.Forms.ComboBox cmbbx_tskcfgs;
@@ -879,8 +880,7 @@
 		private System.Windows.Forms.RadioButton rdbtn_ImgSrc;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.TextBox tbx_BlkSize;
-		private System.Windows.Forms.Button btn_editConfig;
-		private System.Windows.Forms.Label lbl_NioseVal;
+		private System.Windows.Forms.Label lbl_NoiseVal;
 		private System.Windows.Forms.TextBox tbx_NoiseVal;
 		private System.Windows.Forms.Label label16;
 		private System.Windows.Forms.TextBox tbx_NoDataVal;
@@ -888,5 +888,8 @@
 		private System.Windows.Forms.Button btn_CopyCreate;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.NumericUpDown nud_tfwPrec;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.Timer timer_editTC;
+		private System.Windows.Forms.Timer timer_waitErr;
 	}
 }
