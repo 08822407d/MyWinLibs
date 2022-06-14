@@ -108,18 +108,34 @@ namespace CheckerUI
 			}
 			else
 			{
-				this.currTC = new TaskCfg();
-				this.currTCname = newName;
-				Cfgs.addTC(this.currTCname, this.currTC);
-				cmbbx_tskcfgs.Items.Add(currTCname);
+				this.Cfgs.addTC(newName, new TaskCfg());
+				this.Cfgs.setLastTCname(newName);
+				cmbbx_tskcfgs.Items.Add(newName);
+				cmbbx_tskcfgs.SelectedItem = newName;
 
-				MessageBox.Show("新建配置:" + currTCname + ", 采用默认配置模板");
+				MessageBox.Show("新建配置:" + newName + ", 采用默认配置模板");
 			}
 		}
 
 		private void btn_CopyCreate_Click(object sender, EventArgs e)
 		{
+			frmTXTInput wTI = new frmTXTInput(false);
+			wTI.ShowDialog();
 
+			string newName = wTI.ret_val;
+			if (newName == null)
+				MessageBox.Show("未输入名称, 取消新建配置");
+			else if (this.Cfgs.getTC(newName) != null)
+				MessageBox.Show("已存在的名称, 请重新输入");
+			else
+			{
+				this.Cfgs.addTC(newName, new TaskCfg(this.currTC));
+				this.Cfgs.setLastTCname(newName);
+				cmbbx_tskcfgs.Items.Add(newName);
+				cmbbx_tskcfgs.SelectedItem = newName;
+
+				MessageBox.Show("新建配置:" + newName + ", 采用默认配置模板");
+			}
 		}
 
 		private void btn_Rename_Click(object sender, EventArgs e)
@@ -135,7 +151,7 @@ namespace CheckerUI
 				this.Cfgs.addTC(this.currTCname, this.currTC);
 				this.Cfgs.setLastTCname(this.currTCname);
 
-				MessageBox.Show("新建配置:" + currTCname + ", 采用默认配置模板");
+				MessageBox.Show("当前配置重命名为:" + currTCname);
 
 				loadTcfgs2cmbbx();
 			}
@@ -143,12 +159,13 @@ namespace CheckerUI
 
 		private void btn_deleteCurr_Click(object sender, EventArgs e)
 		{
-			DialogResult dr = MessageBox.Show("确定删除当前配置？", "", MessageBoxButtons.OKCancel);
+			DialogResult dr = MessageBox.Show("确定删除当前配置？删除后不可恢复", "", MessageBoxButtons.OKCancel);
 			if (dr == DialogResult.Cancel)
 				return;
 
 			this.Cfgs.removeTC(this.currTCname);
-			this.Cfgs.flushTC();
+			this.Cfgs.getFirstNameTC(ref this.currTCname, ref this.currTC);
+			this.Cfgs.setLastTCname(this.currTCname);
 
 			loadTcfgs2cmbbx();
 		}
@@ -167,7 +184,13 @@ namespace CheckerUI
 			string[] keys = this.Cfgs.TCkeys;
 			if (keys.Length < 1)
 			{
-				MessageBox.Show("未找到现有项目模板，请新建");
+				MessageBox.Show("未找到现有项目模板，新建默认模板");
+
+				string name = "default";
+				TaskCfg tc = new TaskCfg();
+				this.Cfgs.addTC(name, tc);
+				this.Cfgs.setLastTCname(name);
+
 				return;
 			}
 			else

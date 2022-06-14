@@ -509,16 +509,27 @@ namespace geodata
 
 			return ret_val;
 		}
-		public bool removeTC(string name)
-		{
-			return Tcache.Remove(name);
-		}
 		public TaskCfg getTC(string name)
 		{
 			if (this.Tcache.ContainsKey(name))
 				return this.Tcache[name];
 			else
 				return null;
+		}
+		public bool removeTC(string name)
+		{
+			return Tcache.Remove(name);
+		}
+		public bool getFirstNameTC(ref string name, ref TaskCfg tc)
+		{
+			if (Tcache.Count < 1)
+				return false;
+			else
+			{
+				name = Tcache.Keys.First();
+				tc = Tcache[name];
+				return true;
+			}
 		}
 		public bool restoreTC(string name)
 		{

@@ -739,12 +739,12 @@
 			// btn_CopyCreate
 			// 
 			this.btn_CopyCreate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_CopyCreate.Location = new System.Drawing.Point(167, 59);
+			this.btn_CopyCreate.Location = new System.Drawing.Point(167, 60);
 			this.btn_CopyCreate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.btn_CopyCreate.Name = "btn_CopyCreate";
 			this.btn_CopyCreate.Size = new System.Drawing.Size(132, 24);
 			this.btn_CopyCreate.TabIndex = 21;
-			this.btn_CopyCreate.Text = "从已有配置新建";
+			this.btn_CopyCreate.Text = "复制当前配置新建";
 			this.btn_CopyCreate.UseVisualStyleBackColor = true;
 			this.btn_CopyCreate.Click += new System.EventHandler(this.btn_CopyCreate_Click);
 			// 

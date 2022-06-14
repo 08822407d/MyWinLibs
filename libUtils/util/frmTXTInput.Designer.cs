@@ -78,6 +78,7 @@
 			this.MinimizeBox = false;
 			this.Name = "frmTXTInput";
 			this.Padding = new System.Windows.Forms.Padding(10);
+			this.Text = "请输入名称";
 			this.TopMost = true;
 			this.ResumeLayout(false);
 			this.PerformLayout();
