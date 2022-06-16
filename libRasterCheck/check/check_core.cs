@@ -241,7 +241,7 @@ namespace geodata
 		public static void checkClipExtent(Raster img, TaskCfg tc, CheckResult cr)
 		{
 			Extent2d diff = new Extent2d();
-			Extent2d CE = img.getClipExtent(tc.ClipExtent, tc.ExtFormula);
+			Extent2d CE = img.CNS.getClipExtent(img.Resolution, tc.ClipExtent, tc.ExtFormula);
 			diff = CE - img.ImgExtent;
 
 			if (diff.Start.X != 0 ||

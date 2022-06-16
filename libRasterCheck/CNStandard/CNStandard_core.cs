@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using OpenCvSharp;
 
+using Utils;
+
 namespace geodata
 {
 	public partial class CNMapNo
@@ -141,6 +143,65 @@ namespace geodata
 		public string getMapNoStr()
 		{
 			return this.MapNo.ToString();
+		}
+
+		/// <summary>
+		/// 计算裁切范围
+		/// </summary>
+		public Extent2d getClipExtent(Point2d resol, uint extwidth_pixel, ClipExtFormula CEF)
+		{
+			if (resol.Y < 0)
+				resol.Y *= -1;
+
+			double maxX = Const.minX;
+			double maxY = Const.minY;
+			double minX = Const.maxX;
+			double minY = Const.maxY;
+
+			Point2d[] corners = {this.Corners_XY.UpperLeft,
+								this.Corners_XY.UpperRight,
+								this.Corners_XY.LowerRight,
+								this.Corners_XY.LowerLeft};
+			for (int i = 0; i < 4; i++)
+			{
+				Point2d pt = corners[i];
+				if (pt.X > maxX) maxX = pt.X;
+				if (pt.X < minX) minX = pt.X;
+				if (pt.Y > maxY) maxY = pt.Y;
+				if (pt.Y < minY) minY = pt.Y;
+			}
+
+			double	sx = Const.minX,
+					sy = Const.minY,
+					ex = Const.minX,
+					ey = Const.minY;
+			// CH/T 9008.3 - 2010 (1:500 1:1000 1:2000)
+			// CH/T 9009.3 - 2010 (1:10000 1:50000)
+			if (CEF == ClipExtFormula.NewFormula)
+			{
+				sx = (int)((minX - resol.X * extwidth_pixel) /
+						resol.X) * resol.X;
+				sy = (int)((maxY - resol.Y * extwidth_pixel) /
+						resol.Y) * resol.Y;
+				ex = (int)((maxX + resol.X * extwidth_pixel) /
+						resol.X) * resol.X;
+				ey = (int)((minY + resol.Y * extwidth_pixel) /
+						resol.Y) * resol.Y;
+			}
+			else if (CEF == ClipExtFormula.OrigFormula)
+			// 原计算公式
+			{
+				sx = (int)(minX / resol.X) * resol.X -
+						extwidth_pixel * resol.X;
+				sy = ((int)(maxY / resol.Y) - 1) * resol.Y -
+						extwidth_pixel * resol.Y;
+				ex = (int)((maxX / resol.X) + 1) * resol.X +
+						extwidth_pixel * resol.X;
+				ey = (int)(minY / resol.Y) * resol.Y +
+						extwidth_pixel * resol.Y;
+			}
+
+			return new Extent2d(new Point2d(sx, sy), new Point2d(ex, ey));
 		}
 
 		/// <summary>
