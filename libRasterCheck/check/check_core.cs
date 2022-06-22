@@ -13,15 +13,52 @@ namespace geodata
 {
 	public class CheckResult
 	{
+		public string MapNo { get; set; }
+
 		public string PrjSys { get; set; }
 		public string PrjOther { get; set; }
 		public string ColorMode { get; set; }
 		public string DataInfo { get; set; }
+		public string ClipExtent { get; set; }
+
+		public bool IsValid()
+		{
+			bool ret_val = true;
+
+			if (MapNo == null && MapNo.Equals(""))
+				ret_val = false;
+
+			return ret_val;
+		}
+
+		public bool IsErr()
+		{
+			bool ret_val = false;
+
+			if (PrjSys == null || !PrjSys.Equals(""))
+				ret_val = true;
+
+			if (PrjOther == null || !PrjOther.Equals(""))
+				ret_val = true;
+
+			if (ColorMode == null || !ColorMode.Equals(""))
+				ret_val = true;
+
+			if (DataInfo == null || !DataInfo.Equals(""))
+				ret_val = true;
+
+			if (ClipExtent == null || !ClipExtent.Equals(""))
+				ret_val = true;
+
+			return ret_val;
+		}
 	}
 
 	public class CheckTask
 	{
 		public bool output_onefile = true;
+
+		String tmpdir = "/tmp";
 
 		CfgPack Cfgs;
 		CheckItem ci;
@@ -63,38 +100,26 @@ namespace geodata
 			string opath = this.Cfgs.getAutoChkOPath();
 
 			Check.checkCNSMapNo(raster_list, Path.Combine(opath, "InvalidMapNo.txt"));
-			string prj_total = Path.Combine(opath, "投影检查.txt");
-			string colormode_total = Path.Combine(opath, "色彩模式检查.txt");
-			string datainfo_total = Path.Combine(opath, "其他数据信息.txt");
-			string imgedge_total = Path.Combine(opath, "影像接边检查.txt");
-			string imgnoise_total = Path.Combine(opath, "影像噪音检查.txt");
-			string demedge_total = Path.Combine(opath, "DEM接边检查.txt");
-
-			StreamWriter sw_prj = new StreamWriter(prj_total, true);
-			StreamWriter sw_colormode = new StreamWriter(colormode_total, true);
-			StreamWriter sw_datainfo = new StreamWriter(datainfo_total, true);
 
 			foreach (Raster r in raster_list)
 			{
 				if (r.CNS == null)
 					continue;
+				string tmp_opath_with_mapno = Path.Combine(tmpdir, r.CNS.MapNo_str);
+				string noise_ofname = Path.Combine(tmp_opath_with_mapno, "ImageNoise.txt");
+				string imgedge_ofpath = Path.Combine(tmp_opath_with_mapno, "ImgEdge");
+				string demedge_ofpath = Path.Combine(tmp_opath_with_mapno, "DEMEdge");
 
 				r.getOverlapsByNeighbour(this.raster_list);
-
-				string opath_with_mapno = Path.Combine(opath, r.CNS.MapNo_str);
-				string general_ofname = Path.Combine(opath_with_mapno, "GeneralResult.txt");
-				string noise_ofname = Path.Combine(opath_with_mapno, "ImageNoise.txt");
-				string imgedge_ofpath = Path.Combine(opath_with_mapno, "ImgEdge");
-				string demedge_ofpath = Path.Combine(opath_with_mapno, "DEMEdge");
+				if (!Directory.Exists(tmp_opath_with_mapno))
+					Directory.CreateDirectory(tmp_opath_with_mapno);
 				if (!Directory.Exists(imgedge_ofpath))
 					Directory.CreateDirectory(imgedge_ofpath);
 				if (!Directory.Exists(demedge_ofpath))
 					Directory.CreateDirectory(demedge_ofpath);
-
-				if (!Directory.Exists(opath_with_mapno))
-					Directory.CreateDirectory(opath_with_mapno);
 				CheckResult cr = new CheckResult();
 
+				cr.MapNo = r.CNS.getMapNoStr();
 				Check.checkProjSystem(r, tc, cr);
 				Check.checkProjOther(r, tc, cr);
 				Check.checkColorMode(r, tc, cr);
@@ -107,83 +132,44 @@ namespace geodata
 				if (ci.DemEdgeMatch)
 					Check.checkDemEdge(r, tc, demedge_ofpath);
 				chk_results.Add(cr);
-
-				// 为每个数据文件输出独立检查报告
-				if (!output_onefile)
-				{
-					StreamWriter sw_seperate = new StreamWriter(general_ofname, false);
-					if (ci.PrjSys)
-						sw_seperate.WriteLine(cr.PrjSys);
-					if (ci.PrjOther)
-						sw_seperate.WriteLine(cr.PrjOther);
-					if (ci.ColorMode)
-						sw_seperate.WriteLine(cr.ColorMode);
-					if (ci.DataInfo)
-						sw_seperate.WriteLine(cr.DataInfo);
-					sw_seperate.Flush();
-					sw_seperate.Close();
-				}
-				// 为所有数据文件的单项检查创建共用检查报告
-				else
-				{
-					if (ci.PrjSys && cr.PrjSys != null && !cr.PrjSys.Equals(""))
-					{
-						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
-						sw_prj.WriteLine(cr.PrjSys + "\n");
-					}
-					if (ci.PrjOther && cr.PrjOther != null && !cr.PrjOther.Equals(""))
-					{
-						sw_prj.WriteLine("图号：" + r.CNS.getMapNoStr());
-						sw_prj.WriteLine(cr.PrjOther + "\n");
-					}
-					if (ci.ColorMode && cr.ColorMode != null && !cr.ColorMode.Equals(""))
-					{
-						sw_colormode.WriteLine("图号：" + r.CNS.getMapNoStr());
-						sw_colormode.WriteLine(cr.ColorMode + "\n");
-					}
-					if (ci.DataInfo && cr.DataInfo != null && !cr.DataInfo.Equals(""))
-					{
-						sw_datainfo.WriteLine("图号：" + r.CNS.getMapNoStr());
-						sw_datainfo.WriteLine(cr.DataInfo + "\n");
-					}
-					if (ci.ImgNoise)
-					{
-						string[] lines = File.ReadAllLines(noise_ofname);
-						File.WriteAllLines(imgnoise_total, lines);
-					}
-					if (ci.ImgEdgeMatch)
-					{
-						string[] files = Utils.FIO.traverseSearchFile_Ext(imgedge_ofpath, ".txt").ToArray();
-						Utils.FIO.mergeTextFiles(files, imgedge_total, true);
-					}
-					if (ci.DemEdgeMatch)
-					{
-						string[] files = Utils.FIO.traverseSearchFile_Ext(demedge_ofpath, ".txt").ToArray();
-						Utils.FIO.mergeTextFiles(files, imgedge_total, true);
-					}
-
-					sw_prj.Flush();
-					sw_colormode.Flush();
-					sw_datainfo.Flush();
-				}
-
 			}
 
-			sw_prj.Close();
-			sw_colormode.Close();
-			sw_datainfo.Close();
-
-			string TFWPrec_total = Path.Combine(opath, "TFW格式检查.txt");
+			string TFWprec_cr_all = Path.Combine(opath, "TFW格式检查.txt");
 			string cr_str = "";
 			foreach (string f in tfw_list)
 			{
 				if (ci.OtherFile)
 					Check.checkTFWPrec(f, tc, ref cr_str);
 			}
-			StreamWriter sw_tfwp = new StreamWriter(TFWPrec_total);
+			StreamWriter sw_tfwp = new StreamWriter(TFWprec_cr_all);
 			sw_tfwp.Write(cr_str);
 			sw_tfwp.Flush();
 			sw_tfwp.Close();
+
+			string dataheader_cr_all = Path.Combine(opath, "数据信息检查.txt");
+			StreamWriter sw_dh = new StreamWriter(dataheader_cr_all);
+			foreach (CheckResult cr in this.chk_results)
+			{
+				if (!cr.IsErr() || !cr.IsValid())
+					continue;
+
+				sw_dh.WriteLine(cr.MapNo);
+
+				if (this.ci.PrjSys)
+					sw_dh.Write("\t" + cr.PrjSys);
+				if (this.ci.PrjOther)
+					sw_dh.Write("\t" + cr.PrjOther);
+				if (this.ci.DataInfo)
+					sw_dh.Write("\t" + cr.DataInfo);
+				if (this.ci.ColorMode)
+					sw_dh.Write("\t" + cr.ColorMode);
+				if (this.ci.ClipExt)
+					sw_dh.Write("\t" + cr.ClipExtent);
+
+				sw_dh.WriteLine("\n");
+			}
+			sw_dh.Flush();
+			sw_dh.Close();
 		}
 	}
 

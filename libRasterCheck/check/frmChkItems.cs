@@ -78,6 +78,8 @@ namespace CheckerUI
 				chkbx_ColorMode.Checked = true;
 			if (ci.DataInfo)
 				chkbx_DataInfo.Checked = true;
+			if (ci.ClipExt)
+				chkbx_ClipExt.Checked = true;
 
 			if (ci.ImgNoise)
 				chkbx_ImgNoise.Checked = true;
@@ -113,6 +115,8 @@ namespace CheckerUI
 				ci.ColorMode = true;
 			if (chkbx_DataInfo.Checked)
 				ci.DataInfo = true;
+			if (chkbx_ClipExt.Checked)
+				ci.ClipExt = true;
 
 			if (chkbx_ImgNoise.Checked)
 				ci.ImgNoise = true;

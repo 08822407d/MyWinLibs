@@ -209,8 +209,10 @@ namespace geodata
 		public bool PrjOther { get; set; }
 		// 色彩模式，包含波段数，位深度
 		public bool ColorMode { get; set; }
-		// 影像信息，包含分辨率，起点坐标，裁切范围
+		// 影像信息，包含分辨率，起点坐标
 		public bool DataInfo { get; set; }
+		// 裁切范围
+		public bool ClipExt { get; set; }
 
 
 		/// <summary>
