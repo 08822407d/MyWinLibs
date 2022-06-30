@@ -191,20 +191,21 @@ namespace geodata
 		{
 			if (tc.PrjSys != img.PrjSys)
 				cr.PrjSys += "投影系统错误: " + img.PrjSys.ToString() + "\n";
-			if (tc.SemiMajor != img.SemiMajor)
-				cr.PrjSys += "半长轴错误: " + img.SemiMajor.ToString() + "\n";
-			if (tc.InvFlatt != img.InvFlatt)
-				cr.PrjSys += "扁率错误: " + img.InvFlatt.ToString() + "\n";
+			//if (tc.SemiMajor != img.SemiMajor)
+			//	cr.PrjSys += "半长轴错误: " + img.SemiMajor.ToString() + "\n";
+			//if (tc.InvFlatt != img.InvFlatt)
+			//	cr.PrjSys += "扁率错误: " + img.InvFlatt.ToString() + "\n";
 		}
 
 		public static void checkProjOther(Raster img, TaskCfg tc, CheckResult cr)
 		{
-			if (tc.CentralMeridian != img.CentralMeridian)
+			if (img.CNS.CentralMeridian !=  img.CentralMeridian)
+				//if (tc.CentralMeridian != img.CentralMeridian)
 				cr.PrjOther += "中央经线错误: " + img.CentralMeridian.ToString() + "\n";
-			if (tc.FalseEast != img.FalseEast)
-				cr.PrjOther += "坐标东移错误: " + img.FalseEast.ToString() + "\n";
-			if (tc.FalseNorth != img.FalseNorth)
-				cr.PrjOther += "坐标东移错误: " + img.FalseNorth.ToString() + "\n";
+			//if (tc.FalseEast != img.FalseEast)
+			//	cr.PrjOther += "坐标东移错误: " + img.FalseEast.ToString() + "\n";
+			//if (tc.FalseNorth != img.FalseNorth)
+			//	cr.PrjOther += "坐标东移错误: " + img.FalseNorth.ToString() + "\n";
 		}
 
 		public static void checkColorMode(Raster img, TaskCfg tc, CheckResult cr)

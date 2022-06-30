@@ -76,6 +76,7 @@
 			// chkbx_ImgNoise
 			// 
 			this.chkbx_ImgNoise.AutoSize = true;
+			this.chkbx_ImgNoise.Enabled = false;
 			this.chkbx_ImgNoise.Location = new System.Drawing.Point(29, 29);
 			this.chkbx_ImgNoise.Name = "chkbx_ImgNoise";
 			this.chkbx_ImgNoise.Size = new System.Drawing.Size(194, 19);
@@ -171,6 +172,7 @@
 			// chkbx_ImgEdgeMatch
 			// 
 			this.chkbx_ImgEdgeMatch.AutoSize = true;
+			this.chkbx_ImgEdgeMatch.Enabled = false;
 			this.chkbx_ImgEdgeMatch.Location = new System.Drawing.Point(29, 54);
 			this.chkbx_ImgEdgeMatch.Name = "chkbx_ImgEdgeMatch";
 			this.chkbx_ImgEdgeMatch.Size = new System.Drawing.Size(89, 19);
@@ -197,6 +199,7 @@
 			// chkbx_DemEdgeMatch
 			// 
 			this.chkbx_DemEdgeMatch.AutoSize = true;
+			this.chkbx_DemEdgeMatch.Enabled = false;
 			this.chkbx_DemEdgeMatch.Location = new System.Drawing.Point(29, 55);
 			this.chkbx_DemEdgeMatch.Name = "chkbx_DemEdgeMatch";
 			this.chkbx_DemEdgeMatch.Size = new System.Drawing.Size(83, 19);

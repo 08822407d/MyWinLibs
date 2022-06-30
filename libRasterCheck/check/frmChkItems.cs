@@ -139,10 +139,10 @@ namespace CheckerUI
 
 		private void initLayout()
 		{
-			this.Controls.SetChildIndex(this.gbx_check, 0);
-			this.Controls.SetChildIndex(this.gbx_CI_common, 0);
-			this.Controls.SetChildIndex(this.gbx_CI_img, 0);
 			this.Controls.SetChildIndex(this.gbx_CI_dem, 0);
+			this.Controls.SetChildIndex(this.gbx_CI_img, 1);
+			this.Controls.SetChildIndex(this.gbx_CI_common, 2);
+			this.Controls.SetChildIndex(this.gbx_check, 3);
 
 			this.gbx_check.Dock = DockStyle.Top;
 			this.gbx_CI_common.Dock = DockStyle.Top;

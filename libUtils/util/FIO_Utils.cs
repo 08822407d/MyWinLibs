@@ -76,8 +76,8 @@ namespace Utils
 					{
 						// Perform whatever action is required in your scenario.
 						System.IO.FileInfo fi = new System.IO.FileInfo(f);
-						Console.WriteLine("{0}: {1}, {2}", fi.Name, fi.Length, fi.CreationTime);
-						if (Path.GetExtension(f).Equals(ext))
+						//Console.WriteLine("{0}: {1}, {2}", fi.Name, fi.Length, fi.CreationTime);
+						if (Path.GetExtension(f).ToLower().Equals(ext))
 							ret_val.Add(f);
 					}
 					catch (System.IO.FileNotFoundException e)

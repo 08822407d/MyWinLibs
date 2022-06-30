@@ -45,13 +45,13 @@ namespace CheckerUI
 		public frmTaskConf()
 		{
 			InitializeComponent();
-
-			timer_editTC.Start();
+			initLayout();
 		}
 
 		public frmTaskConf(CfgPack cfgs)
 		{
 			InitializeComponent();
+			initLayout();
 
 			CNSimg_only = new List<Control>();
 			DEM_only = new List<Control>();
@@ -69,6 +69,11 @@ namespace CheckerUI
 			NewExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(NewExtFormu_name);
 			OrigExtFormu_idx = cmbbx_ExtFormula.Items.IndexOf(OrigExtFormu_name);
 			loadTcfgs2cmbbx();
+		}
+
+		protected override void OnShown(EventArgs e)
+		{
+			base.OnShown(e);
 
 			timer_editTC.Start();
 		}
@@ -482,6 +487,53 @@ namespace CheckerUI
 
 			// TFW小数位数
 			cfg.TFWPrec = Convert.ToInt32(nud_tfwPrec.Value);
+		}
+
+		private void initLayout()
+		{
+			int cidx = 0;
+			int max_width = 0;
+
+			UI.shrinkContainer_NotAutoSize(gbx_Templete);
+			UI.shrinkContainer_NotAutoSize(gbx_DataType);
+			UI.shrinkContainer_NotAutoSize(gbx_prj);
+			UI.shrinkContainer_NotAutoSize(gbx_DataInfo);
+			UI.shrinkContainer_NotAutoSize(gbx_SpecialValue);
+			UI.shrinkContainer_NotAutoSize(gbx_ClipExt);
+			UI.shrinkContainer_NotAutoSize(gbx_Tolarence);
+
+			for (int i = 0; i < cidx; i++)
+			{
+				Control c = this.Controls[i];
+				if (c.Width > max_width)
+					max_width = c.Width;
+			}
+			for (int i = 0; i < cidx; i++)
+				this.Controls[i].Width = max_width;
+
+
+			this.Controls.SetChildIndex(this.gbx_Tolarence, cidx++);
+			this.gbx_Tolarence.Dock = DockStyle.Top;
+
+			this.Controls.SetChildIndex(this.gbx_ClipExt, cidx++);
+			this.gbx_ClipExt.Dock = DockStyle.Top;
+
+			this.Controls.SetChildIndex(this.gbx_SpecialValue, cidx++);
+			this.gbx_SpecialValue.Dock = DockStyle.Top;
+
+			this.Controls.SetChildIndex(this.gbx_DataInfo, cidx++);
+			this.gbx_DataInfo.Dock = DockStyle.Top;
+
+			this.Controls.SetChildIndex(this.gbx_prj, cidx++);
+			this.gbx_prj.Dock = DockStyle.Top;
+
+			this.Controls.SetChildIndex(this.gbx_DataType, cidx++);
+			this.gbx_DataType.Dock = DockStyle.Top;
+
+			this.Controls.SetChildIndex(this.gbx_Templete, cidx++);
+			this.gbx_Templete.Dock = DockStyle.Top;
+
+			this.Height -= (this.Controls[cidx - 1].Bottom + this.Padding.Bottom);
 		}
 	}
 }

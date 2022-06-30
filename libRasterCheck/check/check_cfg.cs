@@ -29,6 +29,8 @@ namespace geodata
 		public string Citms_path { get; set; }
 		public string Tcfgs_path { get; set; }
 
+		public string DataFile_Ext { get; set; }
+
 		public ProgramCfg()
 		{
 			Last_Tcfg = "";
@@ -36,6 +38,8 @@ namespace geodata
 
 			Citms_path = "";
 			Tcfgs_path = "";
+
+			DataFile_Ext = "tif,tiff,img,image";
 		}
 	}
 
@@ -442,6 +446,10 @@ namespace geodata
 
 
 		// 程序配置参数相关
+		public string getDataFileExt()
+		{
+			return Pcfg.DataFile_Ext;
+		}
 		public string getLastTCname()
 		{
 			return Pcfg.Last_Tcfg;
@@ -449,6 +457,12 @@ namespace geodata
 		public string getAutoChkOPath()
 		{
 			return Pcfg.AutoChk_OPath;
+		}
+		public bool setDataFileExt(string ext)
+		{
+			Pcfg.DataFile_Ext = ext;
+
+			return true;
 		}
 		public bool setLastTCname(string ltc)
 		{
