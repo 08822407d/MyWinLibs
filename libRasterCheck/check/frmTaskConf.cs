@@ -196,6 +196,7 @@ namespace CheckerUI
 				this.Cfgs.addTC(name, tc);
 				this.Cfgs.setLastTCname(name);
 
+				loadTcfgs2cmbbx();
 				return;
 			}
 			else
@@ -354,6 +355,11 @@ namespace CheckerUI
 			tbx_Resolution.Text = cfg.Resolution.ToString();
 			// 块尺寸
 			tbx_BlkSize.Text = cfg.BlkSize.ToString();
+
+			// NoData值
+			tbx_NoDataVal.Text = string.Join("," , cfg.NoData);
+			// 噪音值
+			tbx_NoiseVal.Text = string.Join("," , cfg.Noise);
 
 			// 外扩范围
 			rdbtn_ByPixel.Checked = true;
@@ -533,7 +539,7 @@ namespace CheckerUI
 			this.Controls.SetChildIndex(this.gbx_Templete, cidx++);
 			this.gbx_Templete.Dock = DockStyle.Top;
 
-			this.Height -= (this.Controls[cidx - 1].Bottom + this.Padding.Bottom);
+			//this.Height -= this.Controls[cidx - 1].Bottom;
 		}
 	}
 }

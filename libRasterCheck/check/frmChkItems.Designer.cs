@@ -247,10 +247,13 @@
 			// 
 			// tbx_resultPath
 			// 
+			this.tbx_resultPath.AllowDrop = true;
 			this.tbx_resultPath.Location = new System.Drawing.Point(161, 35);
 			this.tbx_resultPath.Name = "tbx_resultPath";
 			this.tbx_resultPath.Size = new System.Drawing.Size(446, 25);
 			this.tbx_resultPath.TabIndex = 1;
+			this.tbx_resultPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.tbx_resultPath_DragDrop);
+			this.tbx_resultPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.tbx_resultPath_DragEnter);
 			// 
 			// btn_resultPath
 			// 

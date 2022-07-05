@@ -79,6 +79,10 @@ namespace geodata
 		/// </summary>
 		public Extent2d	Extent_BL { get; set; }
 		public Corners	Corners_XY { get; set; }
+		/// <summary>
+		/// 最小外接矩形
+		/// </summary>
+		public Extent2d	MER { get; set; }
 
 		/// <summary>
 		/// 纬度地区（低纬，高纬，极圈）

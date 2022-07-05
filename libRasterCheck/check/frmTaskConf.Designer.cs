@@ -104,10 +104,10 @@
 			// btn_NewCfg
 			// 
 			this.btn_NewCfg.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_NewCfg.Location = new System.Drawing.Point(371, 23);
-			this.btn_NewCfg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.btn_NewCfg.Location = new System.Drawing.Point(411, 24);
+			this.btn_NewCfg.Margin = new System.Windows.Forms.Padding(4);
 			this.btn_NewCfg.Name = "btn_NewCfg";
-			this.btn_NewCfg.Size = new System.Drawing.Size(154, 24);
+			this.btn_NewCfg.Size = new System.Drawing.Size(146, 26);
 			this.btn_NewCfg.TabIndex = 5;
 			this.btn_NewCfg.Text = "新建配置";
 			this.btn_NewCfg.UseVisualStyleBackColor = true;
@@ -117,8 +117,8 @@
 			// 
 			this.label15.AutoSize = true;
 			this.label15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.label15.Location = new System.Drawing.Point(18, 32);
-			this.label15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.label15.Location = new System.Drawing.Point(44, 32);
+			this.label15.Margin = new System.Windows.Forms.Padding(4);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(120, 15);
 			this.label15.TabIndex = 15;
@@ -131,10 +131,10 @@
 			this.cmbbx_tskcfgs.FormattingEnabled = true;
 			this.cmbbx_tskcfgs.ImeMode = System.Windows.Forms.ImeMode.Off;
 			this.cmbbx_tskcfgs.ItemHeight = 18;
-			this.cmbbx_tskcfgs.Location = new System.Drawing.Point(158, 24);
-			this.cmbbx_tskcfgs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmbbx_tskcfgs.Location = new System.Drawing.Point(200, 24);
+			this.cmbbx_tskcfgs.Margin = new System.Windows.Forms.Padding(4);
 			this.cmbbx_tskcfgs.Name = "cmbbx_tskcfgs";
-			this.cmbbx_tskcfgs.Size = new System.Drawing.Size(183, 26);
+			this.cmbbx_tskcfgs.Size = new System.Drawing.Size(153, 26);
 			this.cmbbx_tskcfgs.Sorted = true;
 			this.cmbbx_tskcfgs.TabIndex = 1;
 			this.cmbbx_tskcfgs.SelectedIndexChanged += new System.EventHandler(this.cmbbx_tskcfgs_SelectedIndexChanged);
@@ -142,10 +142,10 @@
 			// btn_deleteCurr
 			// 
 			this.btn_deleteCurr.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_deleteCurr.Location = new System.Drawing.Point(370, 56);
-			this.btn_deleteCurr.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.btn_deleteCurr.Location = new System.Drawing.Point(411, 63);
+			this.btn_deleteCurr.Margin = new System.Windows.Forms.Padding(4);
 			this.btn_deleteCurr.Name = "btn_deleteCurr";
-			this.btn_deleteCurr.Size = new System.Drawing.Size(155, 24);
+			this.btn_deleteCurr.Size = new System.Drawing.Size(147, 26);
 			this.btn_deleteCurr.TabIndex = 18;
 			this.btn_deleteCurr.Text = "删除当前配置";
 			this.btn_deleteCurr.UseVisualStyleBackColor = true;
@@ -161,21 +161,21 @@
 			this.gbx_ClipExt.Controls.Add(this.label17);
 			this.gbx_ClipExt.Controls.Add(this.rdbtn_ByMeter);
 			this.gbx_ClipExt.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_ClipExt.Location = new System.Drawing.Point(14, 518);
-			this.gbx_ClipExt.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbx_ClipExt.Location = new System.Drawing.Point(14, 502);
+			this.gbx_ClipExt.Margin = new System.Windows.Forms.Padding(4);
 			this.gbx_ClipExt.Name = "gbx_ClipExt";
-			this.gbx_ClipExt.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.gbx_ClipExt.Size = new System.Drawing.Size(546, 174);
+			this.gbx_ClipExt.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+			this.gbx_ClipExt.Size = new System.Drawing.Size(591, 192);
 			this.gbx_ClipExt.TabIndex = 38;
 			this.gbx_ClipExt.TabStop = false;
 			this.gbx_ClipExt.Text = "裁切范围";
 			// 
 			// rtbx_ExtFormula
 			// 
-			this.rtbx_ExtFormula.Location = new System.Drawing.Point(19, 60);
+			this.rtbx_ExtFormula.Location = new System.Drawing.Point(23, 69);
 			this.rtbx_ExtFormula.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.rtbx_ExtFormula.Name = "rtbx_ExtFormula";
-			this.rtbx_ExtFormula.Size = new System.Drawing.Size(506, 107);
+			this.rtbx_ExtFormula.Size = new System.Drawing.Size(544, 117);
 			this.rtbx_ExtFormula.TabIndex = 26;
 			this.rtbx_ExtFormula.Text = "";
 			// 
@@ -186,10 +186,10 @@
 			this.cmbbx_ExtFormula.FormattingEnabled = true;
 			this.cmbbx_ExtFormula.ImeMode = System.Windows.Forms.ImeMode.Off;
 			this.cmbbx_ExtFormula.ItemHeight = 18;
-			this.cmbbx_ExtFormula.Location = new System.Drawing.Point(100, 23);
-			this.cmbbx_ExtFormula.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.cmbbx_ExtFormula.Location = new System.Drawing.Point(116, 26);
+			this.cmbbx_ExtFormula.Margin = new System.Windows.Forms.Padding(4);
 			this.cmbbx_ExtFormula.Name = "cmbbx_ExtFormula";
-			this.cmbbx_ExtFormula.Size = new System.Drawing.Size(114, 26);
+			this.cmbbx_ExtFormula.Size = new System.Drawing.Size(127, 26);
 			this.cmbbx_ExtFormula.Sorted = true;
 			this.cmbbx_ExtFormula.TabIndex = 25;
 			this.cmbbx_ExtFormula.SelectedIndexChanged += new System.EventHandler(this.cmbbx_ExtFormula_SelectedIndexChanged);
@@ -197,7 +197,7 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(18, 30);
+			this.label8.Location = new System.Drawing.Point(34, 31);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(75, 15);
 			this.label8.TabIndex = 17;
@@ -206,8 +206,7 @@
 			// rdbtn_ByPixel
 			// 
 			this.rdbtn_ByPixel.AutoSize = true;
-			this.rdbtn_ByPixel.Location = new System.Drawing.Point(467, 24);
-			this.rdbtn_ByPixel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_ByPixel.Location = new System.Drawing.Point(509, 29);
 			this.rdbtn_ByPixel.Name = "rdbtn_ByPixel";
 			this.rdbtn_ByPixel.Size = new System.Drawing.Size(58, 19);
 			this.rdbtn_ByPixel.TabIndex = 15;
@@ -217,16 +216,15 @@
 			// 
 			// tbx_ClipExt
 			// 
-			this.tbx_ClipExt.Location = new System.Drawing.Point(322, 23);
-			this.tbx_ClipExt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_ClipExt.Location = new System.Drawing.Point(367, 26);
 			this.tbx_ClipExt.Name = "tbx_ClipExt";
-			this.tbx_ClipExt.Size = new System.Drawing.Size(87, 25);
+			this.tbx_ClipExt.Size = new System.Drawing.Size(78, 25);
 			this.tbx_ClipExt.TabIndex = 12;
 			// 
 			// label17
 			// 
 			this.label17.AutoSize = true;
-			this.label17.Location = new System.Drawing.Point(240, 29);
+			this.label17.Location = new System.Drawing.Point(286, 31);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(75, 15);
 			this.label17.TabIndex = 14;
@@ -235,8 +233,7 @@
 			// rdbtn_ByMeter
 			// 
 			this.rdbtn_ByMeter.AutoSize = true;
-			this.rdbtn_ByMeter.Location = new System.Drawing.Point(418, 24);
-			this.rdbtn_ByMeter.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_ByMeter.Location = new System.Drawing.Point(461, 29);
 			this.rdbtn_ByMeter.Name = "rdbtn_ByMeter";
 			this.rdbtn_ByMeter.Size = new System.Drawing.Size(43, 19);
 			this.rdbtn_ByMeter.TabIndex = 16;
@@ -250,11 +247,11 @@
 			this.gbx_DataType.Controls.Add(this.rdbtn_DEM);
 			this.gbx_DataType.Controls.Add(this.rdbtn_CNSimg);
 			this.gbx_DataType.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_DataType.Location = new System.Drawing.Point(14, 116);
+			this.gbx_DataType.Location = new System.Drawing.Point(12, 119);
 			this.gbx_DataType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.gbx_DataType.Name = "gbx_DataType";
-			this.gbx_DataType.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.gbx_DataType.Size = new System.Drawing.Size(546, 62);
+			this.gbx_DataType.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+			this.gbx_DataType.Size = new System.Drawing.Size(592, 63);
 			this.gbx_DataType.TabIndex = 37;
 			this.gbx_DataType.TabStop = false;
 			this.gbx_DataType.Text = "项目类型";
@@ -263,8 +260,7 @@
 			// 
 			this.rdbtn_ImgSrc.AutoSize = true;
 			this.rdbtn_ImgSrc.Enabled = false;
-			this.rdbtn_ImgSrc.Location = new System.Drawing.Point(395, 26);
-			this.rdbtn_ImgSrc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_ImgSrc.Location = new System.Drawing.Point(364, 27);
 			this.rdbtn_ImgSrc.Name = "rdbtn_ImgSrc";
 			this.rdbtn_ImgSrc.Size = new System.Drawing.Size(88, 19);
 			this.rdbtn_ImgSrc.TabIndex = 19;
@@ -276,8 +272,7 @@
 			// rdbtn_DEM
 			// 
 			this.rdbtn_DEM.AutoSize = true;
-			this.rdbtn_DEM.Location = new System.Drawing.Point(232, 26);
-			this.rdbtn_DEM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_DEM.Location = new System.Drawing.Point(219, 27);
 			this.rdbtn_DEM.Name = "rdbtn_DEM";
 			this.rdbtn_DEM.Size = new System.Drawing.Size(84, 19);
 			this.rdbtn_DEM.TabIndex = 17;
@@ -289,8 +284,7 @@
 			// rdbtn_CNSimg
 			// 
 			this.rdbtn_CNSimg.AutoSize = true;
-			this.rdbtn_CNSimg.Location = new System.Drawing.Point(46, 26);
-			this.rdbtn_CNSimg.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_CNSimg.Location = new System.Drawing.Point(54, 27);
 			this.rdbtn_CNSimg.Name = "rdbtn_CNSimg";
 			this.rdbtn_CNSimg.Size = new System.Drawing.Size(88, 19);
 			this.rdbtn_CNSimg.TabIndex = 18;
@@ -319,11 +313,11 @@
 			this.gbx_prj.Controls.Add(this.rdbtn_PrjSys_bj54);
 			this.gbx_prj.Controls.Add(this.rdbtn_PrjSys_2000);
 			this.gbx_prj.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_prj.Location = new System.Drawing.Point(14, 187);
-			this.gbx_prj.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbx_prj.Location = new System.Drawing.Point(12, 188);
+			this.gbx_prj.Margin = new System.Windows.Forms.Padding(4);
 			this.gbx_prj.Name = "gbx_prj";
-			this.gbx_prj.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.gbx_prj.Size = new System.Drawing.Size(546, 133);
+			this.gbx_prj.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+			this.gbx_prj.Size = new System.Drawing.Size(592, 121);
 			this.gbx_prj.TabIndex = 34;
 			this.gbx_prj.TabStop = false;
 			this.gbx_prj.Text = "投影信息";
@@ -331,7 +325,7 @@
 			// label12
 			// 
 			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(26, 26);
+			this.label12.Location = new System.Drawing.Point(38, 30);
 			this.label12.Name = "label12";
 			this.label12.Size = new System.Drawing.Size(60, 15);
 			this.label12.TabIndex = 16;
@@ -340,7 +334,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(381, 91);
+			this.label5.Location = new System.Drawing.Point(391, 84);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(45, 15);
 			this.label5.TabIndex = 15;
@@ -350,7 +344,7 @@
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(206, 96);
+			this.label6.Location = new System.Drawing.Point(216, 87);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(45, 15);
 			this.label6.TabIndex = 14;
@@ -359,17 +353,16 @@
 			// 
 			// tbx_False_N
 			// 
-			this.tbx_False_N.Location = new System.Drawing.Point(435, 90);
-			this.tbx_False_N.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_False_N.Location = new System.Drawing.Point(444, 80);
 			this.tbx_False_N.Name = "tbx_False_N";
-			this.tbx_False_N.Size = new System.Drawing.Size(100, 25);
+			this.tbx_False_N.Size = new System.Drawing.Size(89, 25);
 			this.tbx_False_N.TabIndex = 13;
 			this.tbx_False_N.Visible = false;
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(11, 96);
+			this.label4.Location = new System.Drawing.Point(27, 87);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(75, 15);
 			this.label4.TabIndex = 11;
@@ -379,7 +372,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(367, 61);
+			this.label3.Location = new System.Drawing.Point(378, 59);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(60, 15);
 			this.label3.TabIndex = 10;
@@ -388,35 +381,32 @@
 			// 
 			// tbx_False_E
 			// 
-			this.tbx_False_E.Location = new System.Drawing.Point(260, 91);
-			this.tbx_False_E.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_False_E.Location = new System.Drawing.Point(264, 80);
 			this.tbx_False_E.Name = "tbx_False_E";
-			this.tbx_False_E.Size = new System.Drawing.Size(100, 25);
+			this.tbx_False_E.Size = new System.Drawing.Size(89, 25);
 			this.tbx_False_E.TabIndex = 12;
 			this.tbx_False_E.Visible = false;
 			// 
 			// tbx_CM
 			// 
-			this.tbx_CM.Location = new System.Drawing.Point(93, 91);
-			this.tbx_CM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_CM.Location = new System.Drawing.Point(103, 80);
 			this.tbx_CM.Name = "tbx_CM";
-			this.tbx_CM.Size = new System.Drawing.Size(100, 25);
+			this.tbx_CM.Size = new System.Drawing.Size(89, 25);
 			this.tbx_CM.TabIndex = 9;
 			this.tbx_CM.Visible = false;
 			// 
 			// tbx_ScaleFact
 			// 
-			this.tbx_ScaleFact.Location = new System.Drawing.Point(435, 58);
-			this.tbx_ScaleFact.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_ScaleFact.Location = new System.Drawing.Point(444, 53);
 			this.tbx_ScaleFact.Name = "tbx_ScaleFact";
-			this.tbx_ScaleFact.Size = new System.Drawing.Size(100, 25);
+			this.tbx_ScaleFact.Size = new System.Drawing.Size(89, 25);
 			this.tbx_ScaleFact.TabIndex = 8;
 			this.tbx_ScaleFact.Visible = false;
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(206, 62);
+			this.label2.Location = new System.Drawing.Point(216, 59);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(45, 15);
 			this.label2.TabIndex = 7;
@@ -426,7 +416,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(26, 58);
+			this.label1.Location = new System.Drawing.Point(40, 55);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(60, 15);
 			this.label1.TabIndex = 6;
@@ -435,27 +425,24 @@
 			// 
 			// tbx_InvFlatt
 			// 
-			this.tbx_InvFlatt.Location = new System.Drawing.Point(260, 59);
-			this.tbx_InvFlatt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_InvFlatt.Location = new System.Drawing.Point(264, 53);
 			this.tbx_InvFlatt.Name = "tbx_InvFlatt";
-			this.tbx_InvFlatt.Size = new System.Drawing.Size(100, 25);
+			this.tbx_InvFlatt.Size = new System.Drawing.Size(89, 25);
 			this.tbx_InvFlatt.TabIndex = 5;
 			this.tbx_InvFlatt.Visible = false;
 			// 
 			// tbx_SemiMajor
 			// 
-			this.tbx_SemiMajor.Location = new System.Drawing.Point(93, 59);
-			this.tbx_SemiMajor.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_SemiMajor.Location = new System.Drawing.Point(103, 53);
 			this.tbx_SemiMajor.Name = "tbx_SemiMajor";
-			this.tbx_SemiMajor.Size = new System.Drawing.Size(100, 25);
+			this.tbx_SemiMajor.Size = new System.Drawing.Size(89, 25);
 			this.tbx_SemiMajor.TabIndex = 4;
 			this.tbx_SemiMajor.Visible = false;
 			// 
 			// rdbtn_PrjSys_wgs84
 			// 
 			this.rdbtn_PrjSys_wgs84.AutoSize = true;
-			this.rdbtn_PrjSys_wgs84.Location = new System.Drawing.Point(107, 23);
-			this.rdbtn_PrjSys_wgs84.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_PrjSys_wgs84.Location = new System.Drawing.Point(133, 28);
 			this.rdbtn_PrjSys_wgs84.Name = "rdbtn_PrjSys_wgs84";
 			this.rdbtn_PrjSys_wgs84.Size = new System.Drawing.Size(68, 19);
 			this.rdbtn_PrjSys_wgs84.TabIndex = 3;
@@ -466,8 +453,7 @@
 			// rdbtn_PrjSys_xian80
 			// 
 			this.rdbtn_PrjSys_xian80.AutoSize = true;
-			this.rdbtn_PrjSys_xian80.Location = new System.Drawing.Point(331, 23);
-			this.rdbtn_PrjSys_xian80.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_PrjSys_xian80.Location = new System.Drawing.Point(364, 28);
 			this.rdbtn_PrjSys_xian80.Name = "rdbtn_PrjSys_xian80";
 			this.rdbtn_PrjSys_xian80.Size = new System.Drawing.Size(76, 19);
 			this.rdbtn_PrjSys_xian80.TabIndex = 2;
@@ -478,8 +464,7 @@
 			// rdbtn_PrjSys_bj54
 			// 
 			this.rdbtn_PrjSys_bj54.AutoSize = true;
-			this.rdbtn_PrjSys_bj54.Location = new System.Drawing.Point(209, 23);
-			this.rdbtn_PrjSys_bj54.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_PrjSys_bj54.Location = new System.Drawing.Point(246, 27);
 			this.rdbtn_PrjSys_bj54.Name = "rdbtn_PrjSys_bj54";
 			this.rdbtn_PrjSys_bj54.Size = new System.Drawing.Size(100, 19);
 			this.rdbtn_PrjSys_bj54.TabIndex = 1;
@@ -490,8 +475,7 @@
 			// rdbtn_PrjSys_2000
 			// 
 			this.rdbtn_PrjSys_2000.AutoSize = true;
-			this.rdbtn_PrjSys_2000.Location = new System.Drawing.Point(433, 23);
-			this.rdbtn_PrjSys_2000.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_PrjSys_2000.Location = new System.Drawing.Point(465, 28);
 			this.rdbtn_PrjSys_2000.Name = "rdbtn_PrjSys_2000";
 			this.rdbtn_PrjSys_2000.Size = new System.Drawing.Size(92, 19);
 			this.rdbtn_PrjSys_2000.TabIndex = 0;
@@ -512,11 +496,11 @@
 			this.gbx_DataInfo.Controls.Add(this.rdbtn_Depth_32);
 			this.gbx_DataInfo.Controls.Add(this.rdbtn_Depth_16);
 			this.gbx_DataInfo.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_DataInfo.Location = new System.Drawing.Point(14, 330);
-			this.gbx_DataInfo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbx_DataInfo.Location = new System.Drawing.Point(14, 317);
+			this.gbx_DataInfo.Margin = new System.Windows.Forms.Padding(4);
 			this.gbx_DataInfo.Name = "gbx_DataInfo";
-			this.gbx_DataInfo.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.gbx_DataInfo.Size = new System.Drawing.Size(546, 104);
+			this.gbx_DataInfo.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+			this.gbx_DataInfo.Size = new System.Drawing.Size(592, 100);
 			this.gbx_DataInfo.TabIndex = 35;
 			this.gbx_DataInfo.TabStop = false;
 			this.gbx_DataInfo.Text = "数据信息";
@@ -524,7 +508,7 @@
 			// label11
 			// 
 			this.label11.AutoSize = true;
-			this.label11.Location = new System.Drawing.Point(385, 66);
+			this.label11.Location = new System.Drawing.Point(406, 62);
 			this.label11.Name = "label11";
 			this.label11.Size = new System.Drawing.Size(60, 15);
 			this.label11.TabIndex = 21;
@@ -532,16 +516,15 @@
 			// 
 			// tbx_BlkSize
 			// 
-			this.tbx_BlkSize.Location = new System.Drawing.Point(450, 62);
-			this.tbx_BlkSize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_BlkSize.Location = new System.Drawing.Point(472, 59);
 			this.tbx_BlkSize.Name = "tbx_BlkSize";
-			this.tbx_BlkSize.Size = new System.Drawing.Size(75, 25);
+			this.tbx_BlkSize.Size = new System.Drawing.Size(84, 25);
 			this.tbx_BlkSize.TabIndex = 20;
 			// 
 			// label10
 			// 
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(207, 66);
+			this.label10.Location = new System.Drawing.Point(225, 62);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(60, 15);
 			this.label10.TabIndex = 19;
@@ -549,16 +532,15 @@
 			// 
 			// tbx_Resolution
 			// 
-			this.tbx_Resolution.Location = new System.Drawing.Point(272, 62);
-			this.tbx_Resolution.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_Resolution.Location = new System.Drawing.Point(291, 59);
 			this.tbx_Resolution.Name = "tbx_Resolution";
-			this.tbx_Resolution.Size = new System.Drawing.Size(75, 25);
+			this.tbx_Resolution.Size = new System.Drawing.Size(84, 25);
 			this.tbx_Resolution.TabIndex = 18;
 			// 
 			// label7
 			// 
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(30, 26);
+			this.label7.Location = new System.Drawing.Point(35, 27);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(60, 15);
 			this.label7.TabIndex = 17;
@@ -567,7 +549,7 @@
 			// label9
 			// 
 			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(29, 66);
+			this.label9.Location = new System.Drawing.Point(34, 62);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(60, 15);
 			this.label9.TabIndex = 11;
@@ -575,17 +557,15 @@
 			// 
 			// tbx_BandCount
 			// 
-			this.tbx_BandCount.Location = new System.Drawing.Point(100, 62);
-			this.tbx_BandCount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_BandCount.Location = new System.Drawing.Point(103, 59);
 			this.tbx_BandCount.Name = "tbx_BandCount";
-			this.tbx_BandCount.Size = new System.Drawing.Size(75, 25);
+			this.tbx_BandCount.Size = new System.Drawing.Size(82, 25);
 			this.tbx_BandCount.TabIndex = 9;
 			// 
 			// rdbtn_Depth_8
 			// 
 			this.rdbtn_Depth_8.AutoSize = true;
-			this.rdbtn_Depth_8.Location = new System.Drawing.Point(110, 23);
-			this.rdbtn_Depth_8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_Depth_8.Location = new System.Drawing.Point(131, 26);
 			this.rdbtn_Depth_8.Name = "rdbtn_Depth_8";
 			this.rdbtn_Depth_8.Size = new System.Drawing.Size(51, 19);
 			this.rdbtn_Depth_8.TabIndex = 3;
@@ -596,8 +576,7 @@
 			// rdbtn_Depth_32
 			// 
 			this.rdbtn_Depth_32.AutoSize = true;
-			this.rdbtn_Depth_32.Location = new System.Drawing.Point(351, 23);
-			this.rdbtn_Depth_32.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_Depth_32.Location = new System.Drawing.Point(364, 25);
 			this.rdbtn_Depth_32.Name = "rdbtn_Depth_32";
 			this.rdbtn_Depth_32.Size = new System.Drawing.Size(59, 19);
 			this.rdbtn_Depth_32.TabIndex = 2;
@@ -608,8 +587,7 @@
 			// rdbtn_Depth_16
 			// 
 			this.rdbtn_Depth_16.AutoSize = true;
-			this.rdbtn_Depth_16.Location = new System.Drawing.Point(230, 23);
-			this.rdbtn_Depth_16.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.rdbtn_Depth_16.Location = new System.Drawing.Point(249, 25);
 			this.rdbtn_Depth_16.Name = "rdbtn_Depth_16";
 			this.rdbtn_Depth_16.Size = new System.Drawing.Size(59, 19);
 			this.rdbtn_Depth_16.TabIndex = 1;
@@ -620,7 +598,7 @@
 			// lbl_NoiseVal
 			// 
 			this.lbl_NoiseVal.AutoSize = true;
-			this.lbl_NoiseVal.Location = new System.Drawing.Point(271, 30);
+			this.lbl_NoiseVal.Location = new System.Drawing.Point(306, 30);
 			this.lbl_NoiseVal.Name = "lbl_NoiseVal";
 			this.lbl_NoiseVal.Size = new System.Drawing.Size(106, 15);
 			this.lbl_NoiseVal.TabIndex = 25;
@@ -628,16 +606,15 @@
 			// 
 			// tbx_NoiseVal
 			// 
-			this.tbx_NoiseVal.Location = new System.Drawing.Point(382, 25);
-			this.tbx_NoiseVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_NoiseVal.Location = new System.Drawing.Point(428, 25);
 			this.tbx_NoiseVal.Name = "tbx_NoiseVal";
-			this.tbx_NoiseVal.Size = new System.Drawing.Size(142, 25);
+			this.tbx_NoiseVal.Size = new System.Drawing.Size(127, 25);
 			this.tbx_NoiseVal.TabIndex = 24;
 			// 
 			// label16
 			// 
 			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(21, 30);
+			this.label16.Location = new System.Drawing.Point(38, 30);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(78, 15);
 			this.label16.TabIndex = 23;
@@ -645,10 +622,9 @@
 			// 
 			// tbx_NoDataVal
 			// 
-			this.tbx_NoDataVal.Location = new System.Drawing.Point(99, 25);
-			this.tbx_NoDataVal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_NoDataVal.Location = new System.Drawing.Point(131, 25);
 			this.tbx_NoDataVal.Name = "tbx_NoDataVal";
-			this.tbx_NoDataVal.Size = new System.Drawing.Size(142, 25);
+			this.tbx_NoDataVal.Size = new System.Drawing.Size(127, 25);
 			this.tbx_NoDataVal.TabIndex = 22;
 			// 
 			// gbx_Tolarence
@@ -660,27 +636,27 @@
 			this.gbx_Tolarence.Controls.Add(this.lbl_PosTolar);
 			this.gbx_Tolarence.Controls.Add(this.tbx_PosTolar);
 			this.gbx_Tolarence.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_Tolarence.Location = new System.Drawing.Point(14, 702);
-			this.gbx_Tolarence.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.gbx_Tolarence.Location = new System.Drawing.Point(12, 702);
+			this.gbx_Tolarence.Margin = new System.Windows.Forms.Padding(4);
 			this.gbx_Tolarence.Name = "gbx_Tolarence";
-			this.gbx_Tolarence.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.gbx_Tolarence.Size = new System.Drawing.Size(546, 70);
+			this.gbx_Tolarence.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+			this.gbx_Tolarence.Size = new System.Drawing.Size(592, 76);
 			this.gbx_Tolarence.TabIndex = 36;
 			this.gbx_Tolarence.TabStop = false;
 			this.gbx_Tolarence.Text = "精度";
 			// 
 			// nud_tfwPrec
 			// 
-			this.nud_tfwPrec.Location = new System.Drawing.Point(438, 24);
+			this.nud_tfwPrec.Location = new System.Drawing.Point(492, 24);
 			this.nud_tfwPrec.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.nud_tfwPrec.Name = "nud_tfwPrec";
-			this.nud_tfwPrec.Size = new System.Drawing.Size(87, 25);
+			this.nud_tfwPrec.Size = new System.Drawing.Size(77, 25);
 			this.nud_tfwPrec.TabIndex = 24;
 			// 
 			// lbl_HeighTolar
 			// 
 			this.lbl_HeighTolar.AutoSize = true;
-			this.lbl_HeighTolar.Location = new System.Drawing.Point(174, 29);
+			this.lbl_HeighTolar.Location = new System.Drawing.Point(216, 30);
 			this.lbl_HeighTolar.Name = "lbl_HeighTolar";
 			this.lbl_HeighTolar.Size = new System.Drawing.Size(75, 15);
 			this.lbl_HeighTolar.TabIndex = 23;
@@ -689,7 +665,7 @@
 			// label13
 			// 
 			this.label13.AutoSize = true;
-			this.label13.Location = new System.Drawing.Point(345, 28);
+			this.label13.Location = new System.Drawing.Point(399, 28);
 			this.label13.Name = "label13";
 			this.label13.Size = new System.Drawing.Size(84, 15);
 			this.label13.TabIndex = 22;
@@ -697,16 +673,15 @@
 			// 
 			// tbx_HeightTolar
 			// 
-			this.tbx_HeightTolar.Location = new System.Drawing.Point(255, 25);
-			this.tbx_HeightTolar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_HeightTolar.Location = new System.Drawing.Point(297, 23);
 			this.tbx_HeightTolar.Name = "tbx_HeightTolar";
-			this.tbx_HeightTolar.Size = new System.Drawing.Size(61, 25);
+			this.tbx_HeightTolar.Size = new System.Drawing.Size(77, 25);
 			this.tbx_HeightTolar.TabIndex = 22;
 			// 
 			// lbl_PosTolar
 			// 
 			this.lbl_PosTolar.AutoSize = true;
-			this.lbl_PosTolar.Location = new System.Drawing.Point(17, 30);
+			this.lbl_PosTolar.Location = new System.Drawing.Point(25, 30);
 			this.lbl_PosTolar.Name = "lbl_PosTolar";
 			this.lbl_PosTolar.Size = new System.Drawing.Size(75, 15);
 			this.lbl_PosTolar.TabIndex = 21;
@@ -714,10 +689,9 @@
 			// 
 			// tbx_PosTolar
 			// 
-			this.tbx_PosTolar.Location = new System.Drawing.Point(98, 25);
-			this.tbx_PosTolar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.tbx_PosTolar.Location = new System.Drawing.Point(106, 25);
 			this.tbx_PosTolar.Name = "tbx_PosTolar";
-			this.tbx_PosTolar.Size = new System.Drawing.Size(62, 25);
+			this.tbx_PosTolar.Size = new System.Drawing.Size(78, 25);
 			this.tbx_PosTolar.TabIndex = 20;
 			// 
 			// gbx_Templete
@@ -729,11 +703,11 @@
 			this.gbx_Templete.Controls.Add(this.label15);
 			this.gbx_Templete.Controls.Add(this.btn_deleteCurr);
 			this.gbx_Templete.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_Templete.Location = new System.Drawing.Point(14, 13);
+			this.gbx_Templete.Location = new System.Drawing.Point(12, 11);
 			this.gbx_Templete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.gbx_Templete.Name = "gbx_Templete";
-			this.gbx_Templete.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.gbx_Templete.Size = new System.Drawing.Size(546, 98);
+			this.gbx_Templete.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+			this.gbx_Templete.Size = new System.Drawing.Size(592, 104);
 			this.gbx_Templete.TabIndex = 39;
 			this.gbx_Templete.TabStop = false;
 			this.gbx_Templete.Text = "配置模板";
@@ -741,10 +715,10 @@
 			// btn_CopyCreate
 			// 
 			this.btn_CopyCreate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_CopyCreate.Location = new System.Drawing.Point(21, 56);
-			this.btn_CopyCreate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.btn_CopyCreate.Location = new System.Drawing.Point(200, 63);
+			this.btn_CopyCreate.Margin = new System.Windows.Forms.Padding(4);
 			this.btn_CopyCreate.Name = "btn_CopyCreate";
-			this.btn_CopyCreate.Size = new System.Drawing.Size(155, 24);
+			this.btn_CopyCreate.Size = new System.Drawing.Size(153, 26);
 			this.btn_CopyCreate.TabIndex = 21;
 			this.btn_CopyCreate.Text = "复制当前配置新建";
 			this.btn_CopyCreate.UseVisualStyleBackColor = true;
@@ -753,10 +727,10 @@
 			// btn_Rename
 			// 
 			this.btn_Rename.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.btn_Rename.Location = new System.Drawing.Point(186, 56);
-			this.btn_Rename.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.btn_Rename.Location = new System.Drawing.Point(37, 63);
+			this.btn_Rename.Margin = new System.Windows.Forms.Padding(4);
 			this.btn_Rename.Name = "btn_Rename";
-			this.btn_Rename.Size = new System.Drawing.Size(154, 24);
+			this.btn_Rename.Size = new System.Drawing.Size(139, 26);
 			this.btn_Rename.TabIndex = 20;
 			this.btn_Rename.Text = "重命名当前配置";
 			this.btn_Rename.UseVisualStyleBackColor = true;
@@ -769,11 +743,11 @@
 			this.gbx_SpecialValue.Controls.Add(this.tbx_NoDataVal);
 			this.gbx_SpecialValue.Controls.Add(this.label16);
 			this.gbx_SpecialValue.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-			this.gbx_SpecialValue.Location = new System.Drawing.Point(14, 442);
+			this.gbx_SpecialValue.Location = new System.Drawing.Point(14, 423);
 			this.gbx_SpecialValue.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.gbx_SpecialValue.Name = "gbx_SpecialValue";
-			this.gbx_SpecialValue.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.gbx_SpecialValue.Size = new System.Drawing.Size(546, 68);
+			this.gbx_SpecialValue.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
+			this.gbx_SpecialValue.Size = new System.Drawing.Size(592, 73);
 			this.gbx_SpecialValue.TabIndex = 40;
 			this.gbx_SpecialValue.TabStop = false;
 			this.gbx_SpecialValue.Text = "特殊值";
@@ -790,10 +764,11 @@
 			// 
 			// frmTaskConf
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoScroll = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(576, 790);
+			this.ClientSize = new System.Drawing.Size(617, 790);
 			this.Controls.Add(this.gbx_SpecialValue);
 			this.Controls.Add(this.gbx_Templete);
 			this.Controls.Add(this.gbx_ClipExt);
@@ -801,13 +776,12 @@
 			this.Controls.Add(this.gbx_prj);
 			this.Controls.Add(this.gbx_DataInfo);
 			this.Controls.Add(this.gbx_Tolarence);
-			this.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "frmTaskConf";
-			this.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+			this.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.Text = "配置项目参数";

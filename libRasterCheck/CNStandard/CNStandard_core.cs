@@ -145,6 +145,124 @@ namespace geodata
 			return this.MapNo.ToString();
 		}
 
+		// CalMapXYBL
+		/// <summary>
+		/// 计算四角坐标 经纬度
+		/// </summary>
+		void calcExtentBL()
+		{
+			CNMapNo thisMN = this.MapNo;
+			// 图号提取算参数,计算百万图幅起点经纬度
+			double mil_B = 0, mil_L = 0,
+					milBI = 4, milLI = 0;
+			int milrow = thisMN.MilRowNo;
+			if (thisMN.hasHSflag && thisMN.HSflag == Hemisphere.S)
+			{
+				milrow = -milrow + 1;
+			}
+			mil_B = milrow * milBI;
+			// 低纬度
+			if (milrow <= 14)
+			{
+				this.LatDist = LatDist.Low;
+				mil_L = (thisMN.MilColNo - 30) * 6;
+			}
+			// 高纬度
+			else if (milrow > 14 && milrow <= 18)
+			{
+				this.LatDist = LatDist.High;
+				mil_L = (thisMN.MilColNo - 15) * 12;
+			}
+			// 极圈
+			else
+			{
+				this.LatDist = LatDist.CircumPolar;
+				mil_L = (thisMN.MilColNo - 7.5) * 24;
+			}
+			this.CP = new CalcConsts(thisMN.Scale, this.LatDist);
+
+			// 计算四角经纬度
+			// 左上角
+			Point2d UL_BL = new Point2d(mil_L + thisMN.ColNo * this.CP.LI,
+										mil_B - thisMN.RowNo * this.CP.BI);
+			// 右上角
+			Point2d UR_BL = new Point2d(UL_BL.X + this.CP.LI, UL_BL.Y);
+			// 右下角
+			Point2d LR_BL = new Point2d(UR_BL.X, UL_BL.Y - this.CP.BI);
+			// 左下角
+			Point2d LL_BL = new Point2d(UL_BL.X, LR_BL.Y);
+			this.Extent_BL = new Extent2d(UL_BL, LR_BL);
+
+			if (this.CP.PrjWidth == 3)
+			{
+				this.CentralMeridian = (int)(UL_BL.X / 3 + 0.5000001) * 3;
+				this.ZoneNo = this.CentralMeridian / 3;
+			}
+			else
+			{
+				this.CentralMeridian = (int)(UL_BL.X / 6 + 1) * 6 - 3;
+				this.ZoneNo = this.CentralMeridian / 6 + 1;
+			}
+
+			return;
+		}
+		/// <summary>
+		/// 计算四角坐标 大地坐标
+		/// </summary>
+		/// <param name="prjsys"></param>
+		public void calcCornersXY(ProjSystem prjsys)
+		{
+			// 如果坐标系统为WGS84，并且为UTM投影。
+			// UTM投影的起始经线为西经180度。
+			// 注：UTM墨卡托投影均为6度分带！！！！！
+			if (prjsys == ProjSystem.wgs84)
+				this.ZoneNo += 30;
+
+			// 左上角
+			Point2d UL_BL = this.Extent_BL.Start;
+			// 右下角
+			Point2d LR_BL = this.Extent_BL.End;
+			// 右上角
+			Point2d UR_BL = new Point2d(LR_BL.X, UL_BL.Y);
+			// 左下角
+			Point2d LL_BL = new Point2d(UL_BL.X, LR_BL.Y);
+			// 经纬度换算大地坐标
+			Point2d UL_XY = new Point2d();
+			Point2d UR_XY = new Point2d();
+			Point2d LR_XY = new Point2d();
+			Point2d LL_XY = new Point2d();
+			BL2XY(UL_BL, ref UL_XY, prjsys, this.CentralMeridian);
+			BL2XY(UR_BL, ref UR_XY, prjsys, this.CentralMeridian);
+			BL2XY(LL_BL, ref LL_XY, prjsys, this.CentralMeridian);
+			BL2XY(LR_BL, ref LR_XY, prjsys, this.CentralMeridian);
+			this.Corners_XY = new Corners(UL_XY, UR_XY, LR_XY, LL_XY);
+
+			this.calcMinExtRect();
+		}
+		private Extent2d calcMinExtRect()
+		{
+			double maxX = Const.minX;
+			double maxY = Const.minY;
+			double minX = Const.maxX;
+			double minY = Const.maxY;
+
+			Point2d[] corners = {this.Corners_XY.UpperLeft,
+								this.Corners_XY.UpperRight,
+								this.Corners_XY.LowerRight,
+								this.Corners_XY.LowerLeft};
+			for (int i = 0; i < 4; i++)
+			{
+				Point2d pt = corners[i];
+				if (pt.X > maxX) maxX = pt.X;
+				if (pt.X < minX) minX = pt.X;
+				if (pt.Y > maxY) maxY = pt.Y;
+				if (pt.Y < minY) minY = pt.Y;
+			}
+			MER = new Extent2d(new Point2d(minX, maxY),
+										new Point2d(maxX, minY));
+			return MER;
+		}
+
 		/// <summary>
 		/// 计算裁切范围
 		/// </summary>
@@ -262,96 +380,6 @@ namespace geodata
 					this.Neighbours[1] =
 					this.Neighbours[2] = null;
 			}
-		}
-
-		// CalMapXYBL
-		/// <summary>
-		/// 计算四角坐标	
-		/// </summary>
-		void calcExtentBL()
-		{
-			CNMapNo thisMN = this.MapNo;
-			// 图号提取算参数,计算百万图幅起点经纬度
-			double mil_B = 0, mil_L = 0,
-					milBI = 4, milLI = 0;
-			int milrow = thisMN.MilRowNo;
-			if (thisMN.hasHSflag && thisMN.HSflag == Hemisphere.S)
-			{
-				milrow = -milrow + 1;
-			}
-			mil_B = milrow * milBI;
-			// 低纬度
-			if (milrow <= 14)
-			{
-				this.LatDist = LatDist.Low;
-				mil_L = (thisMN.MilColNo - 30) * 6;
-			}
-			// 高纬度
-			else if (milrow > 14 && milrow <= 18)
-			{
-				this.LatDist = LatDist.High;
-				mil_L = (thisMN.MilColNo - 15) * 12;
-			}
-			// 极圈
-			else
-			{
-				this.LatDist = LatDist.CircumPolar;
-				mil_L = (thisMN.MilColNo - 7.5) * 24;
-			}
-			this.CP = new CalcConsts(thisMN.Scale, this.LatDist);
-
-			// 计算四角经纬度
-			// 左上角
-			Point2d UL_BL = new Point2d(mil_L + thisMN.ColNo * this.CP.LI,
-										mil_B - thisMN.RowNo * this.CP.BI);
-			// 右上角
-			Point2d UR_BL = new Point2d(UL_BL.X + this.CP.LI, UL_BL.Y);
-			// 右下角
-			Point2d LR_BL = new Point2d(UR_BL.X, UL_BL.Y - this.CP.BI);
-			// 左下角
-			Point2d LL_BL = new Point2d(UL_BL.X, LR_BL.Y);
-			this.Extent_BL = new Extent2d(UL_BL, LR_BL);
-
-			if (this.CP.PrjWidth == 3)
-			{
-				this.CentralMeridian = (int)(UL_BL.X / 3 + 0.5000001) * 3;
-				this.ZoneNo = this.CentralMeridian / 3;
-			}
-			else
-			{
-				this.CentralMeridian = (int)(UL_BL.X / 6 + 1) * 6 - 3;
-				this.ZoneNo = this.CentralMeridian / 6 + 1;
-			}
-
-			return;
-		}
-
-		public void calcCornersXY(ProjSystem prjsys)
-		{
-			// 如果坐标系统为WGS84，并且为UTM投影。
-			// UTM投影的起始经线为西经180度。
-			// 注：UTM墨卡托投影均为6度分带！！！！！
-			if (prjsys == ProjSystem.wgs84)
-				this.ZoneNo += 30;
-
-			// 左上角
-			Point2d UL_BL = this.Extent_BL.Start;
-			// 右下角
-			Point2d LR_BL = this.Extent_BL.End;
-			// 右上角
-			Point2d UR_BL = new Point2d(LR_BL.X, UL_BL.Y);
-			// 左下角
-			Point2d LL_BL = new Point2d(UL_BL.X, LR_BL.Y);
-			// 经纬度换算大地坐标
-			Point2d UL_XY = new Point2d();
-			Point2d UR_XY = new Point2d();
-			Point2d LR_XY = new Point2d();
-			Point2d LL_XY = new Point2d();
-			BL2XY(UL_BL, ref UL_XY, prjsys, this.CentralMeridian);
-			BL2XY(UR_BL, ref UR_XY, prjsys, this.CentralMeridian);
-			BL2XY(LL_BL, ref LL_XY, prjsys, this.CentralMeridian);
-			BL2XY(LR_BL, ref LR_XY, prjsys, this.CentralMeridian);
-			this.Corners_XY = new Corners(UL_XY, UR_XY, LR_XY, LL_XY);
 		}
 
 		// DEG

@@ -85,6 +85,7 @@ namespace geodata
 		/// GDAL data driver
 		/// </summary>
 		public Driver		Drv { get; }
+		public string		WKT { get; }
 
 
 		public Raster(String filename, TaskCfg TC)
@@ -100,6 +101,7 @@ namespace geodata
 					FileName	= filename;
 					Drv			= Ds.GetDriver();
 					// 影像信息
+					WKT			= Ds.GetProjection();
 					BandCount	= Ds.RasterCount;
 					Gt			= new double[6];
 					ImgSize		= new Point(Ds.RasterXSize, Ds.RasterYSize);
@@ -122,15 +124,24 @@ namespace geodata
 						CNS	= new CNStandard(mapname.Substring(0, 10));
 						if (!CNS.MapNo.IsValid)
 						{
-							CNS = new CNStandard(mapname.Substring(0, 11));
-							if (!CNS.MapNo.IsValid)
+							if (mapname.Length == 10)
 								CNS = null;
+							else
+							{
+								CNS = new CNStandard(mapname.Substring(0, 11));
+								if (!CNS.MapNo.IsValid)
+									CNS = null;
+							}
 						}
-						if (CNS.MapNo.IsValid)
+
+						if (CNS != null && CNS.MapNo.IsValid)
 						{
 							CNS.calcCornersXY(PrjSys);
-							CNS.getNeighbour();
 						}
+					}
+					else
+					{
+						CNS = null;
 					}
 				}
 			}
@@ -150,19 +161,21 @@ namespace geodata
 
 		void parseProjInfo()
 		{
-			string wkt = Ds.GetProjection();
-			SpatialReference sr = new SpatialReference(wkt);
+			SpatialReference sr = new SpatialReference(WKT);
 
 			string datum = sr.GetAttrValue("DATUM", 0);
-			datum = datum.ToUpper();
-			if (datum.Contains("WGS") && datum.Contains("84"))
-				this.PrjSys = ProjSystem.wgs84;
-			else if (datum.Contains("54"))
-				this.PrjSys = ProjSystem.beijing54;
-			else if (datum.Contains("80"))
-				this.PrjSys = ProjSystem.xian80;
-			else if (datum.Contains("CGCS") && datum.Contains("2000"))
-				this.PrjSys = ProjSystem.cgcs2000;
+			if (datum != null)
+			{
+				datum = datum.ToUpper();
+				if (datum.Contains("WGS") && datum.Contains("84"))
+					this.PrjSys = ProjSystem.wgs84;
+				else if (datum.Contains("54"))
+					this.PrjSys = ProjSystem.beijing54;
+				else if (datum.Contains("80"))
+					this.PrjSys = ProjSystem.xian80;
+				else if (datum.Contains("CGCS") && datum.Contains("2000"))
+					this.PrjSys = ProjSystem.cgcs2000;
+			}
 			this.SemiMajor = sr.GetSemiMajor();
 			this.InvFlatt = sr.GetInvFlattening();
 			this.ScaleFactor = sr.GetProjParm(Osr.SRS_PP_SCALE_FACTOR, 0.0);
@@ -206,7 +219,8 @@ namespace geodata
 						"ScaleFact : " + ScaleFactor.ToString() + "\n" +
 						"CM : " + CentralMeridian.ToString() + "\n" +
 						"False_E : " + FalseEast.ToString() + "\n" +
-						"False_N : " + FalseNorth.ToString() + "\n";
+						"False_N : " + FalseNorth.ToString() + "\n\n" +
+						"WKT : " + WKT + "\n";
 
 			return ret_val;
 		}

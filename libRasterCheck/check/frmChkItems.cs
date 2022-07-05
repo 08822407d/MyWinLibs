@@ -40,7 +40,11 @@ namespace CheckerUI
 			frm2ci(ref tmpci);
 
 			TaskCfg ctc = this.Cfgs.getTC(this.Cfgs.getLastTCname());
-			if (ctc.TskType == TaskType.CNSimg)
+			if (ctc == null)
+			{
+				return;
+			}
+			else if (ctc.TskType == TaskType.CNSimg)
 			{
 				gbx_CI_img.Enabled = true;
 				gbx_CI_dem.Enabled = false;
@@ -148,6 +152,20 @@ namespace CheckerUI
 			this.gbx_CI_common.Dock = DockStyle.Top;
 			this.gbx_CI_img.Dock = DockStyle.Top;
 			this.gbx_CI_dem.Dock = DockStyle.Top;
+		}
+
+		private void tbx_resultPath_DragDrop(object sender, DragEventArgs e)
+		{
+			string[] s = (string[]) e.Data.GetData(DataFormats.FileDrop, false);
+			tbx_resultPath.Text = s[0];
+		}
+
+		private void tbx_resultPath_DragEnter(object sender, DragEventArgs e)
+		{
+			if(e.Data.GetDataPresent(DataFormats.FileDrop))
+				e.Effect = DragDropEffects.All;
+			else
+				e.Effect = DragDropEffects.None;
 		}
 	}
 }

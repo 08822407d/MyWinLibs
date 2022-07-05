@@ -89,6 +89,8 @@ namespace geodata
 		public ClipExtFormula	ExtFormula { get; set; }
 		// 无数据区值
 		public double[]	NoData { get; set; }
+		// 噪音值
+		public int[]	Noise { get; set; }
 
 		/// <summary>
 		/// 限差
@@ -126,6 +128,7 @@ namespace geodata
 			ClipExtent = 0;
 			ExtFormula = ClipExtFormula.NewFormula;
 			NoData = new double[] { 0.0, 0.0, 0.0};
+			Noise = new int[] { 255, 255, 255};
 
 			PositionDiffTolarence = 0.0;
 			HeightDiffTolarence = 0.0;
@@ -166,7 +169,7 @@ namespace geodata
 		public TaskCfg(TaskType TskType, ProjSystem PrjSys, double SemiMajor, double InvFlatt,
 							double ScaleFactor, int CentMerid, double FalseEast, double FalseNorth,
 							DataType Depth, uint BandCount, double Resol, uint DPI, int BlkSize, uint ClipExt,
-							ClipExtFormula ExtFormu, double[] Nodata,
+							ClipExtFormula ExtFormu, double[] Nodata, int[] Noise,
 							double PosDiffTolarence, double HeighDiffTolarence,
 							int tfwPrec)
 		{
@@ -191,6 +194,7 @@ namespace geodata
 			this.BlkSize = BlkSize;
 			this.ExtFormula = ExtFormu;
 			this.NoData = NoData;
+			this.Noise = Noise;
 
 			this.PositionDiffTolarence = PosDiffTolarence;
 			this.HeightDiffTolarence = HeightDiffTolarence;
@@ -337,6 +341,7 @@ namespace geodata
 			Pcfg = new ProgramCfg();
 			Citm = new CheckItem();
 			Tcfgs = new Dictionary<string, TaskCfg>();
+			Tcache = new Dictionary<string, TaskCfg>();
 
 			this.PCpath = pc_path;
 			reloadSelf();
