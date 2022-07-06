@@ -299,11 +299,11 @@ namespace geodata
 			{
 				sx = (int)((minX - resol.X * extwidth_pixel) /
 						resol.X) * resol.X;
-				sy = (int)((maxY - resol.Y * extwidth_pixel) /
+				sy = (int)((maxY + resol.Y * extwidth_pixel) /
 						resol.Y) * resol.Y;
 				ex = (int)((maxX + resol.X * extwidth_pixel) /
 						resol.X) * resol.X;
-				ey = (int)((minY + resol.Y * extwidth_pixel) /
+				ey = (int)((minY - resol.Y * extwidth_pixel) /
 						resol.Y) * resol.Y;
 			}
 			else if (CEF == ClipExtFormula.OrigFormula)
@@ -311,11 +311,11 @@ namespace geodata
 			{
 				sx = (int)(minX / resol.X) * resol.X -
 						extwidth_pixel * resol.X;
-				sy = ((int)(maxY / resol.Y) - 1) * resol.Y -
+				sy = ((int)(maxY / resol.Y) - 1) * resol.Y +
 						extwidth_pixel * resol.Y;
 				ex = (int)((maxX / resol.X) + 1) * resol.X +
 						extwidth_pixel * resol.X;
-				ey = (int)(minY / resol.Y) * resol.Y +
+				ey = (int)(minY / resol.Y) * resol.Y -
 						extwidth_pixel * resol.Y;
 			}
 
