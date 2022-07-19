@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,8 +58,13 @@ namespace geodata
 	public class CheckTask
 	{
 		public bool output_onefile = true;
+		public double progress { get; set; }
+		public ConcurrentQueue<string> messages;
 
 		String tmpdir = "/tmp";
+
+		int total_num;
+		int finished_num;
 
 		CfgPack Cfgs;
 		CheckItem ci;
@@ -70,6 +76,7 @@ namespace geodata
 
 		public CheckTask(CfgPack cfgs)
 		{
+			messages = new ConcurrentQueue<string>();
 			raster_list = new List<Raster>();
 			chk_results = new List<CheckResult>();
 
@@ -80,12 +87,16 @@ namespace geodata
 
 		public void setDataList(List<string> file_list)
 		{
+			total_num = 0;
+			finished_num = 0;
+
 			foreach (string f in file_list)
 			{
 				Raster r = new Raster(f, tc);
 				if (r != null)
 				{
 					raster_list.Add(r);
+					total_num++;
 				}
 			}
 		}
@@ -103,6 +114,9 @@ namespace geodata
 
 			foreach (Raster r in raster_list)
 			{
+				finished_num++;
+				this.progress = (double)this.finished_num / this.total_num;
+
 				if (r.CNS == null)
 					continue;
 				string tmp_opath_with_mapno = Path.Combine(tmpdir, r.CNS.MapNo_str);
@@ -132,6 +146,9 @@ namespace geodata
 				if (ci.DemEdgeMatch)
 					Check.checkDemEdge(r, tc, demedge_ofpath);
 				chk_results.Add(cr);
+
+				messages.Enqueue(DateTime.Now.ToLongTimeString() + " " +
+								r.CNS.getMapNoStr() + " 完成检查\n");
 			}
 
 			string TFWprec_cr_all = Path.Combine(opath, "TFW格式检查.txt");
